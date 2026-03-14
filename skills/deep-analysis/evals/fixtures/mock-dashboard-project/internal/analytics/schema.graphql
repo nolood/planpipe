@@ -1,0 +1,45 @@
+type Query {
+  overviewPage(tenantId: ID!, from: DateTime, to: DateTime): OverviewPage!
+  chartData(tenantId: ID!, chartId: String!, from: DateTime, to: DateTime): ChartData!
+  summary(tenantId: ID!, from: DateTime, to: DateTime): SummaryData!
+}
+
+type OverviewPage {
+  charts: [ChartData!]!
+  summary: SummaryData!
+}
+
+type ChartData {
+  chartId: String!
+  title: String!
+  chartType: String!
+  dataPoints: [DataPoint!]!
+  metadata: ChartMeta!
+}
+
+type DataPoint {
+  timestamp: DateTime!
+  values: JSON!
+  labels: JSON
+}
+
+type ChartMeta {
+  totalRows: Int!
+  queryTimeMs: Int!
+  dataRange: TimeRange!
+}
+
+type TimeRange {
+  from: DateTime!
+  to: DateTime!
+}
+
+type SummaryData {
+  totalUsers: Int!
+  activeUsers: Int!
+  totalEvents: Int!
+  conversionRate: Float!
+}
+
+scalar DateTime
+scalar JSON

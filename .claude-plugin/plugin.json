@@ -1,0 +1,9 @@
+{
+  "name": "plan-pipeline",
+  "description": "6-stage planning pipeline for complex tasks: preparation, deep analysis, synthesis, solution design, decomposition, and reviewed execution",
+  "version": "1.0.0",
+  "author": {
+    "name": "nolood"
+  },
+  "keywords": ["planning", "pipeline", "decomposition", "execution", "code-review", "task-analysis"]
+}

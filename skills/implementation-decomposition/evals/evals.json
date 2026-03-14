@@ -1,0 +1,119 @@
+{
+  "skill_name": "implementation-decomposition",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run Stage 5 implementation decomposition on the SSO SAML feature. Stage 4 solution design is complete — the implementation design is finalized and user-approved. Decompose the implementation into execution-ready subtasks.",
+      "expected_output": "Execution backlog with 5-8 subtasks covering migrations, config, tenant SSO config, user extension, Keycloak client, SSO service, HTTP handlers, and route wiring. Dependency graph showing foundation→implementation→integration waves. Coverage matrix mapping all acceptance criteria to subtasks. Decomposition critic returns DECOMPOSITION_APPROVED. Coverage reviewer returns COVERAGE_OK.",
+      "files": [
+        "evals/fixtures/sso-stage4-artifacts/stage-4-handoff.md",
+        "evals/fixtures/sso-stage4-artifacts/implementation-design.md",
+        "evals/fixtures/sso-stage4-artifacts/change-map.md",
+        "evals/fixtures/sso-stage4-artifacts/design-decisions.md",
+        "evals/fixtures/sso-stage4-artifacts/agreed-task-model.md"
+      ],
+      "assertions": [
+        {
+          "text": "All 4 decomposition artifacts created: execution-backlog.md, coverage-matrix.md, decomposition-review-package.md, stage-5-handoff.md — each with all required template sections"
+        },
+        {
+          "text": "Subtasks cover all 6 modules from the change map: auth, tenant, user, config, migrations, server — no module orphaned"
+        },
+        {
+          "text": "Foundation subtasks (migrations, config, shared types) are in Wave 1 with no blocking dependencies"
+        },
+        {
+          "text": "Dependencies correctly reflect that SSO service depends on tenant repository, user service, Keycloak client, and config"
+        },
+        {
+          "text": "Each subtask has explicit boundaries (in-scope/out-of-scope), completion criteria, and related design decisions"
+        },
+        {
+          "text": "Subtask constraints include concrete details (file paths, data formats, interface signatures) — not just one-line summaries like 'preserve backward compatibility'"
+        },
+        {
+          "text": "Subtasks include Source references section pointing to relevant sections from system-analysis.md and implementation-design.md"
+        },
+        {
+          "text": "Decomposition critic subagent was spawned and returned DECOMPOSITION_APPROVED"
+        },
+        {
+          "text": "Coverage reviewer subagent was spawned and returned COVERAGE_OK with at least medium confidence"
+        },
+        {
+          "text": "Coverage matrix maps all 7 acceptance criteria from agreed-task-model.md to specific subtasks"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run Stage 5 implementation decomposition on the dashboard performance optimization task. Stage 4 is complete. Decompose the full-stack optimization into execution-ready subtasks suitable for parallel execution by multiple agents.",
+      "expected_output": "Execution backlog with 5-7 subtasks covering: ClickHouse bug fix, query optimization, cache creation, backend parallelization, frontend utilities (hook + downsampling), frontend component refactoring (Overview + Chart + ChartGrid). Backend and frontend work identified as parallelizable. Conflict zones identified for service.go integration. Coverage matrix validates all acceptance criteria.",
+      "files": [
+        "evals/fixtures/dashboard-stage4-artifacts/stage-4-handoff.md",
+        "evals/fixtures/dashboard-stage4-artifacts/implementation-design.md",
+        "evals/fixtures/dashboard-stage4-artifacts/change-map.md",
+        "evals/fixtures/dashboard-stage4-artifacts/design-decisions.md",
+        "evals/fixtures/dashboard-stage4-artifacts/agreed-task-model.md"
+      ],
+      "assertions": [
+        {
+          "text": "All 4 decomposition artifacts created with all required template sections"
+        },
+        {
+          "text": "Backend subtasks (ClickHouse fix, cache, parallelization) and frontend subtasks (hook, downsampling, component refactoring) are separated and can run in parallel across waves"
+        },
+        {
+          "text": "Retention cohort bug fix (queries.go:67-85) is an independent subtask or part of a foundation subtask with no blocking dependencies"
+        },
+        {
+          "text": "Cache subtask (chart_cache.go) is correctly identified as a dependency for the service parallelization subtask"
+        },
+        {
+          "text": "Frontend useChartQuery hook is correctly identified as a dependency for Overview.tsx refactoring"
+        },
+        {
+          "text": "Conflict zones identified where service.go integration depends on both cache and ClickHouse changes"
+        },
+        {
+          "text": "Coverage reviewer returns COVERAGE_OK — all 7 acceptance criteria mapped"
+        },
+        {
+          "text": "Execution waves maximize parallelism: independent backend and frontend streams can run simultaneously"
+        },
+        {
+          "text": "Subtask constraints include concrete details (specific file paths, function signatures, data formats) extracted from system-analysis.md and implementation-design.md"
+        },
+        {
+          "text": "Subtasks include Source references section with pointers to relevant analysis and design sections"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run Stage 5 implementation decomposition. Here are the design artifacts from Stage 4.",
+      "expected_output": "Stage 5 should reject the input and send it back to Stage 4. The implementation design is incomplete (vague, no concrete changes), no stage-4-handoff.md exists, no agreed-task-model.md exists, and the change map has no actual content.",
+      "files": [
+        "evals/fixtures/rejection-stage4-artifacts/incomplete-design.md",
+        "evals/fixtures/rejection-stage4-artifacts/partial-change-map.md"
+      ],
+      "assertions": [
+        {
+          "text": "Missing stage-4-handoff.md is detected and flagged"
+        },
+        {
+          "text": "Incomplete implementation design is recognized (vague approach, no concrete changes, no decisions)"
+        },
+        {
+          "text": "User is told to return to Stage 4 to complete the design"
+        },
+        {
+          "text": "No decomposition artifacts (execution-backlog.md, coverage-matrix.md) are created from incomplete inputs"
+        },
+        {
+          "text": "Response mentions that agreed-task-model.md is missing, limiting coverage validation"
+        }
+      ]
+    }
+  ]
+}

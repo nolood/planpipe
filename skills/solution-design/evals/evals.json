@@ -1,0 +1,63 @@
+{
+  "skill_name": "solution-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run Stage 4 solution design on the SSO SAML feature. Stage 3 task synthesis is complete — draft task model produced (pending user confirmation). Design the implementation and present combined review (understanding + design) to the user.",
+      "expected_output": "Should produce implementation-design.md, change-map.md, design-decisions.md, design-review-package.md (combined format with Part 1 Understanding, Part 2 Design, Part 3 Key Decisions). Design architect subagent should explore the codebase. Design critic should return DESIGN_APPROVED. Should present combined review to user. Should finalize agreed-task-model.md after user confirms.",
+      "files": [
+        "evals/fixtures/sso-stage3-artifacts/stage-3-handoff.md",
+        "evals/fixtures/sso-stage3-artifacts/agreed-task-model.md",
+        "evals/fixtures/sso-stage3-artifacts/agreement-package.md"
+      ],
+      "assertions": [
+        {"text": "implementation-design.md created with all required sections (Implementation Approach, Solution Description, Change Details, Key Technical Decisions, Implementation Sequence, Risk Zones)"},
+        {"text": "change-map.md created with file-level changes covering auth, tenant, user, config, migrations, and server modules"},
+        {"text": "design-decisions.md created with decisions about: per-tenant config table design, auth code flow approach, account linking strategy, Keycloak IdP management approach"},
+        {"text": "design-review-package.md created as combined review with Part 1 (Task Understanding: goal, scope, scenarios, constraints), Part 2 (Implementation Design), and Part 3 (Key Decisions, max 5)"},
+        {"text": "Design architect subagent was spawned and explored the codebase"},
+        {"text": "Design critic subagent was spawned and returned a verdict"},
+        {"text": "Implementation sequence respects dependencies (e.g., migration before tenant repository, tenant before auth service)"},
+        {"text": "Combined review includes task understanding from Stage 3 (goal, scope, key scenarios, constraints) alongside design decisions"},
+        {"text": "agreed-task-model.md is finalized (status changed from draft to confirmed) after user review"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run Stage 4 solution design on the dashboard performance optimization task. Stage 3 synthesis is complete — draft task model produced. Design the implementation for full-stack optimization and present combined review.",
+      "expected_output": "Should produce all design artifacts. Should design changes across backend (parallelization, caching) and frontend (progressive loading, downsampling). Combined review package should include understanding + design. Should identify the retention cohort bug fix in the change map.",
+      "files": [
+        "evals/fixtures/dashboard-stage3-artifacts/stage-3-handoff.md",
+        "evals/fixtures/dashboard-stage3-artifacts/agreed-task-model.md",
+        "evals/fixtures/dashboard-stage3-artifacts/agreement-package.md"
+      ],
+      "assertions": [
+        {"text": "implementation-design.md created with all required template sections"},
+        {"text": "change-map.md created with files from both backend (internal/analytics/, internal/clickhouse/, internal/cache/) and frontend (apps/dashboard/)"},
+        {"text": "Implementation approach addresses the 3-layer optimization: backend parallelization, caching with singleflight, and frontend progressive loading"},
+        {"text": "change-map.md includes the retention cohort bug fix at queries.go:67-85"},
+        {"text": "Design decisions include: errgroup vs goroutine management, cache TTL strategy per chart type, singleflight integration point, downsampling algorithm choice"},
+        {"text": "Implementation sequence starts with backend changes before frontend to allow incremental validation"},
+        {"text": "Risk zones include connection pool sizing and thundering herd scenarios with specific mitigations"},
+        {"text": "design-review-package.md is a combined review with task understanding (Part 1) and design (Part 2) and key decisions (Part 3)"},
+        {"text": "agreed-task-model.md is finalized after user confirms the combined review"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run Stage 4 solution design. Here are the analysis files from Stage 3.",
+      "expected_output": "Stage 4 should reject or flag that Stage 3 is incomplete — no agreed-task-model.md exists, analysis is shallow, and the handoff notes that synthesis was not completed.",
+      "files": [
+        "evals/fixtures/rejection-stage3-artifacts/analysis.md",
+        "evals/fixtures/rejection-stage3-artifacts/incomplete-handoff.md"
+      ],
+      "assertions": [
+        {"text": "Stage 4 detected missing agreed-task-model.md (neither draft nor confirmed)"},
+        {"text": "Stage 4 flagged that Stage 3 is incomplete"},
+        {"text": "User was told to go back to Stage 3 or complete the task synthesis"},
+        {"text": "No implementation-design.md or change-map.md were created from incomplete inputs"},
+        {"text": "The response mentions that the task model does not exist"}
+      ]
+    }
+  ]
+}

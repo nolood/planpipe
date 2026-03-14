@@ -1,0 +1,60 @@
+{
+  "skill_name": "deep-analysis",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run Stage 2 deep analysis on SSO SAML task with Go codebase.",
+      "expected_output": "All 3 analysis artifacts with specific code references from mock-sso-project.",
+      "files": [
+        "evals/fixtures/sso-stage1-artifacts/requirements.draft.md",
+        "evals/fixtures/sso-stage1-artifacts/readiness-review.md",
+        "evals/fixtures/mock-sso-project/"
+      ],
+      "assertions": [
+        {"text": "product-analysis.md created with all required sections (Business Intent, Actor & Scenario, Expected Outcome, Edge Cases, Success Signals)"},
+        {"text": "system-analysis.md created with all required sections (Relevant Modules, Change Points, Dependencies, Existing Patterns)"},
+        {"text": "constraints-risks-analysis.md created with all required sections (Constraints, Risks, Integration Dependencies, Backward Compatibility)"},
+        {"text": "system-analysis.md references actual file paths from the mock project (internal/auth/, internal/tenant/, internal/user/)"},
+        {"text": "system-analysis.md identifies that tenant model has no per-tenant configuration storage"},
+        {"text": "constraints-risks-analysis.md mentions backward compatibility for existing login flow"},
+        {"text": "product-analysis.md describes SSO login scenario step by step, not just requirements restatement"},
+        {"text": "Each analysis contains Self-Critique Notes section"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run Stage 2 deep analysis on dashboard performance task with Go+React codebase.",
+      "expected_output": "All 3 analysis artifacts identifying specific performance bottlenecks from the code.",
+      "files": [
+        "evals/fixtures/dashboard-stage1-artifacts/requirements.draft.md",
+        "evals/fixtures/dashboard-stage1-artifacts/readiness-review.md",
+        "evals/fixtures/mock-dashboard-project/"
+      ],
+      "assertions": [
+        {"text": "system-analysis.md identifies sequential chart loading in analytics/service.go"},
+        {"text": "system-analysis.md identifies unused cache module in internal/cache/"},
+        {"text": "system-analysis.md identifies frontend rendering issue (no downsampling, all charts render simultaneously)"},
+        {"text": "system-analysis.md references ClickHouse query patterns from internal/clickhouse/queries.go"},
+        {"text": "constraints-risks-analysis.md identifies risk of breaking GraphQL API contract"},
+        {"text": "constraints-risks-analysis.md notes absence of materialized views"},
+        {"text": "All 3 analysis artifacts created"},
+        {"text": "Each analysis contains Self-Critique Notes section"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run Stage 2 deep analysis on unprepared task (NEEDS_CLARIFICATION verdict).",
+      "expected_output": "Stage 2 rejects the task and tells user to go back to Stage 1.",
+      "files": [
+        "evals/fixtures/rejection-stage1-artifacts/requirements.draft.md",
+        "evals/fixtures/rejection-stage1-artifacts/readiness-review.md"
+      ],
+      "assertions": [
+        {"text": "Stage 2 refused to run deep analysis"},
+        {"text": "Refusal mentions NEEDS_CLARIFICATION verdict"},
+        {"text": "User told to go back to Stage 1 or resolve clarifications"},
+        {"text": "No analysis artifacts (product-analysis.md, system-analysis.md, constraints-risks-analysis.md) were created"}
+      ]
+    }
+  ]
+}

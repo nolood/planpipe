@@ -1,0 +1,50 @@
+{
+  "skill_name": "task-preparation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We need to add SSO support via SAML. The product team wants this for Q3. We already use Keycloak for auth. Here's the ticket: users from enterprise clients should be able to log in through their corporate identity provider instead of our standard email/password flow. The backend is FastAPI, frontend is React. We have an existing auth middleware in `services/auth/`. The SSO config should be per-tenant. No changes to the current login flow for non-SSO users.",
+      "expected_output": "Should produce a clear requirements.draft.md and get READY_FOR_DEEP_ANALYSIS from the critic.",
+      "files": [],
+      "expectations": [
+        "requirements.draft.md file was created",
+        "Requirements draft contains all required sections: Goal, Problem Statement, Scope, Constraints, Dependencies, Knowns, Unknowns, Assumptions",
+        "readiness-review.md file was created with a verdict",
+        "Readiness critic returned READY_FOR_DEEP_ANALYSIS",
+        "Task correctly classified as feature or integration",
+        "Knowns section mentions Keycloak, FastAPI, React, per-tenant, SAML",
+        "No clarifications.md was created"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "fix the auth",
+      "expected_output": "Should produce NEEDS_CLARIFICATION with specific actionable questions.",
+      "files": [],
+      "expectations": [
+        "requirements.draft.md file was created (even if sparse)",
+        "readiness-review.md file was created with a verdict",
+        "Readiness critic returned NEEDS_CLARIFICATION",
+        "clarifications.md was created with specific questions",
+        "Clarification questions are specific and actionable",
+        "Requirements draft has more unknowns than knowns",
+        "Agent did NOT invent specific technical details without evidence"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Our analytics dashboard is getting slow — some of the charts take 8-10 seconds to load on the main overview page. The data comes from ClickHouse via a GraphQL API. We think the problem is either in the query layer or in how the frontend renders large datasets. PM wants it under 2 seconds. We have about 50k daily active users. The dashboard code is in `apps/dashboard/` and the API is in `services/analytics-api/`.",
+      "expected_output": "Should identify as performance bug with decent context. May get READY or need one clarification round.",
+      "files": [],
+      "expectations": [
+        "requirements.draft.md file was created with all required sections",
+        "readiness-review.md file was created with all 8 criteria scored",
+        "Task correctly classified as bug or performance issue",
+        "Goal states the performance target: under 2 seconds",
+        "Knowns mention ClickHouse, GraphQL, file paths, 50k DAU",
+        "Unknowns include root cause uncertainty",
+        "Verdict is reasonable for the detail level provided"
+      ]
+    }
+  ]
+}

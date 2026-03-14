@@ -1,0 +1,66 @@
+{
+  "skill_name": "task-synthesis",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run Stage 3 task synthesis on SSO SAML feature. Stage 2 analysis is complete — all analyses were SUFFICIENT. Synthesize findings and package for combined review in Stage 4.",
+      "expected_output": "Should produce analysis.md with synthesized model, agreement-package.md with 5 blocks, and draft agreed-task-model.md (status: draft). Critic should return CONSISTENT. Should NOT present blocks to the user — user review is deferred to Stage 4's combined review.",
+      "files": [
+        "evals/fixtures/sso-stage2-artifacts/stage-2-handoff.md",
+        "evals/fixtures/sso-stage2-artifacts/product-analysis.md",
+        "evals/fixtures/sso-stage2-artifacts/system-analysis.md",
+        "evals/fixtures/sso-stage2-artifacts/constraints-risks-analysis.md"
+      ],
+      "assertions": [
+        {"text": "analysis.md created with all required sections (Task Goal, Problem Statement, Key Scenarios, System Scope, Constraints, Risks, Candidate Solution Directions)"},
+        {"text": "agreement-package.md created with all 5 blocks (Goal & Problem Understanding, Scope, Key Scenarios, Constraints, Candidate Solution Directions)"},
+        {"text": "Draft agreed-task-model.md created with status: draft — pending user confirmation in Stage 4"},
+        {"text": "Synthesis critic was spawned and returned a verdict"},
+        {"text": "analysis.md resolves or flags contradictions from Stage 2 analyses (e.g., password fallback policy, account linking strategy)"},
+        {"text": "analysis.md preserves key findings: zero test coverage, single Keycloak realm, direct grant to auth code shift, no per-tenant config storage"},
+        {"text": "Candidate solution directions include options (e.g., minimal MVO vs. systematic approach)"},
+        {"text": "Open questions from Stage 2 are carried forward (password fallback, account linking, per-tenant config design)"},
+        {"text": "Stage 3 does NOT present blocks to the user or ask for block-by-block confirmation — user review is deferred to Stage 4"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run Stage 3 task synthesis on dashboard performance optimization task. Stage 2 deep analysis is complete. Synthesize and package for combined review in Stage 4.",
+      "expected_output": "Should produce analysis.md, agreement-package.md, and draft agreed-task-model.md. Should correctly synthesize the multi-layer bottleneck (backend sequential queries, no caching, frontend rendering) into a unified model. Should NOT present to user.",
+      "files": [
+        "evals/fixtures/dashboard-stage2-artifacts/stage-2-handoff.md",
+        "evals/fixtures/dashboard-stage2-artifacts/product-analysis.md",
+        "evals/fixtures/dashboard-stage2-artifacts/system-analysis.md",
+        "evals/fixtures/dashboard-stage2-artifacts/constraints-risks-analysis.md"
+      ],
+      "assertions": [
+        {"text": "analysis.md created with all required template sections"},
+        {"text": "agreement-package.md created with all 5 blocks"},
+        {"text": "Draft agreed-task-model.md created with status: draft — pending user confirmation in Stage 4"},
+        {"text": "Synthesis preserves the retention cohort query bug finding from system analysis"},
+        {"text": "Synthesis identifies the 3-layer bottleneck: backend (sequential queries), cache (unused), frontend (no downsampling, monolithic query)"},
+        {"text": "Constraints include: GraphQL API backward compatibility, 2-second target, zero test coverage"},
+        {"text": "Candidate solution directions address: backend-first (parallelization) vs. full-stack optimization"},
+        {"text": "Risks include thundering herd and connection pool concerns from parallelization"},
+        {"text": "The cache-busting time range bug (Overview.tsx:26-27) is captured in the synthesis"},
+        {"text": "Stage 3 does NOT present blocks to the user — user review is deferred to Stage 4"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run Stage 3 task synthesis. Here are the analysis files from Stage 2.",
+      "expected_output": "Stage 3 should reject or flag that the analyses are insufficient — no stage-2-handoff.md exists, and the analyses are shallow with NEEDS_REFINEMENT verdicts.",
+      "files": [
+        "evals/fixtures/rejection-stage2-artifacts/product-analysis.md",
+        "evals/fixtures/rejection-stage2-artifacts/system-analysis.md"
+      ],
+      "assertions": [
+        {"text": "Stage 3 detected missing stage-2-handoff.md"},
+        {"text": "Stage 3 flagged that analyses are insufficient or incomplete"},
+        {"text": "User was told to go back to Stage 2 or provide complete analysis outputs"},
+        {"text": "No analysis.md or agreement-package.md were created from the incomplete inputs"},
+        {"text": "The response mentions that constraints-risks-analysis.md is also missing"}
+      ]
+    }
+  ]
+}

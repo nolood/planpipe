@@ -1,0 +1,68 @@
+{
+  "skill_name": "execution-flow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Execute the execution flow for the SSO feature. The project is a Go multi-tenant backend. Here are the input artifacts:\n\n- Execution backlog: evals/fixtures/sso-wave1-backlog.md\n- Codebase to modify: evals/fixtures/sso-codebase/\n- Supporting design context: evals/fixtures/sso-stage5-artifacts/implementation-design.md\n- Design decisions: evals/fixtures/sso-stage5-artifacts/design-decisions.md\n- System analysis: evals/fixtures/sso-stage5-artifacts/system-analysis.md\n- Constraints and risks: evals/fixtures/sso-stage5-artifacts/constraints-risks-analysis.md\n\nExecute all 3 foundation subtasks (ST-1, ST-2, ST-3). They are all independent and can run in parallel. Follow the execution flow process: dispatch implementers, run task review and code review for each, close only after both reviews pass.",
+      "expected_output": "All 3 subtasks implemented with correct code changes, execution-status.md tracking file created and maintained, dual review (task + code) executed for each subtask",
+      "files": [
+        "evals/fixtures/sso-wave1-backlog.md",
+        "evals/fixtures/sso-codebase/go.mod",
+        "evals/fixtures/sso-codebase/main.go",
+        "evals/fixtures/sso-codebase/config/config.go",
+        "evals/fixtures/sso-codebase/internal/user/model.go",
+        "evals/fixtures/sso-codebase/internal/user/repository.go",
+        "evals/fixtures/sso-codebase/internal/user/service.go",
+        "evals/fixtures/sso-codebase/internal/auth/handler.go",
+        "evals/fixtures/sso-codebase/internal/tenant/model.go",
+        "evals/fixtures/sso-codebase/internal/tenant/repository.go",
+        "evals/fixtures/sso-codebase/internal/tenant/handler.go",
+        "evals/fixtures/sso-codebase/migrations/001_initial.up.sql",
+        "evals/fixtures/sso-codebase/migrations/001_initial.down.sql",
+        "evals/fixtures/sso-stage5-artifacts/implementation-design.md",
+        "evals/fixtures/sso-stage5-artifacts/design-decisions.md",
+        "evals/fixtures/sso-stage5-artifacts/system-analysis.md",
+        "evals/fixtures/sso-stage5-artifacts/constraints-risks-analysis.md"
+      ],
+      "expectations": [
+        "execution-status.md artifact is created and tracks all 3 subtasks",
+        "ST-1: migrations/002_sso.up.sql created with tenant_sso_config table and users.keycloak_id column",
+        "ST-1: migrations/002_sso.down.sql created with reverse operations",
+        "ST-2: config/config.go modified to include SSOConfig struct with Keycloak fields",
+        "ST-3: internal/tenant/model.go modified to include TenantSSOConfig struct",
+        "ST-3: internal/user/model.go modified to include KeycloakID *string field",
+        "Task review was performed for each subtask (task-reviewer agent was spawned)",
+        "Code review was performed for each subtask (code-reviewer agent was spawned)",
+                "Implementer prompts include detailed design context from implementation-design.md (mandatory, not optional)",
+        "Implementer prompts include system analysis context from system-analysis.md for the relevant modules",
+        "Implementer prompts include concrete constraint details with file paths and data formats, not one-line summaries"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I have a simple Go web app at evals/fixtures/sso-codebase/ and I need you to implement these tasks using the execution flow skill:\n\n(tasks are in evals/fixtures/raw-tasks.md)\n\nNo formal planning documents — just these two tasks. Use the execution flow to implement them with proper review gates.",
+      "expected_output": "Both tasks implemented with correct code, execution tracking artifacts created, tasks normalized from raw format, dual review executed for each",
+      "files": [
+        "evals/fixtures/raw-tasks.md",
+        "evals/fixtures/sso-codebase/go.mod",
+        "evals/fixtures/sso-codebase/main.go",
+        "evals/fixtures/sso-codebase/config/config.go",
+        "evals/fixtures/sso-codebase/internal/user/model.go",
+        "evals/fixtures/sso-codebase/internal/tenant/model.go",
+        "evals/fixtures/sso-codebase/internal/tenant/handler.go",
+        "evals/fixtures/sso-codebase/internal/auth/handler.go"
+      ],
+      "expectations": [
+        "Raw tasks from raw-tasks.md are normalized into structured subtasks before execution",
+        "Health check endpoint implementation exists (handler returning JSON status)",
+        "Health check route is registered in main.go",
+        "Logging middleware exists in internal/middleware/logging.go or similar path",
+        "Middleware logs method, path, status code, and duration",
+        "Middleware is applied to the router in main.go",
+        "Task review was performed for each task",
+        "Code review was performed for each task",
+        "execution-status.md tracking artifact is created"
+      ]
+    }
+  ]
+}
