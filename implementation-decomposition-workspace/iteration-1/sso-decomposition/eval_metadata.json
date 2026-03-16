@@ -1,0 +1,15 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-decomposition",
+  "prompt": "Run Stage 5 implementation decomposition on the SSO SAML feature. Stage 4 solution design is complete — the implementation design is finalized and user-approved. Decompose the implementation into execution-ready subtasks.",
+  "assertions": [
+    {"text": "All 4 decomposition artifacts created: execution-backlog.md, coverage-matrix.md, decomposition-review-package.md, stage-5-handoff.md — each with all required template sections"},
+    {"text": "Subtasks cover all 6 modules from the change map: auth, tenant, user, config, migrations, server — no module orphaned"},
+    {"text": "Foundation subtasks (migrations, config, shared types) are in Wave 1 with no blocking dependencies"},
+    {"text": "Dependencies correctly reflect that SSO service depends on tenant repository, user service, Keycloak client, and config"},
+    {"text": "Each subtask has explicit boundaries (in-scope/out-of-scope), completion criteria, and related design decisions"},
+    {"text": "Decomposition critic subagent was spawned and returned DECOMPOSITION_APPROVED"},
+    {"text": "Coverage reviewer subagent was spawned and returned COVERAGE_OK with at least medium confidence"},
+    {"text": "Coverage matrix maps all 7 acceptance criteria from agreed-task-model.md to specific subtasks"}
+  ]
+}

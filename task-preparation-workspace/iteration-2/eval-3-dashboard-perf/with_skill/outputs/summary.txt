@@ -1,0 +1,40 @@
+Task Preparation — Stage 1 Summary
+====================================
+
+Task: Reduce analytics dashboard chart load time from 8-10s to under 2s
+
+Process Executed:
+- Step 1 (Intake): Collected raw task statement, identified mentioned entities
+  (ClickHouse, GraphQL API, apps/dashboard/, services/analytics-api/), checked
+  for memobank (none found), no external links to fetch.
+- Step 2 (Normalize): Classified as a performance/bug task. Core ask: optimize
+  chart loading on the main overview page. Actor: end users (~50k DAU). Expected
+  outcome: charts load in under 2 seconds.
+- Step 3 (Knowns/Unknowns/Assumptions): Identified 7 knowns, 11 unknowns, and
+  7 assumptions. Key unknowns include which specific charts are slow, how the
+  8-10s was measured, and whether caching/aggregation exists.
+- Step 4 (Requirements Draft): Created requirements.draft.md with all sections.
+- Step 5 (Readiness Critique): Evaluated against 8 criteria. Result: 4 PASS,
+  4 WEAK, 0 FAIL. Verdict: NEEDS_CLARIFICATION (4 WEAK exceeds the 2-WEAK
+  threshold for READY_FOR_DEEP_ANALYSIS).
+- Step 6 (Close Gaps): Created clarifications.md with 3 blocking gaps,
+  7 unknowns, 6 assumptions to verify, and 10 consolidated questions.
+
+Verdict: NEEDS_CLARIFICATION
+Reason: Too many blind spots for reliable deep analysis. The task has a strong
+goal and measurable acceptance criteria, but lacks specificity about which
+charts are slow, how performance was measured, whether profiling data exists,
+and whether infrastructure-level changes are in scope.
+
+Artifacts Produced:
+- requirements.draft.md — structured task statement
+- readiness-review.md — critic evaluation with scores and gaps
+- clarifications.md — 10 prioritized questions for the user
+
+Next Step: User answers the clarification questions. Upon receiving answers,
+the requirements draft gets updated and the readiness critique is re-run.
+The task is not ready for deep analysis until the clarification round completes.
+
+Note: The Agent tool was not available in this environment, so the readiness
+critique was performed inline following the exact evaluation criteria and
+output format specified in agents/readiness-critic.md.

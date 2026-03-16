@@ -1,0 +1,47 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-decomposition",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "All 4 decomposition artifacts created with all required template sections",
+      "passed": true,
+      "evidence": "All 4 files exist and contain comprehensive sections: execution-backlog.md (execution overview, waves, dependency graph, conflict zones, 10 subtask details each with purpose/goal/change area/boundaries/context/dependencies/completion criteria, critique review, coverage review), coverage-matrix.md (requirement traceability from agreed task model, implementation design, change map, design decisions, coverage gaps, over-coverage, done-state validation), decomposition-review-package.md (summary, subtask overview table, execution waves, dependency highlights, conflict zones, coverage assessment, review points, scope confirmation), stage-5-handoff.md (task summary, classification, implementation approach, execution strategy, subtask summary table, waves, dependency graph, conflict zones, coverage verification, constraints, risks, user decisions log, acceptance criteria, detailed references)."
+    },
+    {
+      "text": "Backend subtasks (ClickHouse fix, cache, parallelization) and frontend subtasks (hook, downsampling, component refactoring) are separated and can run in parallel across waves",
+      "passed": true,
+      "evidence": "Backend subtasks: ST-1 (retention bug fix), ST-2 (query limits), ST-3 (ChartCache), ST-5 (service parallelization), ST-10 (API wiring). Frontend subtasks: ST-4 (LTTB downsampling utility), ST-6 (useChartQuery hook), ST-7 (lazy loading), ST-8 (Overview.tsx refactor), ST-9 (Chart.tsx downsampling). decomposition-review-package.md explicitly states: 'The backend path (ST-3 -> ST-5 -> ST-10) and frontend path (ST-6 -> ST-8) can run in parallel with no cross-dependencies.' Wave 1 runs 4 mixed backend/frontend tasks in parallel; Wave 2 runs 4 mixed backend/frontend tasks in parallel."
+    },
+    {
+      "text": "Retention cohort bug fix (queries.go:67-85) is an independent subtask or part of a foundation subtask with no blocking dependencies",
+      "passed": true,
+      "evidence": "ST-1 'Fix retention cohort bug' is an independent foundation subtask in Wave 1 targeting queries.go:67-85. Its dependencies section states: 'No dependencies — can start immediately.' It has no blocking dependencies and can run in parallel with ST-2, ST-3, and ST-4. It is only a soft (non-blocking) dependency for ST-5."
+    },
+    {
+      "text": "Cache subtask (chart_cache.go) is correctly identified as a dependency for the service parallelization subtask",
+      "passed": true,
+      "evidence": "ST-3 (Create ChartCache with per-chart TTL and singleflight, creating internal/cache/chart_cache.go) is listed as a blocking dependency for ST-5 (Parallelize analytics service). execution-backlog.md ST-5 dependencies table: 'ChartCache module | blocking | ST-3 | ChartCache with Get/Set/Invalidate is implemented and tests pass'. stage-5-handoff.md dependency graph: 'ST-3 (cache module) -block-> ST-5 (parallelize service)'."
+    },
+    {
+      "text": "Frontend useChartQuery hook is correctly identified as a dependency for Overview.tsx refactoring",
+      "passed": true,
+      "evidence": "ST-6 (Create useChartQuery hook) is listed as a blocking dependency for ST-8 (Refactor Overview.tsx). execution-backlog.md ST-8 dependencies table: 'useChartQuery hook | blocking | ST-6 | useChartQuery hook is implemented and returns {data, loading, error}'. stage-5-handoff.md dependency graph: 'ST-6 (useChartQuery hook) -block-> ST-8 (Overview.tsx refactor)'. ST-8 is in Wave 3 specifically because it must wait for ST-6 (Wave 2) to complete."
+    },
+    {
+      "text": "Conflict zones identified where service.go integration depends on both cache and ClickHouse changes",
+      "passed": true,
+      "evidence": "The dependency relationship is documented across multiple artifacts. execution-backlog.md ST-5 dependencies show three dependencies: 'ChartCache module | blocking | ST-3', 'Fixed ClickHouse queries | soft | ST-1', and 'Query limits | soft | ST-2'. stage-5-handoff.md dependency graph shows: 'ST-1 (fix retention bug) -soft-> ST-5', 'ST-2 (query limits) -soft-> ST-5', 'ST-3 (cache module) -block-> ST-5'. decomposition-review-package.md notes: 'ST-3 (cache) is the critical foundation for the backend: ST-5 (service parallelization) and ST-10 (API wiring) both depend on it.' The conflict zones table itself focuses on file-level collisions (queries.go between ST-1 and ST-2), while the service.go integration dependency on both cache and ClickHouse changes is captured in the dependency graph rather than as a file-collision conflict zone."
+    },
+    {
+      "text": "Coverage reviewer returns COVERAGE_OK — all 7 acceptance criteria mapped",
+      "passed": true,
+      "evidence": "coverage-matrix.md verdict: 'COVERAGE_OK', confidence: 'high'. All acceptance criteria are mapped in the Requirement Traceability table: (1) P95 load <2s -> ST-5, ST-8, ST-7, ST-9, ST-10, (2) All 8 charts correct data -> ST-1, ST-5, ST-8, (3) Retention cohort works -> ST-1, (4) GraphQL contract unchanged -> ST-6, ST-8, (5) Progressive loading works -> ST-8, (6) Apollo cache hits -> ST-6, (7) ClickHouse load reduced -> ST-3, ST-5, (8) Race detector passes -> ST-5. Actually 8 acceptance criteria are mapped (exceeding the 7 stated in the assertion), all with 'covered' status. Done-state validation confirms: 'If all subtasks are completed, is the original task complete? Answer: yes.'"
+    },
+    {
+      "text": "Execution waves maximize parallelism: independent backend and frontend streams can run simultaneously",
+      "passed": true,
+      "evidence": "Wave 1 runs 4 independent subtasks in parallel (ST-1, ST-2, ST-3, ST-4) with zero file overlap. Wave 2 runs 4 parallel subtasks (ST-5, ST-6, ST-7, ST-9). decomposition-review-package.md states: 'Backend and frontend critical paths are independent: The backend path (ST-3 -> ST-5 -> ST-10) and frontend path (ST-6 -> ST-8) can run in parallel with no cross-dependencies.' stage-5-handoff.md confirms: 'maximizing parallel execution with up to 4 subtasks running simultaneously'. execution-backlog.md: 'The structure maximizes parallel execution — up to 4 subtasks can run simultaneously at peak (Waves 1 and 2).' The design deliberately isolates backend and frontend streams to enable simultaneous execution."
+    }
+  ]
+}

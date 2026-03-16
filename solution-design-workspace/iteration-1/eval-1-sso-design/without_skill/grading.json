@@ -1,0 +1,47 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-design",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "implementation-design.md created with all required sections (Implementation Approach, Solution Description, Change Details, Key Technical Decisions, Implementation Sequence, Risk Zones)",
+      "passed": true,
+      "evidence": "File exists (32K). Contains implementation approach, detailed component designs, edge case handling, Keycloak config, security considerations, testing strategy, and implementation order. Structure differs from template but content is comprehensive."
+    },
+    {
+      "text": "change-map.md created with file-level changes covering auth, tenant, user, config, migrations, and server modules",
+      "passed": true,
+      "evidence": "File exists (14K). Lists 3 new files, 8 modified files, 10 unchanged files. Covers auth, tenant, user, config, migrations, and server modules."
+    },
+    {
+      "text": "design-decisions.md created with decisions about: per-tenant config table design, auth code flow approach, account linking strategy, Keycloak IdP management approach",
+      "passed": true,
+      "evidence": "File exists (18K). Contains 15 decisions (DD-1 through DD-15) covering config table, auth code flow, account linking, Keycloak admin API, and more. More decisions than with_skill version."
+    },
+    {
+      "text": "design-review-package.md created with approval points for the user",
+      "passed": true,
+      "evidence": "File exists (13K). Contains stakeholder-ready summary with architecture decisions, change footprint, API surface, risk mitigations, and open items. Structure is less formal than skill template."
+    },
+    {
+      "text": "Design architect subagent was spawned and explored the codebase",
+      "passed": false,
+      "evidence": "No subagent was spawned. The agent explored the codebase directly without delegation. Codebase was explored (19 files read) but not via a separate architect subagent."
+    },
+    {
+      "text": "Design critic subagent was spawned and returned a verdict",
+      "passed": false,
+      "evidence": "No critic subagent was spawned. No independent review was performed. No critique section in the output artifacts."
+    },
+    {
+      "text": "Implementation sequence respects dependencies (e.g., migration before tenant repository, tenant before auth service)",
+      "passed": true,
+      "evidence": "Implementation order shows 13 steps, all additive. Change-map includes dependency graph. Migration and models come before repositories and services."
+    },
+    {
+      "text": "design-review-package.md includes approval points about API contract decisions and scope boundaries",
+      "passed": true,
+      "evidence": "Lists 6 new endpoints, 7 unchanged endpoints. Contains risk mitigations and acceptance criteria. Less formal approval point structure than skill version but covers API decisions."
+    }
+  ]
+}

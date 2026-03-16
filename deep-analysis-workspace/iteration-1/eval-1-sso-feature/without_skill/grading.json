@@ -1,0 +1,46 @@
+{
+  "eval_id": 1,
+  "config": "without_skill",
+  "expectations": [
+    {
+      "text": "product-analysis.md was created with all required sections (Business Intent, Actor & Scenario, Expected Outcome, Edge Cases, Success Signals)",
+      "passed": false,
+      "evidence": "Found: '## Business Intent' (line 3), '## Expected Outcomes' (line 35), '## Edge Cases' (line 44), '## Success Signals' (line 67). Missing: 'Actor & Scenario' — the file uses '## User Scenarios' instead, which does not match the required header name."
+    },
+    {
+      "text": "system-analysis.md was created with all required sections (Relevant Modules, Change Points, Dependencies, Existing Patterns)",
+      "passed": false,
+      "evidence": "Found: '## Relevant Modules and Change Points' (line 26), '## Existing Patterns to Follow' (line 182). Change Points appear as sub-headers under each module section. Missing: no standalone '## Dependencies' section header exists; the closest section is '## Integration Dependencies' in constraints-risks-analysis.md, not in system-analysis.md."
+    },
+    {
+      "text": "constraints-risks-analysis.md was created with all required sections (Constraints, Risks, Integration Dependencies, Backward Compatibility)",
+      "passed": true,
+      "evidence": "Found: '## Hard Constraints' (line 4) covers Constraints, '## Risks' (line 23), '## Integration Dependencies' (line 67), '## Backward Compatibility Analysis' (line 90). All four required topics are present, though the Constraints section header uses 'Hard Constraints' rather than plain 'Constraints'."
+    },
+    {
+      "text": "system-analysis.md references actual file paths from the mock project (internal/auth/, internal/tenant/, internal/user/)",
+      "passed": true,
+      "evidence": "All three paths appear repeatedly. 'internal/auth/' appears in lines 9, 28, 44, 47, 56, 63; 'internal/tenant/' appears in lines 10, 70, 97, 104, 112; 'internal/user/' appears in lines 11, 119, 121, 128, 135."
+    },
+    {
+      "text": "system-analysis.md identifies that the tenant model has no per-tenant configuration storage (key finding from reading tenant/models.go)",
+      "passed": true,
+      "evidence": "Line 73 of system-analysis.md states: 'The file contains a NOTE comment explicitly acknowledging the lack of per-tenant configuration storage and suggesting a tenant_settings table or JSONB column.' Also reinforced in the summary.txt line 24-25: 'Storage gap: The Tenant model (internal/tenant/models.go) has no per-tenant configuration storage. A note in the code explicitly acknowledges this.'"
+    },
+    {
+      "text": "constraints-risks-analysis.md mentions backward compatibility for the existing email/password login flow",
+      "passed": true,
+      "evidence": "Lines 11-13 state: 'The existing email/password login flow (POST /api/auth/login) must remain fully functional for non-SSO tenants. No behavioral changes are acceptable for tenants that do not enable SSO.' Line 93 under Backward Compatibility Analysis reiterates: 'POST /api/auth/login: Will continue to work for non-SSO tenants.'"
+    },
+    {
+      "text": "product-analysis.md describes the SSO login scenario step by step, not just restates the requirements",
+      "passed": true,
+      "evidence": "Scenario 2 ('Enterprise Employee Logs In via SSO (SP-Initiated)', lines 14-22) contains 7 numbered steps describing the full login walkthrough: user navigates to login page, enters email, system resolves tenant, detects SSO, redirects to Keycloak, Keycloak issues tokens, backend validates JWT. This is a detailed walkthrough beyond requirement restatement."
+    },
+    {
+      "text": "Each analysis contains a Self-Critique Notes section showing evidence of the analyze-critique-refine cycle",
+      "passed": false,
+      "evidence": "A grep for 'Self-Critique', 'Critique Notes', 'self-critique', and 'critique notes' across all output files returned no matches. None of the three analysis files (product-analysis.md, system-analysis.md, constraints-risks-analysis.md) contain a Self-Critique Notes section."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+Task Preparation — Stage 1 Summary
+====================================
+
+Task: Optimize analytics dashboard chart load times from 8-10s to under 2s.
+
+Process executed:
+1. Intake: Collected raw task statement. No external links to fetch, no memobank found.
+2. Normalization: Identified task type as performance optimization, actor as end users (50k DAU), affected area as the full data path (ClickHouse -> GraphQL API -> frontend dashboard).
+3. Knowns/Unknowns/Assumptions: Separated into three buckets. Key knowns include the performance target, code locations, and data path. Significant unknowns include which specific charts are slow, payload sizes, caching status, and charting library. Key assumptions flagged include compute capacity sufficiency and measurement definition.
+4. Requirements draft: Created structured requirements.draft.md with all sections.
+5. Readiness critique: Evaluated against 8 criteria. Results: 4 PASS, 4 WEAK, 0 FAIL.
+6. Verdict: NEEDS_CLARIFICATION (4 WEAK scores exceeds the 2 WEAK maximum for READY).
+
+Blocking gaps identified:
+- "Some of the charts" is too vague — need to know which specific charts are slow
+- Unclear whether ClickHouse-level infrastructure changes are in scope
+- Ambiguous whether the 2-second target is per-chart or total page load
+
+Five clarification questions were formulated and saved to clarifications.md.
+
+Artifacts produced:
+- requirements.draft.md (structured task statement)
+- readiness-review.md (critic evaluation with scores and verdict)
+- clarifications.md (blocking gaps and specific questions for the user)
+
+Status: BLOCKED — waiting for user clarification before re-entering the prepare-critique-refine loop.
+
+Note: The Agent tool was not available in this environment, so the readiness critique was performed inline following the exact criteria and format specified in the readiness-critic.md prompt.

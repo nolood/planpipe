@@ -1,0 +1,32 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection-incomplete-design",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "Missing stage-4-handoff.md is detected and flagged",
+      "passed": true,
+      "evidence": "Line 13 states 'Status: MISSING' for stage-4-handoff.md. The assessment summary table on line 106 also confirms 'NO' for stage-4-handoff.md existence. The response explicitly notes: 'No stage-4-handoff.md was provided.'"
+    },
+    {
+      "text": "Incomplete implementation design is recognized (vague approach, no concrete changes, no decisions)",
+      "passed": true,
+      "evidence": "Lines 19-38 mark the design as 'PROVIDED BUT INCOMPLETE — effectively unusable'. Vague approach identified: 'Improve the notification system to make it more reliable' with 'no concrete technical detail'. No concrete changes: 'Changes to be determined after further analysis'. No decisions: 'No decisions made yet'. The response calls it 'a placeholder document, not a completed Stage 4 design.'"
+    },
+    {
+      "text": "User is told to return to Stage 4 to complete the design",
+      "passed": true,
+      "evidence": "Line 87 explicitly states 'This work must be sent back to Stage 4 (Solution Design).' Line 98 reinforces: 'Only after Stage 4 is genuinely complete can Stage 5 begin decomposition.' The process rule is also quoted: 'stop immediately and tell the user — send it back to Stage 4.'"
+    },
+    {
+      "text": "No decomposition artifacts (execution-backlog.md, coverage-matrix.md) are created from incomplete inputs",
+      "passed": true,
+      "evidence": "The outputs directory contains only response.md (verified via ls). No execution-backlog.md, coverage-matrix.md, or any other artifact files exist."
+    },
+    {
+      "text": "Response mentions that agreed-task-model.md is missing, limiting coverage validation",
+      "passed": false,
+      "evidence": "Lines 59-61 note agreed-task-model.md as 'Status: NOT PROVIDED', so the missing status is acknowledged. However, the response does not mention that this limits coverage validation. No connection is drawn between the absence of agreed-task-model.md and any impact on coverage validation capabilities. The term 'coverage validation' does not appear anywhere in the response."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS — now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+    "should_trigger": true
+  },
+  {
+    "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+    "should_trigger": true
+  },
+  {
+    "query": "we just finished preparing the task (stage 1 complete) and now need the multi-faceted analysis — product/business, system mapping, constraints. The dashboard refactoring involves clickhouse queries, graphql resolvers, and react components",
+    "should_trigger": true
+  },
+  {
+    "query": "before we plan the implementation, I want to deeply understand this task from all angles — what's the business intent, where in the codebase does this live, what are the risks. We have the requirements ready, they passed the readiness gate",
+    "should_trigger": true
+  },
+  {
+    "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+    "should_trigger": true
+  },
+  {
+    "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+    "should_trigger": true
+  },
+  {
+    "query": "нужно провести глубокий анализ задачи перед планированием. Этап 1 пройден, есть requirements.draft.md. Задача — добавить поддержку мультиязычности в наше приложение",
+    "should_trigger": true
+  },
+  {
+    "query": "I need to investigate what parts of the system are affected by this change and what risks we should account for. We've already structured the requirements in stage 1. The task involves replacing our message queue from RabbitMQ to Kafka",
+    "should_trigger": true
+  },
+  {
+    "query": "build a knowledge base for this task before planning — I want to understand business intent, map the codebase, and identify constraints. Stage 1 handoff is ready. Task: implement rate limiting on our public API",
+    "should_trigger": true
+  },
+  {
+    "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+    "should_trigger": true
+  },
+  {
+    "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+    "should_trigger": false
+  },
+  {
+    "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+    "should_trigger": false
+  },
+  {
+    "query": "I have a vague idea for a feature — something about improving our search. Not sure what exactly. Can you help me understand what needs to happen?",
+    "should_trigger": false
+  },
+  {
+    "query": "explain how the auth middleware works in our codebase. I'm new to the team and trying to understand the request flow from the HTTP handler through authentication to the service layer",
+    "should_trigger": false
+  },
+  {
+    "query": "create a PR for the changes I just made. I've committed everything on the feature/sso branch. The PR should go to main with a description of what changed",
+    "should_trigger": false
+  },
+  {
+    "query": "our CI pipeline is failing on the linting step. The error is about unused imports in internal/auth/handler.go. Can you fix it?",
+    "should_trigger": false
+  },
+  {
+    "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+    "should_trigger": false
+  },
+  {
+    "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+    "should_trigger": false
+  },
+  {
+    "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+    "should_trigger": false
+  },
+  {
+    "query": "we got a new ticket from the product team but it's super vague — just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+    "should_trigger": false
+  }
+]

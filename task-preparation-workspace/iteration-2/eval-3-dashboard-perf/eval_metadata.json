@@ -1,0 +1,42 @@
+{
+  "eval_id": 3,
+  "eval_name": "dashboard-performance",
+  "prompt": "Our analytics dashboard is getting slow...",
+  "assertions": [
+    {
+      "id": "req-draft-exists",
+      "text": "requirements.draft.md with all required sections",
+      "type": "file_exists"
+    },
+    {
+      "id": "readiness-review-exists",
+      "text": "readiness-review.md with all 8 criteria scored",
+      "type": "file_exists"
+    },
+    {
+      "id": "clarifications-created",
+      "text": "clarifications.md was created to address unknowns",
+      "type": "file_exists"
+    },
+    {
+      "id": "clarifications-follow-template",
+      "text": "clarifications.md follows the fixed template with all 4 sections",
+      "type": "template_check"
+    },
+    {
+      "id": "perf-target-stated",
+      "text": "Goal states the performance target: under 2 seconds",
+      "type": "content_check"
+    },
+    {
+      "id": "tech-context-captured",
+      "text": "Knowns mention ClickHouse, GraphQL, file paths, 50k DAU",
+      "type": "content_check"
+    },
+    {
+      "id": "root-cause-in-unknowns",
+      "text": "Unknowns include root cause uncertainty",
+      "type": "content_check"
+    }
+  ]
+}

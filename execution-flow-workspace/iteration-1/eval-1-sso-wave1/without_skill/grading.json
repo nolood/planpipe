@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "execution-status.md artifact is created and tracks all 3 subtasks",
+      "passed": false,
+      "evidence": "No execution-status.md file exists anywhere in the without_skill directory. The only output artifact is outputs/implementation-summary.md, which summarizes work done but is not a structured status-tracking document."
+    },
+    {
+      "text": "ST-1: migrations/002_sso.up.sql created with tenant_sso_config table and users.keycloak_id column",
+      "passed": true,
+      "evidence": "codebase/migrations/002_sso.up.sql exists and contains: CREATE TABLE tenant_sso_config with all required columns (id, tenant_id, idp_entity_id, idp_sso_url, idp_certificate, sp_entity_id, enabled, created_at, updated_at), a foreign key on tenant_id referencing tenants(id), an index on tenant_id, and ALTER TABLE users ADD COLUMN keycloak_id TEXT UNIQUE."
+    },
+    {
+      "text": "ST-1: migrations/002_sso.down.sql created with reverse operations",
+      "passed": true,
+      "evidence": "codebase/migrations/002_sso.down.sql exists and contains: ALTER TABLE users DROP COLUMN IF EXISTS keycloak_id, DROP INDEX IF EXISTS idx_tenant_sso_config_tenant_id, DROP TABLE IF EXISTS tenant_sso_config. All three up-migration operations are reversed."
+    },
+    {
+      "text": "ST-2: config/config.go modified to include SSOConfig struct with Keycloak fields",
+      "passed": true,
+      "evidence": "codebase/config/config.go contains SSOConfig struct with fields: KeycloakURL, KeycloakRealm, KeycloakAdminUser, KeycloakAdminPassword, SAMLCallbackURL, SPEntityID. The main Config struct includes SSO SSOConfig field. Load() populates all SSO fields from environment variables using the getEnv() pattern."
+    },
+    {
+      "text": "ST-3: internal/tenant/model.go modified to include TenantSSOConfig struct",
+      "passed": true,
+      "evidence": "codebase/internal/tenant/model.go contains TenantSSOConfig struct with all required fields (ID, TenantID, IdPEntityID, IdPSSOURL, IdPCertificate, SPEntityID, Enabled, CreatedAt, UpdatedAt) and appropriate JSON tags. The existing Tenant struct is preserved unchanged."
+    },
+    {
+      "text": "ST-3: internal/user/model.go modified to include KeycloakID *string field",
+      "passed": true,
+      "evidence": "codebase/internal/user/model.go contains User struct with KeycloakID *string field and json tag `json:\"keycloak_id,omitempty\"`. All existing fields (ID, Email, Password, TenantID, Role, CreatedAt, UpdatedAt) are preserved unchanged."
+    },
+    {
+      "text": "Task review was performed for each subtask (task-reviewer agent was spawned)",
+      "passed": false,
+      "evidence": "No evidence of task-reviewer agent being spawned. No review-related files exist in outputs/ or anywhere in the without_skill directory. A grep for 'review' or 'reviewer' across all files returned no matches. This is expected for a baseline run without the execution-flow skill."
+    },
+    {
+      "text": "Code review was performed for each subtask (code-reviewer agent was spawned)",
+      "passed": false,
+      "evidence": "No evidence of code-reviewer agent being spawned. No review-related files exist in outputs/ or anywhere in the without_skill directory. A grep for 'review' or 'reviewer' across all files returned no matches. This is expected for a baseline run without the execution-flow skill."
+    },
+    {
+      "text": "task-completion-log.md is created with completion records for all 3 subtasks",
+      "passed": false,
+      "evidence": "No task-completion-log.md file exists anywhere in the without_skill directory. The only output artifact is outputs/implementation-summary.md. This is expected for a baseline run without the execution-flow skill."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 4,
+    "total": 9,
+    "pass_rate": 0.56
+  }
+}

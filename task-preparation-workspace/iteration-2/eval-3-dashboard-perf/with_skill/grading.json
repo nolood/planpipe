@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md with all required sections",
+      "passed": true,
+      "evidence": "Found 7/7"
+    },
+    {
+      "text": "readiness-review.md with all 8 criteria scored",
+      "passed": true,
+      "evidence": "Found 8/8"
+    },
+    {
+      "text": "clarifications.md was created to address unknowns",
+      "passed": true,
+      "evidence": "Exists, 4581 chars"
+    },
+    {
+      "text": "clarifications.md follows the fixed template with all 4 sections",
+      "passed": true,
+      "evidence": "Sections: ['# Clarifications Needed', '## Blocking Gaps', '## Open Unknowns', '## Assumptions to Verify', '## Questions for the User']"
+    },
+    {
+      "text": "Goal states the performance target: under 2 seconds",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Knowns mention ClickHouse, GraphQL, file paths, 50k DAU",
+      "passed": true,
+      "evidence": "Found 5/5: ['clickhouse', 'graphql', 'apps/dashboard', 'services/analytics-api', '50']"
+    },
+    {
+      "text": "Unknowns include root cause uncertainty",
+      "passed": true,
+      "evidence": "Found"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

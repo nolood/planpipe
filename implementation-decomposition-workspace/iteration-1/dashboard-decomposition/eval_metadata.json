@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-decomposition",
+  "prompt": "Run Stage 5 implementation decomposition on the dashboard performance optimization task. Stage 4 is complete. Decompose the full-stack optimization into execution-ready subtasks suitable for parallel execution by multiple agents.",
+  "assertions": [
+    {"text": "All 4 decomposition artifacts created with all required template sections"},
+    {"text": "Backend subtasks (ClickHouse fix, cache, parallelization) and frontend subtasks (hook, downsampling, component refactoring) are separated and can run in parallel across waves"},
+    {"text": "Retention cohort bug fix (queries.go:67-85) is an independent subtask or part of a foundation subtask with no blocking dependencies"},
+    {"text": "Cache subtask (chart_cache.go) is correctly identified as a dependency for the service parallelization subtask"},
+    {"text": "Frontend useChartQuery hook is correctly identified as a dependency for Overview.tsx refactoring"},
+    {"text": "Conflict zones identified where service.go integration depends on both cache and ClickHouse changes"},
+    {"text": "Coverage reviewer returns COVERAGE_OK — all 7 acceptance criteria mapped"},
+    {"text": "Execution waves maximize parallelism: independent backend and frontend streams can run simultaneously"}
+  ]
+}

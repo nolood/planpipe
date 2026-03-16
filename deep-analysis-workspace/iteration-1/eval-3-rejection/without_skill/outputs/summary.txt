@@ -1,0 +1,105 @@
+DEEP ANALYSIS DECISION: REJECTED — Task Not Ready for Analysis
+
+Task: "Fix the authentication system"
+
+==============================================================================
+DECISION RATIONALE
+==============================================================================
+
+The readiness review returned a verdict of NEEDS_CLARIFICATION with 5 of 8
+criteria scored as FAIL and the remaining 2 scored as WEAK. Deep analysis
+cannot proceed because there is insufficient information to analyze from any
+perspective — product/business, system/codebase, or constraints/risks.
+
+Attempting analysis at this stage would produce pure speculation, not
+actionable findings.
+
+==============================================================================
+WHAT WE KNOW
+==============================================================================
+
+- An authentication system exists.
+- Someone believes something is wrong with it.
+- That is all.
+
+==============================================================================
+WHAT IS MISSING (Blocking Gaps)
+==============================================================================
+
+1. PROBLEM DEFINITION: No description of what is actually broken. No error
+   messages, no user reports, no observed symptoms, no logs. "Something is
+   wrong with the auth" is not a problem statement.
+
+2. SCOPE BOUNDARY: "Auth-related changes" could mean a one-line typo fix or
+   a full system rewrite. Without knowing the problem, scope cannot be
+   bounded. This makes effort estimation, risk assessment, and change-impact
+   analysis impossible.
+
+3. CHANGE TARGET: While "auth" is identified as the general area, the
+   specific components, files, services, or flows involved are unknown.
+   Without this, codebase analysis has no starting point.
+
+4. ACCEPTANCE CRITERIA: There is no way to determine when the task is done.
+   No definition of correct behavior, no test cases, no expected outcomes.
+   This makes verification impossible.
+
+5. CONTEXT: No information about the tech stack, architecture, affected
+   users, severity, or business impact. Without this, prioritization and
+   risk assessment cannot be performed.
+
+==============================================================================
+ANALYSIS BY PERSPECTIVE (Why Each Is Blocked)
+==============================================================================
+
+PRODUCT / BUSINESS PERSPECTIVE:
+  - Cannot assess business impact without knowing what is broken.
+  - Cannot prioritize without knowing severity or number of affected users.
+  - Cannot estimate value delivered without knowing the desired outcome.
+  Status: BLOCKED — no usable information.
+
+SYSTEM / CODEBASE PERSPECTIVE:
+  - Cannot identify affected components without knowing the failure mode.
+  - Cannot assess change impact without knowing what will change.
+  - Cannot evaluate technical approach without a defined problem.
+  Status: BLOCKED — no usable information.
+
+CONSTRAINTS / RISKS PERSPECTIVE:
+  - Cannot assess risk without knowing scope of changes.
+  - Cannot identify security implications without knowing the vulnerability
+    (if any).
+  - Cannot estimate timeline without understanding complexity.
+  - Cannot identify dependencies without knowing affected components.
+  Status: BLOCKED — no usable information.
+
+==============================================================================
+REQUIRED CLARIFICATIONS BEFORE ANALYSIS CAN PROCEED
+==============================================================================
+
+The following questions must be answered before deep analysis is viable:
+
+1. What specific behavior is broken? Provide at least one of: error message,
+   incorrect behavior description, security vulnerability report, or
+   performance degradation metric.
+
+2. Who reported this issue and what did they observe? First-hand accounts or
+   reproduction steps are needed.
+
+3. Which part of the authentication system is affected? Possibilities include
+   but are not limited to: login flow, token generation/validation, session
+   management, password reset, OAuth/SSO integration, role-based access
+   control, rate limiting, or account lockout.
+
+4. What does a successful fix look like? Define the expected behavior after
+   the fix is applied and how it will be verified.
+
+5. What is the severity and urgency? Is this a production outage, a security
+   vulnerability, a UX annoyance, or a technical debt item?
+
+==============================================================================
+CONCLUSION
+==============================================================================
+
+This task must be returned for clarification. No analysis artifacts beyond
+this rejection summary are produced because doing so would provide false
+confidence in fabricated findings. Once the blocking questions above are
+answered, the task can be resubmitted for proper deep analysis.

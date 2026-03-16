@@ -1,0 +1,23 @@
+Task Preparation — Stage 1 Summary
+====================================
+
+Task: Add SAML-based SSO support for enterprise tenants
+
+Process Executed:
+1. Intake Context — Gathered all entities and context from the user's request. No external links to fetch, no memobank found in the project.
+2. Normalize Task Statement — Classified as a "feature" task. Core ask: enterprise tenant users authenticate via their corporate SAML IdP through the existing Keycloak auth system. Affected areas: services/auth/ middleware (FastAPI), Keycloak config, React frontend login flow.
+3. Extract Knowns/Unknowns/Assumptions — Identified 9 knowns (tech stack, protocol, constraints), 9 unknowns (auth middleware internals, tenant identification mechanism, account linking strategy, etc.), and 8 assumptions (Keycloak as SAML broker, SP-initiated flow baseline, JIT provisioning, etc.).
+4. Draft Requirements — Produced requirements.draft.md with all sections: goal, problem statement, scope, out of scope, constraints, dependencies, knowns, unknowns, assumptions.
+5. Readiness Critique — Evaluated the draft against 8 criteria. Results: 6 PASS, 2 WEAK (context sufficiency and ambiguity level), 0 FAIL.
+6. Verdict: READY_FOR_DEEP_ANALYSIS
+
+Verdict Rationale:
+The task preparation meets all readiness criteria. The goal, problem, scope, and change targets are clearly defined. Two areas scored WEAK — the internal structure of the auth middleware is unknown, and the tenant identification mechanism during login is ambiguous — but both are honestly acknowledged as unknowns and do not block meaningful deep analysis. The assumption that Keycloak serves as the SAML SP/broker is well-supported and safe to carry forward.
+
+Artifacts Produced:
+- requirements.draft.md — Structured task statement with all sections
+- readiness-review.md — Critic evaluation with scores, verdict, and reasoning
+- (No clarifications.md — verdict was READY, not NEEDS_CLARIFICATION)
+
+Next Step:
+The task is ready to proceed to Stage 2 (deep analysis) of the planning pipeline.

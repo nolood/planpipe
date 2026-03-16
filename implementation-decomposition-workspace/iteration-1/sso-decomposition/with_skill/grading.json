@@ -1,0 +1,47 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-decomposition",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "All 4 decomposition artifacts created: execution-backlog.md, coverage-matrix.md, decomposition-review-package.md, stage-5-handoff.md — each with all required template sections",
+      "passed": true,
+      "evidence": "All four files exist in the outputs directory. execution-backlog.md contains Execution Overview, Execution Waves, Dependency Graph, Conflict Zones, and 10 detailed subtask definitions (ST-1 through ST-10) plus Critique Review and Coverage Review sections. coverage-matrix.md contains Requirement Traceability tables from four sources (Agreed Task Model, Implementation Design, Change Map, Design Decisions), Coverage Gaps, Over-Coverage, and Done-State Validation sections. decomposition-review-package.md contains Decomposition Summary, Subtask Overview table, Execution Waves breakdown, Dependency Highlights, Conflict Zones, Coverage Assessment, Review Points, and Scope Confirmation. stage-5-handoff.md contains Task Summary, Classification, Implementation Approach, Execution Strategy, Subtask Summary table, Execution Waves, Dependency Graph, Conflict Zones, Coverage Verification, Constraints Respected, Risks for Execution, Acceptance Criteria, and Detailed References."
+    },
+    {
+      "text": "Subtasks cover all 6 modules from the change map: auth, tenant, user, config, migrations, server — no module orphaned",
+      "passed": true,
+      "evidence": "Migrations module: ST-1 (migrations/00X_add_tenant_sso_config.sql, migrations/00Y_add_user_keycloak_id.sql). Config module: ST-2 (internal/config/config.go). Tenant module: ST-3 (internal/tenant/model.go), ST-4 (internal/tenant/repository.go, repository_test.go). User module: ST-3 (internal/user/model.go), ST-5 (internal/user/repository.go, service.go, service_test.go). Auth module: ST-6 (internal/auth/keycloak_client.go), ST-7 (internal/auth/sso_service.go), ST-8 (internal/auth/handler.go). Server module: ST-9 (cmd/server/main.go). Coverage matrix confirms: 'All 16 files (10 modify + 6 create) are explicitly assigned to subtasks. No orphaned files.'"
+    },
+    {
+      "text": "Foundation subtasks (migrations, config, shared types) are in Wave 1 with no blocking dependencies",
+      "passed": true,
+      "evidence": "Wave 1 contains ST-1 (Database Migrations for SSO, type: foundation), ST-2 (SSO Configuration Struct, type: foundation), and ST-3 (Tenant and User Model Extensions, type: foundation). Each explicitly states 'No dependencies — can start immediately.' The execution-backlog confirms: 'These subtasks have no inter-dependencies and can run fully in parallel.'"
+    },
+    {
+      "text": "Dependencies correctly reflect that SSO service depends on tenant repository, user service, Keycloak client, and config",
+      "passed": true,
+      "evidence": "ST-7 (SSO Service Implementation) lists four blocking dependencies: ST-2 (SSOConfig struct — 'SSO configuration settings'), ST-4 (TenantRepository.GetSSOConfigByDomain — 'Tenant SSO config repository'), ST-5 (UserService.FindOrCreateBySSO and LinkKeycloakID — 'User service SSO methods'), ST-6 (KeycloakClient interface — 'Keycloak client'). The dependency graph in execution-backlog.md shows: 'ST-4 (tenant repo) ──→ ST-7 (sso service)', 'ST-5 (user repo+service) ──→ ST-7 (sso service)', 'ST-6 (keycloak client) ──→ ST-7 (sso service)', and 'ST-2 (config) ──→ ST-7 (sso service)'. The decomposition-review-package confirms: 'ST-7 (SSO Service) is the convergence point: It depends on 4 prior subtasks (ST-2, ST-4, ST-5, ST-6) and cannot start until all of them are complete.'"
+    },
+    {
+      "text": "Each subtask has explicit boundaries (in-scope/out-of-scope), completion criteria, and related design decisions",
+      "passed": true,
+      "evidence": "All 10 subtasks (ST-1 through ST-10) have a 'Boundaries' section with 'In scope' and 'Out of scope' subsections, a 'Completion Criteria' section with checkboxes, and a 'Context' section containing 'Related design decisions'. For example, ST-1 has in-scope items (migration SQL files, UP/DOWN directions, table structure), out-of-scope items (Go model structs, repository methods), completion criteria (4 checkboxes), and references DD-1. ST-7 has in-scope items (SSOService struct, InitiateSSO, ProcessCallback, SAML handling, tests), out-of-scope items (HTTP handlers, Keycloak Admin API, user provisioning), completion criteria (9 checkboxes), and references DD-2, DD-3, DD-4, DD-5."
+    },
+    {
+      "text": "Decomposition critic subagent was spawned and returned DECOMPOSITION_APPROVED",
+      "passed": true,
+      "evidence": "The execution-backlog.md contains a 'Critique Review' section with 'Verdict: DECOMPOSITION_APPROVED'. It includes a detailed scoring table with 7 criteria (Task clarity, Boundary quality, Dependency correctness, Parallelizability, Conflict risk, Context completeness, Scope discipline), all scored as PASS. The summary states: 'The decomposition is well-structured with clean boundaries, correct dependencies, and genuine parallelism.' Issues to Address: None."
+    },
+    {
+      "text": "Coverage reviewer subagent was spawned and returned COVERAGE_OK with at least medium confidence",
+      "passed": true,
+      "evidence": "The execution-backlog.md contains a 'Coverage Review' section with 'Verdict: COVERAGE_OK' and 'Confidence: high'. Additionally, coverage-matrix.md header states 'Coverage verdict: COVERAGE_OK' and 'Confidence: high'. The coverage summary table shows 0 partial and 0 missing items across all four sources (agreed task model, implementation design, change map, design decisions). High confidence exceeds the 'at least medium' threshold."
+    },
+    {
+      "text": "Coverage matrix maps all 7 acceptance criteria from agreed-task-model.md to specific subtasks",
+      "passed": true,
+      "evidence": "The coverage-matrix.md 'Requirement Traceability — From Agreed Task Model' table maps all 7 acceptance criteria: AC-1 (SP-initiated SAML SSO login) → ST-7, ST-8, ST-9; AC-2 (Email/password login unchanged) → ST-3, ST-10; AC-3 (JIT-provisioned with correct tenant) → ST-5, ST-7; AC-4 (Existing users auto-linked via email) → ST-5, ST-7; AC-5 (Per-tenant SSO config stored) → ST-1, ST-3, ST-4; AC-6 (Keycloak IdP config automated) → ST-6; AC-7 (JWT tokens contain required claims) → ST-7. All 7 are marked 'covered'. The execution-backlog.md Coverage Review section independently confirms: 'All seven criteria are traceable to specific subtask completion criteria.'"
+    }
+  ]
+}

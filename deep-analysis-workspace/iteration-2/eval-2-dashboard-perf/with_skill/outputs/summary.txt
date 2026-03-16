@@ -1,0 +1,40 @@
+Stage 2 Deep Analysis Summary — Dashboard Performance Optimization
+===================================================================
+
+Task: Reduce analytics dashboard chart load times from 8-10s to under 2s.
+System: Go backend (gqlgen + ClickHouse) + React frontend (Recharts + Apollo Client).
+Scale: ~50,000 DAU, ~500M rows in ClickHouse events table.
+
+BOTTLENECKS IDENTIFIED (from actual code reading):
+
+Backend:
+1. Sequential chart loading — 8 charts loaded one-by-one in a for-loop (service.go:30-37)
+2. No caching — every request hits ClickHouse; unused cache utility exists (internal/cache/)
+3. Unbounded result sets — no LIMIT on most queries; entire result loaded into memory
+4. All queries hit raw events table — no materialized views; 2-5s per query for large tenants
+5. Bug: retention cohort query has 5 SQL params but only 3 are passed (queries.go:67-85)
+
+Frontend:
+6. Monolithic GraphQL query — page shows nothing until all 8 charts complete (Overview.tsx)
+7. No data downsampling — 10k+ SVG elements per chart cause 2-5s render time (Chart.tsx)
+8. All charts render simultaneously — no lazy loading (ChartGrid.tsx)
+9. Cache-busting time range — millisecond-precision timestamps prevent Apollo cache hits
+
+CRITIC RESULTS: All 3 analyses assessed as SUFFICIENT. No refinement needed.
+
+KEY RISKS:
+- Parallel queries may overwhelm ClickHouse connection pool (no pool config exists)
+- Cache thundering herd under 50k DAU load
+- Zero test coverage across entire codebase — any change is high-risk
+
+MINIMUM VIABLE OUTCOME:
+Backend parallelization of chart queries. Without this, the 2-second target is
+mathematically impossible for large tenants (8 queries x 1s each = 8s minimum).
+
+OUTPUT ARTIFACTS:
+- product-analysis.md — business intent, scenarios, success signals
+- system-analysis.md — modules, change points, dependencies, bottlenecks
+- constraints-risks-analysis.md — constraints, calibrated risks, compatibility
+- stage-2-handoff.md — consolidated handoff for Stage 3 (plan synthesis)
+
+STATUS: Ready for Stage 3 (plan synthesis).

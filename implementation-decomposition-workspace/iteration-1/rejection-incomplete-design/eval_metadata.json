@@ -1,0 +1,12 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection-incomplete-design",
+  "prompt": "Run Stage 5 implementation decomposition. Here are the design artifacts from Stage 4.",
+  "assertions": [
+    {"text": "Missing stage-4-handoff.md is detected and flagged"},
+    {"text": "Incomplete implementation design is recognized (vague approach, no concrete changes, no decisions)"},
+    {"text": "User is told to return to Stage 4 to complete the design"},
+    {"text": "No decomposition artifacts (execution-backlog.md, coverage-matrix.md) are created from incomplete inputs"},
+    {"text": "Response mentions that agreed-task-model.md is missing, limiting coverage validation"}
+  ]
+}

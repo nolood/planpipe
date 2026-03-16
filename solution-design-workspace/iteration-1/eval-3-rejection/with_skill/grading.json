@@ -1,0 +1,32 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "Stage 4 detected missing agreed-task-model.md",
+      "passed": true,
+      "evidence": "Rejection file explicitly states: 'agreed-task-model.md | MISSING | Does not exist. The handoff document explicitly states: The agreed-task-model.md does not exist.'"
+    },
+    {
+      "text": "Stage 4 flagged that Stage 3 is incomplete or user agreement was not obtained",
+      "passed": true,
+      "evidence": "States: 'The handoff was generated before user agreement' and 'Solution direction is not agreed'. Lists Stage 3 as incomplete."
+    },
+    {
+      "text": "User was told to go back to Stage 3 or complete the task synthesis",
+      "passed": true,
+      "evidence": "Action Required section: 'Return to Stage 3. Complete the task synthesis and obtain user agreement on the task model before invoking Stage 4.'"
+    },
+    {
+      "text": "No implementation-design.md or change-map.md were created from incomplete inputs",
+      "passed": true,
+      "evidence": "Only stage-4-rejection.md was created in outputs directory. No design artifacts present."
+    },
+    {
+      "text": "The response mentions that the task model is not confirmed/agreed by the user",
+      "passed": true,
+      "evidence": "Multiple references: 'No user-agreed task model exists', 'generated before user agreement was obtained', 'Stage 3's purpose is to synthesize the analysis into a task model and obtain user agreement. That process was not completed.'"
+    }
+  ]
+}

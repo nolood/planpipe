@@ -1,0 +1,73 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection-incomplete-input",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Stage 3 detected missing stage-2-handoff.md",
+      "passed": true,
+      "evidence": "Both output files identify the missing handoff. analysis.md states: '`stage-2-handoff.md` — Missing entirely. This is the primary entry point for Stage 3 and is required per the pipeline specification.' synthesis-rejected.md lists it in the table as 'MISSING — Primary entry point for Stage 3 — never produced.'"
+    },
+    {
+      "text": "Stage 3 flagged that analyses are insufficient or incomplete",
+      "passed": true,
+      "evidence": "analysis.md provides detailed quality assessment of both analyses: product-analysis has 'single vague sentence' business intent, 'two steps: \"Something happens\" and \"User gets notified\"', edge cases 'None identified', success signals 'Users are happy — unmeasurable'. System analysis has 'all change points, dependencies, patterns, and test coverage marked as \"unknown\"' and 'Could not explore codebase'. synthesis-rejected.md labels both as 'PRESENT but INSUFFICIENT'."
+    },
+    {
+      "text": "User was told to go back to Stage 2 or provide complete analysis outputs",
+      "passed": true,
+      "evidence": "analysis.md section 'Required Action' begins with '**Send this task back to Stage 2.**' and lists 5 specific items that must happen before synthesis can be attempted. synthesis-rejected.md header states 'Decision: REJECTED — cannot synthesize, returning to Stage 2' and includes 'What Stage 2 Must Deliver Before Retry' with 5 required deliverables."
+    },
+    {
+      "text": "No analysis.md or agreement-package.md were created from the incomplete inputs",
+      "passed": false,
+      "evidence": "An `analysis.md` file was created in the outputs directory. While its content is a rejection explanation (titled 'Synthesis Blocked — Insufficient Stage 2 Input') rather than actual synthesis, the file named `analysis.md` does exist. No `agreement-package.md` was created. The assertion states 'No analysis.md ... were created' — the file was created, even though it contains rejection content rather than synthesis. This is a behavioral difference from the with_skill configuration, which cleanly avoided creating any file named analysis.md and instead produced only stage-3-rejection.md."
+    },
+    {
+      "text": "The response mentions that constraints-risks-analysis.md is also missing",
+      "passed": true,
+      "evidence": "analysis.md lists under 'Missing Artifacts': '`constraints-risks-analysis.md` — Missing entirely. One of the three required analysis streams was never produced.' synthesis-rejected.md table shows: '`constraints-risks-analysis.md` | MISSING | Entire analysis stream was never produced'. The analysis.md also asks 'What constraints exist? (no constraints/risks analysis was performed at all).'"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 1,
+    "total": 5,
+    "pass_rate": 0.8
+  },
+  "timing": {
+    "total_duration_seconds": 109.4
+  },
+  "claims": [
+    {
+      "claim": "Producing synthesis artifacts from this input would require fabricating content not supported by any analysis",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Given the described state of inputs (placeholder content, all unknowns, zero findings), this assessment is well-supported."
+    },
+    {
+      "claim": "No agreement-package.md, agreed-task-model.md, or stage-3-handoff.md were produced",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Directory listing shows only analysis.md and synthesis-rejected.md in outputs. No other synthesis artifacts exist."
+    },
+    {
+      "claim": "The original requirement ('add notifications to the platform') is too ambiguous to analyze",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The analysis correctly identifies that 'notifications' without specifying type (in-app, email, push, SMS, webhooks), triggers, recipients, or channels is insufficient for technical analysis."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "No analysis.md or agreement-package.md were created from the incomplete inputs",
+        "reason": "This assertion is ambiguous about what 'created' means when the file exists but contains rejection content. The without_skill configuration created an analysis.md file with rejection rationale — not synthesis content. Consider splitting this into two assertions: (1) no file named analysis.md was created, OR (2) no file containing actual synthesis content was created. The current wording penalizes the without_skill config for using a standard filename for its rejection notice, which is arguably a reasonable behavior."
+      },
+      {
+        "reason": "No assertion checks the quality or completeness of the rejection explanation itself. Both configurations produced thorough rejection rationale, but a weak rejection that just said 'inputs are bad, go back' would also pass all assertions. Consider adding an assertion like 'The rejection identifies specific deficiencies in each provided analysis.'"
+      }
+    ],
+    "overall": "Assertions are reasonable but assertion 4 creates an ambiguity around file naming vs. file content. The key behavioral difference between configurations is that with_skill avoided creating any standard synthesis output filenames (cleaner rejection), while without_skill reused the analysis.md filename for its rejection content."
+  }
+}

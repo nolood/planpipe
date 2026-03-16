@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md file was created",
+      "passed": true,
+      "evidence": "Exists"
+    },
+    {
+      "text": "readiness-review.md with NEEDS_CLARIFICATION verdict",
+      "passed": true,
+      "evidence": "## Verdict: NEEDS_CLARIFICATION"
+    },
+    {
+      "text": "clarifications.md was created",
+      "passed": true,
+      "evidence": "Exists, 3698 chars"
+    },
+    {
+      "text": "clarifications.md follows the fixed template with all 4 sections",
+      "passed": true,
+      "evidence": "Sections: ['# Clarifications Needed', '## Blocking Gaps', '## Open Unknowns', '## Assumptions to Verify', '## Questions for the User']"
+    },
+    {
+      "text": "Questions are specific and actionable, not generic",
+      "passed": true,
+      "evidence": "24 questions found"
+    },
+    {
+      "text": "Requirements draft has more unknowns than knowns",
+      "passed": true,
+      "evidence": "Knowns: 2, Unknowns: 10"
+    },
+    {
+      "text": "Agent did not invent technical details",
+      "passed": true,
+      "evidence": "Clean"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

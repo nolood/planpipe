@@ -1,0 +1,15 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-design",
+  "prompt": "Run Stage 4 solution design on the SSO SAML feature. Stage 3 task synthesis is complete — the user has confirmed the task model. Design the implementation.",
+  "assertions": [
+    {"text": "implementation-design.md created with all required sections (Implementation Approach, Solution Description, Change Details, Key Technical Decisions, Implementation Sequence, Risk Zones)"},
+    {"text": "change-map.md created with file-level changes covering auth, tenant, user, config, migrations, and server modules"},
+    {"text": "design-decisions.md created with decisions about: per-tenant config table design, auth code flow approach, account linking strategy, Keycloak IdP management approach"},
+    {"text": "design-review-package.md created with approval points for the user"},
+    {"text": "Design architect subagent was spawned and explored the codebase"},
+    {"text": "Design critic subagent was spawned and returned a verdict"},
+    {"text": "Implementation sequence respects dependencies (e.g., migration before tenant repository, tenant before auth service)"},
+    {"text": "design-review-package.md includes approval points about API contract decisions and scope boundaries"}
+  ]
+}

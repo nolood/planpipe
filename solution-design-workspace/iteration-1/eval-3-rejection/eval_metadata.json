@@ -1,0 +1,12 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection",
+  "prompt": "Run Stage 4 solution design. Here are the analysis files from Stage 3.",
+  "assertions": [
+    {"text": "Stage 4 detected missing agreed-task-model.md"},
+    {"text": "Stage 4 flagged that Stage 3 is incomplete or user agreement was not obtained"},
+    {"text": "User was told to go back to Stage 3 or complete the task synthesis"},
+    {"text": "No implementation-design.md or change-map.md were created from incomplete inputs"},
+    {"text": "The response mentions that the task model is not confirmed/agreed by the user"}
+  ]
+}

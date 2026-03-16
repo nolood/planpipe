@@ -1,0 +1,12 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection-incomplete-input",
+  "prompt": "Run Stage 3 task synthesis. Here are the analysis files from Stage 2.",
+  "assertions": [
+    {"text": "Stage 3 detected missing stage-2-handoff.md"},
+    {"text": "Stage 3 flagged that analyses are insufficient or incomplete"},
+    {"text": "User was told to go back to Stage 2 or provide complete analysis outputs"},
+    {"text": "No analysis.md or agreement-package.md were created from the incomplete inputs"},
+    {"text": "The response mentions that constraints-risks-analysis.md is also missing"}
+  ]
+}

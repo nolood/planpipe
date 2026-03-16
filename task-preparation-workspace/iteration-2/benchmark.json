@@ -1,0 +1,191 @@
+{
+  "metadata": {
+    "skill_name": "task-preparation",
+    "skill_path": "/home/nolood/general/plan-pipeline/task-preparation",
+    "executor_model": "claude-opus-4-6",
+    "analyzer_model": "claude-opus-4-6",
+    "timestamp": "2026-03-13T13:30:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "SSO Feature (clear task)",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 154.5,
+        "tokens": 21541,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md with all sections", "passed": true, "evidence": "All 8 present"},
+        {"text": "readiness-review.md with all 8 criteria", "passed": true, "evidence": "8/8 criteria"},
+        {"text": "clarifications.md created to close unknowns", "passed": true, "evidence": "5014 chars, 12 unknowns + 3 assumptions"},
+        {"text": "clarifications.md follows fixed template", "passed": true, "evidence": "All 5 sections + header present"},
+        {"text": "Unknowns converted to questions", "passed": true, "evidence": "Tenant config, JIT, SLO, attribute mapping all in questions"},
+        {"text": "Tech context captured", "passed": true, "evidence": "5/5 terms"},
+        {"text": "Task classified as feature", "passed": true, "evidence": "Found"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "SSO Feature (clear task)",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.43,
+        "passed": 3,
+        "failed": 4,
+        "total": 7,
+        "time_seconds": 166.6,
+        "tokens": 16125,
+        "tool_calls": 9,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md with all sections", "passed": false, "evidence": "Missing Knowns, Unknowns, Assumptions"},
+        {"text": "readiness-review.md with all 8 criteria", "passed": false, "evidence": "No readiness review created"},
+        {"text": "clarifications.md created to close unknowns", "passed": false, "evidence": "No clarifications — jumped into technical analysis"},
+        {"text": "clarifications.md follows fixed template", "passed": false, "evidence": "No file"},
+        {"text": "Unknowns converted to questions", "passed": false, "evidence": "No clarification loop"},
+        {"text": "Tech context captured", "passed": true, "evidence": "5/5 terms in requirements.md"},
+        {"text": "Task classified as feature", "passed": true, "evidence": "Found"},
+        {"text": "No premature deep analysis", "passed": false, "evidence": "Created technical-analysis.md and task-breakdown.md with time estimates"}
+      ],
+      "notes": ["Baseline jumped into deep analysis: technical-analysis.md, task-breakdown.md with 6-8 week estimates"]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Vague Auth Fix",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 123.8,
+        "tokens": 19883,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md created", "passed": true, "evidence": "Exists"},
+        {"text": "NEEDS_CLARIFICATION verdict", "passed": true, "evidence": "7 FAIL, 1 WEAK"},
+        {"text": "clarifications.md created", "passed": true, "evidence": "3698 chars"},
+        {"text": "Follows fixed template", "passed": true, "evidence": "All 5 sections present"},
+        {"text": "Questions are actionable", "passed": true, "evidence": "24 questions"},
+        {"text": "More unknowns than knowns", "passed": true, "evidence": "2 knowns, 10 unknowns"},
+        {"text": "No hallucinated tech details", "passed": true, "evidence": "Clean"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Vague Auth Fix",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.86,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 107.0,
+        "tokens": 19406,
+        "tool_calls": 15,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md created", "passed": true, "evidence": "Exists"},
+        {"text": "NEEDS_CLARIFICATION verdict", "passed": true, "evidence": "Found"},
+        {"text": "clarifications.md created", "passed": true, "evidence": "Exists"},
+        {"text": "Follows fixed template", "passed": false, "evidence": "Different structure: Critical/Important/Useful grouping instead of standard template"},
+        {"text": "Questions are actionable", "passed": true, "evidence": "22 questions"},
+        {"text": "More unknowns than knowns", "passed": true, "evidence": "2 knowns, 11 unknowns"},
+        {"text": "No hallucinated tech details", "passed": true, "evidence": "Clean"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "Dashboard Performance",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 153.1,
+        "tokens": 20772,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md with all sections", "passed": true, "evidence": "7/7"},
+        {"text": "readiness-review with all 8 criteria", "passed": true, "evidence": "8/8"},
+        {"text": "clarifications.md created", "passed": true, "evidence": "4581 chars"},
+        {"text": "Follows fixed template", "passed": true, "evidence": "All 5 sections present"},
+        {"text": "Performance target stated", "passed": true, "evidence": "Under 2 seconds"},
+        {"text": "Tech context captured", "passed": true, "evidence": "5/5 terms"},
+        {"text": "Root cause in unknowns", "passed": true, "evidence": "Found"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "Dashboard Performance",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.43,
+        "passed": 3,
+        "failed": 4,
+        "total": 7,
+        "time_seconds": 174.2,
+        "tokens": 16938,
+        "tool_calls": 13,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md with all sections", "passed": true, "evidence": "Requirement sections present"},
+        {"text": "readiness-review with all 8 criteria", "passed": false, "evidence": "No readiness review"},
+        {"text": "clarifications.md created", "passed": false, "evidence": "No clarifications — jumped into investigation plan"},
+        {"text": "Follows fixed template", "passed": false, "evidence": "No clarifications file"},
+        {"text": "Performance target stated", "passed": true, "evidence": "Under 2 seconds found"},
+        {"text": "Tech context captured", "passed": true, "evidence": "5/5 terms"},
+        {"text": "Root cause in unknowns", "passed": false, "evidence": "No unknowns section — jumped to analysis"}
+      ],
+      "notes": ["Baseline produced investigation-plan.md and task-breakdown.md instead of preparation artifacts"]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 143.8, "stddev": 14.4, "min": 123.8, "max": 154.5},
+      "tokens": {"mean": 20732, "stddev": 681, "min": 19883, "max": 21541}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.57, "stddev": 0.20, "min": 0.43, "max": 0.86},
+      "time_seconds": {"mean": 149.3, "stddev": 30.4, "min": 107.0, "max": 174.2},
+      "tokens": {"mean": 17490, "stddev": 1420, "min": 16125, "max": 19406}
+    },
+    "delta": {
+      "pass_rate": "+0.43",
+      "time_seconds": "-5.5",
+      "tokens": "+3242"
+    }
+  },
+  "notes": [
+    "Iteration 2 vs Iteration 1: Eval 1 (SSO) now correctly creates clarifications.md with 12 unknowns + 3 assumptions to verify, instead of declaring READY and moving on. This was the main user feedback from iteration 1.",
+    "All three clarifications.md files now follow the consistent template: header summary → Blocking Gaps → Open Unknowns → Assumptions to Verify → Questions for the User. This was the second user feedback from iteration 1.",
+    "Pass rate delta increased from +0.24 (iter 1) to +0.43 (iter 2), primarily because the new assertions catch baseline's failure to create clarification loops and follow the template.",
+    "The skill now actually runs FASTER on average (-5.5s) than baselines despite doing more structured work — baselines waste time on premature deep analysis that the skill avoids.",
+    "Baseline for Eval 2 (vague auth) still scores 86% — the only failure is template conformance. The task is so underspecified that even without a skill, the model correctly asks for clarification. But it uses its own ad-hoc structure (Critical/Important/Useful) instead of the standard template.",
+    "Key behavioral improvement: the skill now refuses to declare done when there are open unknowns, even with a READY verdict. This is the core change from user feedback."
+  ]
+}

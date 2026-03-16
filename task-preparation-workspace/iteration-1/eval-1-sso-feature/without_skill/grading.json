@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md file was created",
+      "passed": true,
+      "evidence": "Found requirements doc: requirements.md"
+    },
+    {
+      "text": "Requirements draft contains all required sections",
+      "passed": false,
+      "evidence": "Missing sections: ['Knowns', 'Unknowns', 'Assumptions']"
+    },
+    {
+      "text": "readiness-review.md file was created with a verdict",
+      "passed": false,
+      "evidence": "File missing \u2014 baseline did not create a readiness review"
+    },
+    {
+      "text": "Readiness critic returned READY_FOR_DEEP_ANALYSIS",
+      "passed": false,
+      "evidence": "No readiness review file \u2014 no verdict"
+    },
+    {
+      "text": "Task correctly classified as feature or integration",
+      "passed": true,
+      "evidence": "Found"
+    },
+    {
+      "text": "Knowns section mentions key technical context",
+      "passed": true,
+      "evidence": "Found 5/5 terms: ['keycloak', 'fastapi', 'react', 'per-tenant', 'saml']"
+    },
+    {
+      "text": "No clarifications.md was created",
+      "passed": true,
+      "evidence": "Absent"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 3,
+    "total": 7,
+    "pass_rate": 0.57
+  }
+}

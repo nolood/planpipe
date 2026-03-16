@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "skill_name": "task-preparation",
+    "skill_path": "/home/nolood/general/plan-pipeline/task-preparation",
+    "executor_model": "claude-opus-4-6",
+    "analyzer_model": "claude-opus-4-6",
+    "timestamp": "2026-03-13T12:00:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "SSO Feature (clear task)",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 315.5,
+        "tokens": 20899,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md file was created", "passed": true, "evidence": "File exists"},
+        {"text": "Requirements draft contains all required sections", "passed": true, "evidence": "All 8 sections present"},
+        {"text": "readiness-review.md file was created with a verdict", "passed": true, "evidence": "File exists"},
+        {"text": "Readiness critic returned READY_FOR_DEEP_ANALYSIS", "passed": true, "evidence": "Verdict: READY_FOR_DEEP_ANALYSIS"},
+        {"text": "Task correctly classified as feature or integration", "passed": true, "evidence": "Found 'feature' in outputs"},
+        {"text": "Knowns section mentions key technical context", "passed": true, "evidence": "Found 5/5 terms: keycloak, fastapi, react, per-tenant, saml"},
+        {"text": "No clarifications.md was created", "passed": true, "evidence": "Absent (correct)"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "SSO Feature (clear task)",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.57,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 166.6,
+        "tokens": 16125,
+        "tool_calls": 9,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md file was created", "passed": true, "evidence": "Found requirements.md"},
+        {"text": "Requirements draft contains all required sections", "passed": false, "evidence": "Missing: Knowns, Unknowns, Assumptions"},
+        {"text": "readiness-review.md file was created with a verdict", "passed": false, "evidence": "File missing — no readiness review"},
+        {"text": "Readiness critic returned READY_FOR_DEEP_ANALYSIS", "passed": false, "evidence": "No readiness review — no verdict"},
+        {"text": "Task correctly classified as feature or integration", "passed": true, "evidence": "Found"},
+        {"text": "Knowns section mentions key technical context", "passed": true, "evidence": "Found 5/5 terms"},
+        {"text": "No clarifications.md was created", "passed": true, "evidence": "Absent"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Vague Auth Fix",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 119.8,
+        "tokens": 18761,
+        "tool_calls": 13,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md file was created (even if sparse)", "passed": true, "evidence": "File exists"},
+        {"text": "readiness-review.md file was created with a verdict", "passed": true, "evidence": "File exists"},
+        {"text": "Readiness critic returned NEEDS_CLARIFICATION", "passed": true, "evidence": "Verdict: NEEDS_CLARIFICATION"},
+        {"text": "clarifications.md was created with specific questions", "passed": true, "evidence": "File exists"},
+        {"text": "Clarification questions are specific and actionable", "passed": true, "evidence": "15 questions, specific terms present"},
+        {"text": "Requirements draft has more unknowns than knowns", "passed": true, "evidence": "Knowns: 2, Unknowns: 10"},
+        {"text": "Agent did NOT invent specific technical details", "passed": true, "evidence": "No invented details in Knowns"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Vague Auth Fix",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 107.0,
+        "tokens": 19406,
+        "tool_calls": 15,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md file was created (even if sparse)", "passed": true, "evidence": "File exists"},
+        {"text": "readiness-review.md file was created with a verdict", "passed": true, "evidence": "File exists"},
+        {"text": "Readiness critic returned NEEDS_CLARIFICATION", "passed": true, "evidence": "Verdict: NEEDS_CLARIFICATION"},
+        {"text": "clarifications.md was created with specific questions", "passed": true, "evidence": "File exists"},
+        {"text": "Clarification questions are specific and actionable", "passed": true, "evidence": "22 questions, specific terms present"},
+        {"text": "Requirements draft has more unknowns than knowns", "passed": true, "evidence": "Knowns: 2, Unknowns: 11"},
+        {"text": "Agent did NOT invent specific technical details", "passed": true, "evidence": "Clean"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "Dashboard Performance",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 176.5,
+        "tokens": 19195,
+        "tool_calls": 11,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md with all required sections", "passed": true, "evidence": "7/7 sections found"},
+        {"text": "readiness-review.md with all 8 criteria scored", "passed": true, "evidence": "8/8 criteria found"},
+        {"text": "Task correctly classified as performance issue", "passed": true, "evidence": "Performance terms found"},
+        {"text": "Goal states performance target: under 2 seconds", "passed": true, "evidence": "Target found"},
+        {"text": "Knowns mention ClickHouse, GraphQL, file paths, 50k DAU", "passed": true, "evidence": "5/5 terms found"},
+        {"text": "Unknowns include root cause uncertainty", "passed": true, "evidence": "Root cause uncertainty mentioned"},
+        {"text": "Verdict is reasonable for detail level", "passed": true, "evidence": "NEEDS_CLARIFICATION with 4 WEAK scores"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "Dashboard Performance",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.71,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 174.2,
+        "tokens": 16938,
+        "tool_calls": 13,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "requirements.draft.md with all required sections", "passed": true, "evidence": "4/4 section variants found"},
+        {"text": "readiness-review.md with all 8 criteria scored", "passed": false, "evidence": "Missing — no readiness review"},
+        {"text": "Task correctly classified as performance issue", "passed": true, "evidence": "Performance terms found"},
+        {"text": "Goal states performance target: under 2 seconds", "passed": true, "evidence": "Target found"},
+        {"text": "Knowns mention ClickHouse, GraphQL, file paths, 50k DAU", "passed": true, "evidence": "5/5 terms found"},
+        {"text": "Unknowns include root cause uncertainty", "passed": true, "evidence": "Root cause terms found"},
+        {"text": "Verdict is reasonable for detail level", "passed": false, "evidence": "No readiness review — no verdict"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 203.9, "stddev": 82.5, "min": 119.8, "max": 315.5},
+      "tokens": {"mean": 19618, "stddev": 902, "min": 18761, "max": 20899}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.76, "stddev": 0.18, "min": 0.57, "max": 1.0},
+      "time_seconds": {"mean": 149.3, "stddev": 30.4, "min": 107.0, "max": 174.2},
+      "tokens": {"mean": 17490, "stddev": 1420, "min": 16125, "max": 19406}
+    },
+    "delta": {
+      "pass_rate": "+0.24",
+      "time_seconds": "+54.6",
+      "tokens": "+2128"
+    }
+  },
+  "notes": [
+    "Eval 2 (vague 'fix the auth') passes 100% in both configurations — task is so obviously underspecified that even without the skill, the model correctly asks for clarification. This eval doesn't differentiate skill value.",
+    "The skill's primary value shows in Evals 1 and 3: it enforces structured knowns/unknowns/assumptions separation and a formal readiness review — both missing from baselines.",
+    "Critical behavioral difference not captured by assertions: baselines for Evals 1 and 3 jumped into deep technical analysis, architecture decisions, and task breakdowns with time estimates. The skill successfully constrained the agent to PREPARATION ONLY — no premature analysis. This is arguably the skill's most important function.",
+    "Skill adds ~55s average execution time and ~2k tokens, but improves pass rate by 24%. The time cost is primarily the readiness critique step.",
+    "The readiness critic subagent could not be spawned as a real subagent in the test runs (Agent tool unavailable in nested context) — critique was done inline. A real subagent would provide better isolation and objectivity."
+  ]
+}

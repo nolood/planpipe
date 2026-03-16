@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-perf-deep-analysis-v2",
+  "prompt": "Run Stage 2 deep analysis on dashboard performance task. Updated skill with external critic, strict templates, and handoff document.",
+  "assertions": [
+    {"text": "system-analysis.md identifies sequential chart loading in analytics/service.go"},
+    {"text": "system-analysis.md identifies unused cache module in internal/cache/"},
+    {"text": "system-analysis.md identifies frontend rendering issue (no downsampling, all charts render simultaneously)"},
+    {"text": "Critique Review section in each artifact contains actual critic findings"},
+    {"text": "stage-2-handoff.md was created with all required sections"},
+    {"text": "stage-2-handoff.md System Map table lists specific modules with paths"},
+    {"text": "stage-2-handoff.md Risks table includes specific risks with likelihood/impact"},
+    {"text": "All 4 artifacts created (3 analyses + handoff)"}
+  ]
+}

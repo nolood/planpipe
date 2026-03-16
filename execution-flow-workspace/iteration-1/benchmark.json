@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "skill_name": "execution-flow",
+    "skill_path": "/home/nolood/general/plan-pipeline/execution-flow",
+    "executor_model": "claude-opus-4-6",
+    "analyzer_model": "claude-opus-4-6",
+    "timestamp": "2026-03-14T11:00:00Z",
+    "evals_run": [1, 2],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "SSO Wave 1 Foundation",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 232.2,
+        "tokens": 50648,
+        "tool_calls": 45,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "execution-status.md artifact is created and tracks all 3 subtasks", "passed": true, "evidence": "execution-status.md exists with all 3 subtasks tracked as done"},
+        {"text": "ST-1: migrations/002_sso.up.sql created with tenant_sso_config table and users.keycloak_id column", "passed": true, "evidence": "File exists with correct schema"},
+        {"text": "ST-1: migrations/002_sso.down.sql created with reverse operations", "passed": true, "evidence": "File exists with correct reverse operations"},
+        {"text": "ST-2: config/config.go modified to include SSOConfig struct with Keycloak fields", "passed": true, "evidence": "SSOConfig struct with 6 fields present"},
+        {"text": "ST-3: internal/tenant/model.go modified to include TenantSSOConfig struct", "passed": true, "evidence": "TenantSSOConfig struct with 9 fields present"},
+        {"text": "ST-3: internal/user/model.go modified to include KeycloakID *string field", "passed": true, "evidence": "KeycloakID *string with correct json tag present"},
+        {"text": "Task review was performed for each subtask", "passed": true, "evidence": "3 task review files with TASK_REVIEW_PASSED verdicts"},
+        {"text": "Code review was performed for each subtask", "passed": true, "evidence": "3 code review files with CODE_REVIEW_PASSED verdicts"},
+        {"text": "task-completion-log.md is created with completion records for all 3 subtasks", "passed": true, "evidence": "File exists with 3 detailed completion records"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "SSO Wave 1 Foundation",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.56,
+        "passed": 5,
+        "failed": 4,
+        "total": 9,
+        "time_seconds": 86.1,
+        "tokens": 21551,
+        "tool_calls": 26,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "execution-status.md artifact is created and tracks all 3 subtasks", "passed": false, "evidence": "No execution-status.md created"},
+        {"text": "ST-1: migrations/002_sso.up.sql created with tenant_sso_config table and users.keycloak_id column", "passed": true, "evidence": "File exists with correct schema"},
+        {"text": "ST-1: migrations/002_sso.down.sql created with reverse operations", "passed": true, "evidence": "File exists with correct reverse operations"},
+        {"text": "ST-2: config/config.go modified to include SSOConfig struct with Keycloak fields", "passed": true, "evidence": "SSOConfig struct present"},
+        {"text": "ST-3: internal/tenant/model.go modified to include TenantSSOConfig struct", "passed": true, "evidence": "TenantSSOConfig struct present"},
+        {"text": "ST-3: internal/user/model.go modified to include KeycloakID *string field", "passed": true, "evidence": "KeycloakID *string present"},
+        {"text": "Task review was performed for each subtask", "passed": false, "evidence": "No reviews performed"},
+        {"text": "Code review was performed for each subtask", "passed": false, "evidence": "No reviews performed"},
+        {"text": "task-completion-log.md is created with completion records for all 3 subtasks", "passed": false, "evidence": "No completion log created"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Raw Tasks Flexible Input",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 250.0,
+        "tokens": 55000,
+        "tool_calls": 40,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Raw tasks normalized into structured subtasks before execution", "passed": true, "evidence": "Subtasks structured with IDs, goals, change areas, completion criteria"},
+        {"text": "Health check endpoint implementation exists", "passed": true, "evidence": "handler.go with HandleHealth returning correct JSON"},
+        {"text": "Health check route is registered in main.go", "passed": true, "evidence": "r.Get(\"/health\", health.HandleHealth) in main.go"},
+        {"text": "Logging middleware exists", "passed": true, "evidence": "internal/middleware/logging.go with RequestLogger"},
+        {"text": "Middleware logs method, path, status code, and duration", "passed": true, "evidence": "log.Printf with all 4 fields"},
+        {"text": "Middleware is applied to the router in main.go", "passed": true, "evidence": "r.Use(middleware.RequestLogger) in main.go"},
+        {"text": "Task review was performed for each task", "passed": true, "evidence": "Task review records in completion log"},
+        {"text": "Code review was performed for each task", "passed": true, "evidence": "Code review records in completion log"},
+        {"text": "execution-status.md tracking artifact is created", "passed": true, "evidence": "Full execution-status.md with structured tracking"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "Raw Tasks Flexible Input",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.56,
+        "passed": 5,
+        "failed": 4,
+        "total": 9,
+        "time_seconds": 78.0,
+        "tokens": 18039,
+        "tool_calls": 19,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Raw tasks normalized into structured subtasks before execution", "passed": false, "evidence": "No normalization step"},
+        {"text": "Health check endpoint implementation exists", "passed": true, "evidence": "handler.go with HandleHealth"},
+        {"text": "Health check route is registered in main.go", "passed": true, "evidence": "Route registered"},
+        {"text": "Logging middleware exists", "passed": true, "evidence": "internal/middleware/logging.go exists"},
+        {"text": "Middleware logs method, path, status code, and duration", "passed": true, "evidence": "All 4 fields logged"},
+        {"text": "Middleware is applied to the router in main.go", "passed": true, "evidence": "r.Use applied"},
+        {"text": "Task review was performed for each task", "passed": false, "evidence": "No reviews"},
+        {"text": "Code review was performed for each task", "passed": false, "evidence": "No reviews"},
+        {"text": "execution-status.md tracking artifact is created", "passed": false, "evidence": "No tracking artifact"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 241.1, "stddev": 12.6, "min": 232.2, "max": 250.0},
+      "tokens": {"mean": 52824, "stddev": 3076, "min": 50648, "max": 55000}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.56, "stddev": 0.0, "min": 0.56, "max": 0.56},
+      "time_seconds": {"mean": 82.05, "stddev": 5.73, "min": 78.0, "max": 86.1},
+      "tokens": {"mean": 19795, "stddev": 2481, "min": 18039, "max": 21551}
+    },
+    "delta": {
+      "pass_rate": "+0.44",
+      "time_seconds": "+159.1",
+      "tokens": "+33029"
+    }
+  },
+  "notes": [
+    "Code implementation assertions (5/9) pass equally in both configurations — the skill doesn't change code quality, it adds process quality",
+    "Process assertions (4/9: tracking, reviews, normalization, completion log) only pass with the skill — this is the core value-add",
+    "With-skill runs take ~3x longer and use ~2.7x more tokens due to dual review overhead",
+    "Both with-skill runs achieved 100% first-pass approval (0 rework cycles), suggesting the review overhead is proportional to implementation quality"
+  ]
+}

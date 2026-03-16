@@ -1,0 +1,43 @@
+Stage 2 Deep Analysis Summary — SAML SSO Feature
+=================================================
+
+Task: Add SAML 2.0 SSO support to a multi-tenant Go backend platform using
+Keycloak as SAML SP/broker, with per-tenant SSO configuration.
+
+Three parallel analysis streams were executed, followed by independent critique.
+
+PRODUCT ANALYSIS: Enterprise adoption is blocked without SSO. Main scenario is
+SP-initiated SAML login: user enters email, system detects SSO-enabled tenant,
+redirects through Keycloak to corporate IdP, user returns authenticated. MVO is
+SSO for one tenant with JIT provisioning, coexisting with email/password.
+
+SYSTEM ANALYSIS: Codebase has clean repo-service-handler pattern across
+internal/auth/, internal/tenant/, internal/user/. Primary changes: auth handler
+(new SSO endpoints), auth service (SSO branch in login), keycloak client (auth
+code flow), tenant model (SSO config storage), new DB migration. Auth middleware
+should work unchanged. Zero test coverage across entire codebase. Bug found in
+RequireRole middleware (variable shadowing).
+
+CONSTRAINTS/RISKS ANALYSIS: Key constraints are single Keycloak realm, no
+per-tenant config storage, auth flow paradigm shift (direct grant to auth code).
+Top risks: zero test coverage (high/high), Keycloak SAML config complexity
+(medium/high), undefined account linking strategy (high/medium).
+
+CRITIQUE RESULTS: All three analyses rated SUFFICIENT. No FAIL scores. No
+cross-analysis contradictions. Analyses are specific (real file paths, actual
+code references) rather than generic.
+
+KEY OPEN QUESTIONS FOR PLANNING:
+1. Password fallback policy for SSO tenants (blocks login endpoint design)
+2. Account linking strategy for existing users (affects user service + migration)
+3. Per-tenant config storage design (sets precedent for future config)
+4. gocloak SAML Admin API coverage (affects implementation approach)
+
+VERDICT: Knowledge base is sufficient for Stage 3 (plan synthesis).
+
+Output artifacts:
+- product-analysis.md
+- system-analysis.md
+- constraints-risks-analysis.md
+- stage-2-handoff.md (primary input for Stage 3)
+- summary.txt (this file)

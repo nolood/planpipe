@@ -1,0 +1,47 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-design",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "implementation-design.md created with all required sections (Implementation Approach, Solution Description, Change Details, Key Technical Decisions, Implementation Sequence, Risk Zones)",
+      "passed": true,
+      "evidence": "File exists (28K). Contains: Implementation Approach (with chosen approach, alternatives, trade-offs), Solution Description (overview, data flow, new/modified entities), Change Details per module, Key Technical Decisions table, Implementation Sequence table, Risk Zones table."
+    },
+    {
+      "text": "change-map.md created with file-level changes covering auth, tenant, user, config, migrations, and server modules",
+      "passed": true,
+      "evidence": "File exists (7.1K). Lists 7 files to modify (auth/keycloak.go, user/service.go, user/repository.go, tenant/service.go, auth/service.go, config/config.go, cmd/server/main.go) and 5 files to create (migration, sso_config.go, sso_config_repository.go, sso_service.go, sso_handler.go). All 6 modules covered."
+    },
+    {
+      "text": "design-decisions.md created with decisions about: per-tenant config table design, auth code flow approach, account linking strategy, Keycloak IdP management approach",
+      "passed": true,
+      "evidence": "File exists (14K). Contains 7 decisions: #1 Separate SSOService, #2 Dedicated tenant_sso_config table, #3 GetOrCreateByEmail signature change (account linking), #4 gocloak with fallback (Keycloak IdP management), plus decisions on token delivery, CSRF protection, and IdP alias format."
+    },
+    {
+      "text": "design-review-package.md created with approval points for the user",
+      "passed": true,
+      "evidence": "File exists (7.8K). Contains 3 approval points: #1 GetOrCreateByEmail signature change, #2 Frontend token delivery mechanism, #3 Keycloak client Standard Flow requirement. Each has context, options, recommendation, and question."
+    },
+    {
+      "text": "Design architect subagent was spawned and explored the codebase",
+      "passed": true,
+      "evidence": "Agent summary confirms: 'Performed thorough codebase exploration of the mock-sso-project (19 source files across 6 modules). Read every file to verify Stage 2's system analysis.'"
+    },
+    {
+      "text": "Design critic subagent was spawned and returned a verdict",
+      "passed": true,
+      "evidence": "Agent summary confirms: 'Reviewed the design against the agreed task model... Verdict: DESIGN_APPROVED.' Critique review section present in implementation-design.md."
+    },
+    {
+      "text": "Implementation sequence respects dependencies (e.g., migration before tenant repository, tenant before auth service)",
+      "passed": true,
+      "evidence": "Change dependency order shows: migration → tenant/sso_config.go → tenant/sso_config_repository.go → tenant/service.go, then user module changes, then config → keycloak → sso_service → sso_handler → main.go wiring. All tracks converge at auth/sso_service.go."
+    },
+    {
+      "text": "design-review-package.md includes approval points about API contract decisions and scope boundaries",
+      "passed": true,
+      "evidence": "Approval Point #1 covers API signature change (GetOrCreateByEmail). Scope Confirmation section lists all in-scope and not-in-scope items with explicit question: 'Does this implementation scope match what you agreed to?'"
+    }
+  ]
+}

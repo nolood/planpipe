@@ -1,0 +1,26 @@
+{
+  "eval_id": 3,
+  "config": "without_skill",
+  "expectations": [
+    {
+      "text": "Stage 2 refused to run deep analysis (did not produce analysis artifacts)",
+      "passed": true,
+      "evidence": "The outputs directory contains only summary.txt. No product-analysis.md, system-analysis.md, or constraints-risks-analysis.md were created. summary.txt line 102 states: 'No analysis artifacts beyond this rejection summary are produced.'"
+    },
+    {
+      "text": "The refusal explicitly mentions the NEEDS_CLARIFICATION verdict from the readiness review",
+      "passed": true,
+      "evidence": "summary.txt line 9: 'The readiness review returned a verdict of NEEDS_CLARIFICATION with 5 of 8 criteria scored as FAIL and the remaining 2 scored as WEAK.'"
+    },
+    {
+      "text": "User is told to go back to Stage 1 or resolve the clarification questions first",
+      "passed": true,
+      "evidence": "summary.txt lines 75-105 list five specific blocking clarification questions that must be answered before analysis can proceed. Line 102: 'This task must be returned for clarification.' Line 104: 'Once the blocking questions above are answered, the task can be resubmitted for proper deep analysis.' The guidance satisfies 'resolve the clarification questions first' even though 'Stage 1' is not named explicitly."
+    },
+    {
+      "text": "No product-analysis.md, system-analysis.md, or constraints-risks-analysis.md files were created",
+      "passed": true,
+      "evidence": "Directory listing of outputs/ shows exactly one file: summary.txt. None of the three analysis artifact files are present."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+Task Preparation (Stage 1) — Summary
+
+Input: "fix the auth"
+
+Process executed:
+1. Intake Context — Collected the raw task statement. No external links, no ticket IDs, no related resources were provided. No memobank or memory store exists in the project. No application source code was available for inspection in the working directory.
+
+2. Normalize Task Statement — Attempted to normalize. The task appears to be a bug fix in an authentication/authorization system, but the core ask, actor, expected outcome, and affected area could not be meaningfully determined from the two-word input.
+
+3. Extract Knowns/Unknowns/Assumptions — The knowns are minimal (user wants auth fixed). The unknowns are extensive (what is broken, where, how, for whom, since when, how to verify the fix). Two assumptions were flagged: that a real bug exists, and that "auth" refers to this project's system.
+
+4. Draft Requirements — Produced requirements.draft.md with all sections filled honestly. Most sections explicitly state that information is unavailable.
+
+5. Readiness Critique — Evaluated the draft against 8 criteria. Result: 6 FAIL, 2 WEAK. Verdict: NEEDS_CLARIFICATION.
+
+6. Handle Verdict — Since the verdict is NEEDS_CLARIFICATION, produced clarifications.md with 6 specific, actionable clarification questions targeting the blocking gaps. Per test instructions, stopped here without inventing answers.
+
+Outcome: Task is NOT ready for deep analysis. Six fundamental questions must be answered before this task can proceed to the next pipeline stage.
+
+Artifacts produced:
+- requirements.draft.md (structured task statement with honest gaps)
+- readiness-review.md (critic evaluation: 6 FAIL, 2 WEAK, NEEDS_CLARIFICATION)
+- clarifications.md (6 blocking gaps and 6 clarification questions)

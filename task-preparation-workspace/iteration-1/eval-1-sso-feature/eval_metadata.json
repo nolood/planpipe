@@ -1,0 +1,42 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-feature-clear-task",
+  "prompt": "We need to add SSO support via SAML. The product team wants this for Q3. We already use Keycloak for auth. Here's the ticket: users from enterprise clients should be able to log in through their corporate identity provider instead of our standard email/password flow. The backend is FastAPI, frontend is React. We have an existing auth middleware in `services/auth/`. The SSO config should be per-tenant. No changes to the current login flow for non-SSO users.",
+  "assertions": [
+    {
+      "id": "req-draft-exists",
+      "text": "requirements.draft.md file was created",
+      "type": "file_exists"
+    },
+    {
+      "id": "req-has-all-sections",
+      "text": "Requirements draft contains all required sections: Goal, Problem Statement, Scope, Constraints, Dependencies, Knowns, Unknowns, Assumptions",
+      "type": "content_check"
+    },
+    {
+      "id": "readiness-review-exists",
+      "text": "readiness-review.md file was created with a verdict",
+      "type": "file_exists"
+    },
+    {
+      "id": "verdict-ready",
+      "text": "Readiness critic returned READY_FOR_DEEP_ANALYSIS (task is well-defined with clear goal, stack, scope, and constraints)",
+      "type": "verdict_check"
+    },
+    {
+      "id": "task-type-identified",
+      "text": "Task correctly classified as feature or integration (not bug/refactor)",
+      "type": "content_check"
+    },
+    {
+      "id": "knowns-include-stack",
+      "text": "Knowns section mentions key technical context: Keycloak, FastAPI, React, per-tenant, SAML",
+      "type": "content_check"
+    },
+    {
+      "id": "no-clarification-needed",
+      "text": "No clarifications.md was created (task is clear enough to proceed)",
+      "type": "file_absent"
+    }
+  ]
+}

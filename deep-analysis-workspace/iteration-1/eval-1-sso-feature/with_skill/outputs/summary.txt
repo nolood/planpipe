@@ -1,0 +1,93 @@
+Stage 2 Deep Analysis Summary -- SAML SSO Feature
+==================================================
+
+VERDICT: Knowledge base is sufficient for Stage 3 (plan synthesis).
+
+Codebase Analyzed: mock-sso-project (Go backend, chi router, gocloak, PostgreSQL)
+Files examined: 16 source files across 6 packages + 1 migration + docker-compose + go.mod
+
+-----------------------------------------------------------------------
+KEY FINDINGS BY STREAM
+-----------------------------------------------------------------------
+
+Product/Business Analysis:
+- The core business driver is unblocking enterprise deal pipeline -- without SSO,
+  enterprise procurement is blocked by security requirements.
+- Primary scenario: employee enters email -> system detects SSO tenant -> redirect
+  to corporate IdP -> Keycloak brokers SAML -> tokens issued -> JIT provisioning.
+- Biggest product gap: no account linking strategy for existing password users when
+  a tenant enables SSO. This needs a product decision before implementation.
+- Multiple email domains per tenant is a likely real-world requirement that the
+  current single-domain schema does not support.
+
+Codebase/System Analysis:
+- Auth flow is in internal/auth/ (handler.go, service.go, keycloak.go, middleware.go).
+  Login is password-only via Keycloak direct grant. Service.Login() resolves tenant
+  by email domain, authenticates via Keycloak, and calls user JIT provisioning.
+- Tenant model (internal/tenant/models.go) has no SSO fields. An explicit code NOTE
+  acknowledges this gap. Schema needs migration for SSO config storage.
+- User JIT provisioning exists (user.Service.GetOrCreateByEmail) but does NOT
+  populate KeycloakID during creation -- critical gap for SSO account linking.
+- All tenant repository queries use hardcoded column lists -- schema changes
+  require updating 4 SELECT queries and 1 UPDATE query.
+- Zero test files in the entire project. No test infrastructure whatsoever.
+- Bug found: middleware.go RequireRole() has variable shadowing (line 99-101)
+  where loop variable 'r' shadows the http.Request 'r'.
+
+Constraints/Risks Analysis:
+- Single Keycloak realm architecture (confirmed via config). Multi-tenant SSO
+  must use per-tenant IdP aliases within one realm.
+- No Keycloak Admin API credentials in config -- needed if IdP management is
+  programmatic rather than manual.
+- Highest risk: modifying core auth code (service.go Login function, middleware)
+  with zero test coverage. Regression potential is significant.
+- tenant_id custom claim in JWT must be configured for SAML-brokered users via
+  Keycloak mappers -- not automatic.
+
+-----------------------------------------------------------------------
+CROSS-ANALYSIS OBSERVATIONS
+-----------------------------------------------------------------------
+
+1. ALIGNMENT: All three streams agree that the auth middleware (Authenticate)
+   should NOT need changes for SSO, since Keycloak issues standard JWTs
+   regardless of auth method. This is a significant de-risking factor.
+
+2. TENSION: Product analysis identifies multiple email domains as a likely
+   requirement. System analysis confirms the schema has a single email_domain
+   column with a UNIQUE constraint. Constraints analysis flags this as a
+   medium-likelihood/high-impact risk. Resolution: accept single-domain for
+   MVO, plan for multi-domain in a follow-up.
+
+3. GAP SURFACED: System analysis found that KeycloakID is not set during user
+   creation, which constraints analysis identifies as a risk for account
+   linking. Product analysis calls account linking the biggest open question.
+   All three streams converge on this as the most important issue to resolve.
+
+4. DEPENDENCY: All streams note the missing Keycloak configuration visibility.
+   The Go codebase has no Keycloak realm export, Terraform, or setup scripts.
+   The tenant_id custom claim mapper, first broker login flow, and IdP
+   configuration are all Keycloak-side concerns that cannot be verified from code.
+
+-----------------------------------------------------------------------
+OPEN QUESTIONS FOR PLANNING
+-----------------------------------------------------------------------
+
+1. Account linking strategy: when a tenant enables SSO, how should existing
+   password-only users be handled? Force SSO? Allow both? Link by email?
+2. Should the application manage Keycloak IdPs programmatically (via Admin API)
+   or is manual Keycloak admin console configuration acceptable for MVO?
+3. Is single email domain per tenant acceptable for initial release, or must
+   multi-domain be supported from day one?
+4. Should tests be added for existing auth flows before modifying them, or is
+   that deferred?
+5. Login UX: email-first detection (enter email, system detects SSO) vs.
+   explicit "Sign in with SSO" button -- this affects the API design.
+
+-----------------------------------------------------------------------
+ARTIFACTS PRODUCED
+-----------------------------------------------------------------------
+
+1. product-analysis.md    -- Business intent, scenarios, edge cases, success signals
+2. system-analysis.md     -- Module map, change points, dependencies, patterns
+3. constraints-risks-analysis.md -- Constraints, risks, compatibility, sensitive areas
+4. summary.txt            -- This file

@@ -1,0 +1,42 @@
+{
+  "eval_id": 3,
+  "eval_name": "dashboard-performance",
+  "prompt": "Our analytics dashboard is getting slow — some of the charts take 8-10 seconds to load on the main overview page. The data comes from ClickHouse via a GraphQL API. We think the problem is either in the query layer or in how the frontend renders large datasets. PM wants it under 2 seconds. We have about 50k daily active users. The dashboard code is in `apps/dashboard/` and the API is in `services/analytics-api/`.",
+  "assertions": [
+    {
+      "id": "req-draft-exists",
+      "text": "requirements.draft.md file was created with all required sections",
+      "type": "file_exists"
+    },
+    {
+      "id": "readiness-review-exists",
+      "text": "readiness-review.md file was created with a verdict and all 8 criteria scored",
+      "type": "file_exists"
+    },
+    {
+      "id": "task-type-correct",
+      "text": "Task correctly classified as bug or performance issue (not feature/refactor)",
+      "type": "content_check"
+    },
+    {
+      "id": "clear-goal-stated",
+      "text": "Goal clearly states the performance target: page load under 2 seconds",
+      "type": "content_check"
+    },
+    {
+      "id": "tech-context-captured",
+      "text": "Knowns mention ClickHouse, GraphQL API, specific file paths (apps/dashboard/, services/analytics-api/), 50k DAU",
+      "type": "content_check"
+    },
+    {
+      "id": "unknowns-identified",
+      "text": "Unknowns include root cause uncertainty (query layer vs frontend rendering)",
+      "type": "content_check"
+    },
+    {
+      "id": "verdict-reasonable",
+      "text": "Verdict is reasonable for the level of detail provided (READY with flagged unknowns, or NEEDS_CLARIFICATION with specific targeted questions about which charts are slow)",
+      "type": "verdict_check"
+    }
+  ]
+}

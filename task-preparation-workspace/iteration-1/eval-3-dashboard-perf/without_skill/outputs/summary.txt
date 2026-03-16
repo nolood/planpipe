@@ -1,0 +1,50 @@
+Summary: Analytics Dashboard Performance Task Preparation
+=========================================================
+
+What was done:
+--------------
+Analyzed the task description ("analytics dashboard loading in 8-10 seconds, target < 2 seconds,
+ClickHouse + GraphQL, 50k DAU") and produced five structured planning artifacts:
+
+1. requirements.md
+   - Formal requirements document with objective, success criteria, scope, constraints,
+     and out-of-scope items. Defines the measurable target (< 2s P95) and the three
+     codebases in scope.
+
+2. analysis.md
+   - Technical analysis decomposing the problem into three bottleneck zones:
+     ClickHouse query layer, GraphQL API layer, and frontend rendering.
+   - For each zone: symptoms that would indicate it's the bottleneck, common root causes,
+     and specific investigation steps.
+   - Ranked probable root causes based on the symptom profile.
+   - Impact/effort matrix for the most likely fixes.
+
+3. questions.md
+   - 18 questions organized by criticality (must-answer-before-starting vs. answer-during-work).
+   - Covers measurement methodology, data architecture, caching, freshness requirements,
+     technology stack specifics, and product constraints.
+
+4. investigation-plan.md
+   - Four-phase plan: Instrument & Measure -> Quick Wins -> Targeted Optimization -> Validate.
+   - Phase 3 splits into three tracks (DB-heavy, API-heavy, Frontend-heavy) depending on
+     Phase 1 findings, so the team doesn't waste effort on the wrong layer.
+   - Estimated total timeline: 7-12 days.
+
+5. task-breakdown.md
+   - 11 concrete tasks with priorities, estimates, dependencies, assignee suggestions,
+     and acceptance checklists.
+   - Organized into Audit (2-3 days), Implementation (3-5 days), and Validation (1-2 days).
+   - Total estimated effort: 6-10 calendar days.
+
+Key observations:
+-----------------
+- The most important first step is measurement: without knowing whether the bottleneck is
+  in ClickHouse, the API, or the frontend, any optimization is a guess.
+- For a ClickHouse + GraphQL + charting library stack with "large datasets," the three most
+  probable root causes are: (a) queries hitting raw event tables instead of rollups,
+  (b) too many data points sent to the frontend, and (c) N+1 query patterns in resolvers.
+- API-level caching with even a 30-60 second TTL is likely the highest-impact, lowest-effort
+  fix given 50k DAU (many users see the same aggregated data).
+- 18 open questions were identified that should be answered before or during implementation,
+  the most critical being: what does "8-10 seconds" actually measure, is there existing
+  APM/tracing, and how fresh does the data need to be.

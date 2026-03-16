@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "Raw tasks from raw-tasks.md are normalized into structured subtasks before execution",
+      "passed": false,
+      "evidence": "No normalization or structured subtask artifacts found in outputs. The summary.md simply lists 'Task 1' and 'Task 2' without any evidence of a normalization step converting raw tasks into structured subtasks with acceptance criteria, dependencies, etc."
+    },
+    {
+      "text": "Health check endpoint implementation exists (handler returning JSON status)",
+      "passed": true,
+      "evidence": "internal/health/handler.go exists with HandleHealth function that sets Content-Type to application/json and returns JSON {\"status\": \"ok\", \"version\": \"1.0.0\"}. Tests in handler_test.go verify status code, content type, and response body."
+    },
+    {
+      "text": "Health check route is registered in main.go",
+      "passed": true,
+      "evidence": "main.go line 35: r.Get(\"/health\", health.HandleHealth) — route is registered on the chi router. The health package is imported at line 9."
+    },
+    {
+      "text": "Logging middleware exists in internal/middleware/logging.go or similar path",
+      "passed": true,
+      "evidence": "internal/middleware/logging.go exists with RequestLogger function and statusWriter wrapper. Tests in logging_test.go verify behavior."
+    },
+    {
+      "text": "Middleware logs method, path, status code, and duration",
+      "passed": true,
+      "evidence": "logging.go line 30: log.Printf(\"%s %s %d %s\", r.Method, r.URL.Path, sw.statusCode, duration) — logs all four fields. Tests explicitly verify presence of method (POST), path (/test/path), status code (201), and duration (time unit suffix)."
+    },
+    {
+      "text": "Middleware is applied to the router in main.go",
+      "passed": true,
+      "evidence": "main.go line 32: r.Use(middleware.RequestLogger) — middleware is applied to the chi router before all route registrations. The middleware package is imported at line 10."
+    },
+    {
+      "text": "Task review was performed for each task",
+      "passed": false,
+      "evidence": "No task review artifacts found anywhere in outputs or codebase. The summary.md contains no mention of task review. No review files or review sections exist."
+    },
+    {
+      "text": "Code review was performed for each task",
+      "passed": false,
+      "evidence": "No code review artifacts found anywhere in outputs or codebase. The summary.md contains no mention of code review. No review files or review sections exist."
+    },
+    {
+      "text": "execution-status.md tracking artifact is created",
+      "passed": false,
+      "evidence": "No execution-status.md file found anywhere in the workspace. Only output artifact is outputs/summary.md which is a simple implementation summary, not a structured tracking artifact."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 4,
+    "total": 9,
+    "pass_rate": 0.56
+  }
+}

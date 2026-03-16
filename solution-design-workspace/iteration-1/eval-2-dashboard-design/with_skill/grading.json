@@ -1,0 +1,47 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-design",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "implementation-design.md created with all required template sections",
+      "passed": true,
+      "evidence": "File exists (31K). Contains: Implementation Approach (chosen + alternatives + trade-offs), Solution Description (overview, data flow, new/modified entities), Change Details per module, Key Technical Decisions, Dependencies, Implementation Sequence, Risk Zones, Backward Compatibility, Critique Review."
+    },
+    {
+      "text": "change-map.md created with files from both backend (internal/analytics/, internal/clickhouse/, internal/cache/) and frontend (apps/dashboard/)",
+      "passed": true,
+      "evidence": "File exists (7.0K). Backend: service.go, client.go, queries.go, cache.go, main.go. Frontend: Overview.tsx, Chart.tsx. Plus 5 new frontend files. Both backend and frontend covered."
+    },
+    {
+      "text": "Implementation approach addresses the 3-layer optimization: backend parallelization, caching with singleflight, and frontend progressive loading",
+      "passed": true,
+      "evidence": "Approach clearly describes three layers: (1) errgroup parallelization, (2) in-memory cache with per-chart TTLs + singleflight dedup, (3) per-chart queries with progressive loading + LTTB downsampling."
+    },
+    {
+      "text": "change-map.md includes the retention cohort bug fix at queries.go:67-85",
+      "passed": true,
+      "evidence": "queries.go listed with 'Fix retention cohort param bug' in change description. Implementation-design.md Modified Entities table shows: 'user_retention_cohort query at queries.go:66-85, 5 placeholders 3 params (bug) → 5 placeholders 5 params.'"
+    },
+    {
+      "text": "Design decisions include: errgroup vs goroutine management, cache TTL strategy per chart type, singleflight integration point, downsampling algorithm choice",
+      "passed": true,
+      "evidence": "design-decisions.md contains 9 decisions including: #1 errgroup for parallelization, #2 enhance existing cache (TTL + LRU), #3 singleflight in loadChart, #5 LTTB for downsampling, #9 per-chart-type TTLs."
+    },
+    {
+      "text": "Implementation sequence starts with backend changes before frontend to allow incremental validation",
+      "passed": true,
+      "evidence": "8-step sequence: Steps 1-5 are backend (fix bug → enhance cache → add errgroup/singleflight → wire main.go → optimize queries), Steps 6-8 are frontend (utilities → components → integration). Backend and frontend noted as independent parallel tracks."
+    },
+    {
+      "text": "Risk zones include connection pool sizing and thundering herd scenarios with specific mitigations",
+      "passed": true,
+      "evidence": "Risk zones table includes: 'Parallel ClickHouse queries exhaust connection pool' with mitigation 'Configure MaxOpenConns=20, MaxIdleConns=10 + semaphore of size 8'. Thundering herd addressed via singleflight in design (cache miss dedup). Also includes race condition risks with errgroup mitigation."
+    },
+    {
+      "text": "design-review-package.md presents approval points about cache TTL values and downsampling thresholds",
+      "passed": true,
+      "evidence": "4 approval points: #1 Cache staleness with per-chart TTLs (1m/5m/15m options), #2 Error rate granularity change (1-min vs 5-min), #3 Frontend request pattern (lazy loading), #4 Backward compatibility. TTL values and granularity thresholds explicitly presented for user decision."
+    }
+  ]
+}

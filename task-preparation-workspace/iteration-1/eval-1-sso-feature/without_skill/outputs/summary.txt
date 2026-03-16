@@ -1,0 +1,47 @@
+Summary of Task Preparation: SSO via SAML Feature
+
+What was done:
+I analyzed the feature request for adding SAML-based SSO support and produced
+four structured planning artifacts:
+
+1. requirements.md
+   Formal requirements document covering functional requirements (SAML IdP
+   integration via Keycloak, per-tenant SSO configuration, SSO login flow,
+   backward compatibility for non-SSO users, logout handling, error handling)
+   and non-functional requirements (security, performance, observability,
+   testability). Also defines what is explicitly out of scope.
+
+2. technical-analysis.md
+   Technical architecture analysis covering how the feature fits into the
+   existing stack (FastAPI + Keycloak + React). Proposes using Keycloak's
+   built-in SAML Identity Brokering rather than implementing SAML directly
+   in FastAPI. Includes component breakdown for Keycloak configuration,
+   backend API endpoints, auth middleware changes, frontend changes, and
+   JIT user provisioning. Documents a data model for TenantSSOConfig.
+   Identifies key risks (realm strategy, certificate rotation, tenant
+   identification, JIT conflicts) with mitigations.
+
+3. task-breakdown.md
+   Detailed task breakdown across 5 phases with ~20 individual tasks:
+   - Phase 0: Discovery spike (1 week) - audit Keycloak, PoC, decide tenant ID strategy
+   - Phase 1: Backend config API (2 weeks) - data model, CRUD, Keycloak admin integration
+   - Phase 2: Backend login flow (2 weeks) - SSO initiation, middleware, JIT, logout
+   - Phase 3: Frontend (2 weeks) - conditional login UI, admin config panel
+   - Phase 4: Testing & hardening (1-2 weeks) - E2E, security, multi-tenant isolation
+   Total estimated effort: 6-8 weeks with 1-2 engineers.
+
+4. open-questions.md
+   13 open questions organized by category (architecture, product/UX,
+   security, operations) that should be resolved before or during the
+   discovery phase. Key questions include realm strategy, tenant
+   identification method, dual-auth mode, and SLO requirements.
+
+Key findings:
+- The recommended approach is to leverage Keycloak's SAML Identity Brokering,
+  which avoids implementing SAML protocol handling in FastAPI directly. The
+  backend changes are primarily: (a) a config API that syncs to Keycloak via
+  its Admin REST API, and (b) minor auth middleware extensions.
+- The biggest architectural decision to resolve first is the Keycloak realm
+  strategy (single realm vs. realm-per-tenant), as it impacts every other
+  component.
+- A discovery spike (Phase 0) is essential before committing to implementation.

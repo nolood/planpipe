@@ -1,0 +1,6 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-wave1-foundation",
+  "prompt": "Execute the execution flow for the SSO feature. The project is a Go multi-tenant backend. Execute all 3 foundation subtasks (ST-1, ST-2, ST-3) with dual review.",
+  "assertions": []
+}

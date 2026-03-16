@@ -1,0 +1,42 @@
+{
+  "eval_id": 2,
+  "eval_name": "vague-auth-fix",
+  "prompt": "fix the auth",
+  "assertions": [
+    {
+      "id": "req-draft-exists",
+      "text": "requirements.draft.md file was created (even if sparse)",
+      "type": "file_exists"
+    },
+    {
+      "id": "readiness-review-exists",
+      "text": "readiness-review.md file was created with a verdict",
+      "type": "file_exists"
+    },
+    {
+      "id": "verdict-needs-clarification",
+      "text": "Readiness critic returned NEEDS_CLARIFICATION (task is far too vague to proceed)",
+      "type": "verdict_check"
+    },
+    {
+      "id": "clarifications-exist",
+      "text": "clarifications.md was created with specific questions for the user",
+      "type": "file_exists"
+    },
+    {
+      "id": "questions-are-actionable",
+      "text": "Clarification questions are specific and actionable (e.g. 'what error are users seeing?' not 'what is the scope?')",
+      "type": "quality_check"
+    },
+    {
+      "id": "many-unknowns",
+      "text": "Requirements draft has significantly more unknowns than knowns, reflecting the vagueness of the input",
+      "type": "content_check"
+    },
+    {
+      "id": "no-invented-details",
+      "text": "The agent did NOT invent specific technical details or assume a particular auth system/bug without evidence",
+      "type": "quality_check"
+    }
+  ]
+}

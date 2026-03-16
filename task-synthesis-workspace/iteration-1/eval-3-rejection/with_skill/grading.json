@@ -1,0 +1,70 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection-incomplete-input",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "Stage 3 detected missing stage-2-handoff.md",
+      "passed": true,
+      "evidence": "stage-3-rejection.md section '1. Missing Required Handoff Document' states: '`stage-2-handoff.md` is missing entirely. Per the Stage 3 skill instructions: \"If `stage-2-handoff.md` is missing or doesn't reference completed analyses, stop and tell the user — send it back to Stage 2.\"'"
+    },
+    {
+      "text": "Stage 3 flagged that analyses are insufficient or incomplete",
+      "passed": true,
+      "evidence": "stage-3-rejection.md section '3. Existing Analyses Are Self-Admittedly Inadequate' details deficiencies in both analyses. Product analysis: 'Business intent is a single vague sentence with no specificity', 'Zero edge cases identified', 'Success signal is unmeasurable'. System analysis: 'Module description: path src/, purpose \"Does stuff\"', 'Zero dependencies identified', 'Admits: \"Could not explore codebase\"'. Both flagged as NEEDS_REFINEMENT by their own critics."
+    },
+    {
+      "text": "User was told to go back to Stage 2 or provide complete analysis outputs",
+      "passed": true,
+      "evidence": "stage-3-rejection.md header states 'Decision: REJECTED — Return to Stage 2'. Section 'What Stage 2 Needs to Deliver' lists all four required artifacts that must be produced before Stage 3 can proceed: stage-2-handoff.md, product-analysis.md, system-analysis.md, and constraints-risks-analysis.md."
+    },
+    {
+      "text": "No analysis.md or agreement-package.md were created from the incomplete inputs",
+      "passed": true,
+      "evidence": "The with_skill outputs directory contains only one file: stage-3-rejection.md. No analysis.md or agreement-package.md exist in the outputs directory."
+    },
+    {
+      "text": "The response mentions that constraints-risks-analysis.md is also missing",
+      "passed": true,
+      "evidence": "stage-3-rejection.md section '2. Missing Analysis Stream' states: '`constraints-risks-analysis.md` is missing. Stage 2 is designed to produce three independent analysis streams (product, system, constraints/risks). Only two of three were delivered.'"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_duration_seconds": 53.4
+  },
+  "claims": [
+    {
+      "claim": "The Stage 3 skill instructions require stage-2-handoff.md as primary entry point",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The rejection quotes the skill spec: 'If stage-2-handoff.md is missing or doesn't reference completed analyses, stop and tell the user — send it back to Stage 2.'"
+    },
+    {
+      "claim": "Both provided analyses were flagged as NEEDS_REFINEMENT by their own critics",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The rejection cites specific critic verdicts for both product-analysis.md and system-analysis.md, including quoted critic text."
+    },
+    {
+      "claim": "Synthesis on this input would produce a fabricated model with no grounding",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Given the described analysis quality (placeholder content, zero edge cases, 'Does stuff' descriptions, all unknowns), this assessment is well-supported."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "No analysis.md or agreement-package.md were created from the incomplete inputs",
+        "reason": "This assertion is the most discriminating of the set — it checks behavior, not just words. The with_skill configuration correctly produced only a rejection file and nothing else. However, the assertion could be strengthened by also checking that no stage-3-handoff.md or agreed-task-model.md were created."
+      }
+    ],
+    "overall": "The assertions are well-designed for this eval. The with_skill configuration handled rejection cleanly — single rejection file, no synthesis artifacts, detailed explanation of every deficiency. The assertions effectively captured the key behaviors."
+  }
+}

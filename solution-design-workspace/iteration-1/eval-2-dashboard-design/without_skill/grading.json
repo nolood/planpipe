@@ -1,0 +1,47 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-design",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "implementation-design.md created with all required template sections",
+      "passed": true,
+      "evidence": "File exists (31K). Contains 4 phases, code references with line numbers, detailed component designs. Structure differs from template but content coverage is similar."
+    },
+    {
+      "text": "change-map.md created with files from both backend (internal/analytics/, internal/clickhouse/, internal/cache/) and frontend (apps/dashboard/)",
+      "passed": true,
+      "evidence": "File exists (12K). Lists 9 modified files and 4 new files covering backend and frontend. Line-by-line change specifications."
+    },
+    {
+      "text": "Implementation approach addresses the 3-layer optimization: backend parallelization, caching with singleflight, and frontend progressive loading",
+      "passed": true,
+      "evidence": "4-phase design covers: Phase 1 (errgroup parallelization), Phase 2 (caching + singleflight), Phase 3 (frontend per-chart queries + downsampling), Phase 4 (testing)."
+    },
+    {
+      "text": "change-map.md includes the retention cohort bug fix at queries.go:67-85",
+      "passed": true,
+      "evidence": "Agent summary mentions 'retention cohort bug fix (5 params vs 3 passed)'. Change-map includes queries.go modifications."
+    },
+    {
+      "text": "Design decisions include: errgroup vs goroutine management, cache TTL strategy per chart type, singleflight integration point, downsampling algorithm choice",
+      "passed": true,
+      "evidence": "design-decisions.md contains 12 decisions covering errgroup vs raw goroutines, in-memory vs Redis, LRU vs naive eviction, singleflight, per-chart queries vs monolithic, time quantization, and downsampling algorithm."
+    },
+    {
+      "text": "Implementation sequence starts with backend changes before frontend to allow incremental validation",
+      "passed": true,
+      "evidence": "4-phase approach: Phase 1-2 are backend, Phase 3 is frontend. Agent summary mentions 5-sprint execution plan (10-15 days)."
+    },
+    {
+      "text": "Risk zones include connection pool sizing and thundering herd scenarios with specific mitigations",
+      "passed": true,
+      "evidence": "Agent mentions: connection pool configuration (MaxOpenConns=12), thundering herd addressed via singleflight, race conditions with race detector."
+    },
+    {
+      "text": "design-review-package.md presents approval points about cache TTL values and downsampling thresholds",
+      "passed": false,
+      "evidence": "design-review-package.md exists (12K) with 'open questions for reviewers' but these are not structured as formal approval points with options/recommendations. Less actionable for user decision-making."
+    }
+  ]
+}

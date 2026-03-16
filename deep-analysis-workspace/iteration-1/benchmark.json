@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "skill_name": "deep-analysis",
+    "timestamp": "2026-03-14T06:07:14Z",
+    "runs_per_configuration": 3
+  },
+  "configurations": [
+    {
+      "name": "with_skill",
+      "pass_rate": {
+        "mean": 100.0,
+        "stddev": 0.0
+      },
+      "time_seconds": {
+        "mean": 248.8,
+        "stddev": 165.3
+      },
+      "tokens": {
+        "mean": 40656,
+        "stddev": 18117
+      }
+    },
+    {
+      "name": "without_skill",
+      "pass_rate": {
+        "mean": 80.0,
+        "stddev": 14.4
+      },
+      "time_seconds": {
+        "mean": 195.7,
+        "stddev": 121.5
+      },
+      "tokens": {
+        "mean": 29904,
+        "stddev": 12889
+      }
+    }
+  ],
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "sso-feature-deep-analysis",
+      "with_skill": {
+        "pass_rate": 100.0,
+        "passed": 8,
+        "total": 8,
+        "time_seconds": 378.1,
+        "tokens": 55484
+      },
+      "without_skill": {
+        "pass_rate": 62.5,
+        "passed": 5,
+        "total": 8,
+        "time_seconds": 300.7,
+        "tokens": 41129
+      }
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "dashboard-perf-deep-analysis",
+      "with_skill": {
+        "pass_rate": 100.0,
+        "passed": 8,
+        "total": 8,
+        "time_seconds": 340.9,
+        "tokens": 51867
+      },
+      "without_skill": {
+        "pass_rate": 87.5,
+        "passed": 7,
+        "total": 8,
+        "time_seconds": 247.8,
+        "tokens": 36881
+      }
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rejection-needs-clarification",
+      "with_skill": {
+        "pass_rate": 100.0,
+        "passed": 4,
+        "total": 4,
+        "time_seconds": 27.3,
+        "tokens": 14618
+      },
+      "without_skill": {
+        "pass_rate": 100.0,
+        "passed": 4,
+        "total": 4,
+        "time_seconds": 38.5,
+        "tokens": 11703
+      }
+    }
+  ],
+  "run_summary": {
+    "delta": {
+      "pass_rate": "+20.0%",
+      "time_seconds": "+53.1s",
+      "tokens": "+10752"
+    }
+  },
+  "analysis": {
+    "discriminating_assertions": [
+      "Self-Critique Notes section (fails in 100% of without_skill runs, passes in 100% of with_skill runs)",
+      "Exact section headers matching skill template (Actor & Scenario, Dependencies — without_skill uses different names)"
+    ],
+    "non_discriminating_assertions": [
+      "All 3 artifacts created (passes both configs)",
+      "References actual file paths (passes both configs)",
+      "Identifies key findings from code (passes both configs)",
+      "Rejection gate enforcement (passes both configs)"
+    ],
+    "observations": [
+      "with_skill runs are ~30% slower and use ~35% more tokens — the cost of the analyze-critique-refine cycle",
+      "Baseline (without_skill) finds the same key technical findings — the code exploration quality is comparable",
+      "The skill's main value is structural consistency (Self-Critique Notes, exact section headers) and process discipline",
+      "Rejection test passes equally in both configs — even without the skill, the model respects NEEDS_CLARIFICATION"
+    ]
+  }
+}

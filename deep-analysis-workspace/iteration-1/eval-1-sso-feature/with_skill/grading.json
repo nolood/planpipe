@@ -1,0 +1,46 @@
+{
+  "eval_id": 1,
+  "config": "with_skill",
+  "expectations": [
+    {
+      "text": "product-analysis.md was created with all required sections (Business Intent, Actor & Scenario, Expected Outcome, Edge Cases, Success Signals)",
+      "passed": true,
+      "evidence": "All 5 section headers present: '## Business Intent' (line 3), '## Actor & Scenario' (line 11), '## Expected Outcome' (line 39), '## Edge Cases' (line 58), '## Success Signals' (line 72)."
+    },
+    {
+      "text": "system-analysis.md was created with all required sections (Relevant Modules, Change Points, Dependencies, Existing Patterns)",
+      "passed": true,
+      "evidence": "All 4 section headers present: '## Relevant Modules' (line 3), '## Change Points' (line 62), '## Dependencies' (line 78), '## Existing Patterns' (line 107)."
+    },
+    {
+      "text": "constraints-risks-analysis.md was created with all required sections (Constraints, Risks, Integration Dependencies, Backward Compatibility)",
+      "passed": true,
+      "evidence": "All 4 section headers present: '## Constraints' (line 4), '## Risks' (line 45), '## Integration Dependencies' (line 58), '## Backward Compatibility' (line 66)."
+    },
+    {
+      "text": "system-analysis.md references actual file paths from the mock project (internal/auth/, internal/tenant/, internal/user/)",
+      "passed": true,
+      "evidence": "All 3 paths explicitly referenced: 'internal/auth/' at line 6 under Auth Package, 'internal/tenant/' at line 16 under Tenant Package, 'internal/user/' at line 27 under User Package."
+    },
+    {
+      "text": "system-analysis.md identifies that the tenant model has no per-tenant configuration storage (key finding from reading tenant/models.go)",
+      "passed": true,
+      "evidence": "Line 20 states: 'Contains an explicit NOTE comment stating there is no per-tenant configuration storage and that SSO config would need either new columns or a new table.' Line 54 also references migration file containing 'explicit NOTE about no tenant_settings table.'"
+    },
+    {
+      "text": "constraints-risks-analysis.md mentions backward compatibility for the existing email/password login flow",
+      "passed": true,
+      "evidence": "Under '## Backward Compatibility' table (line 71): 'no -- password login behavior unchanged. SSO adds new behavior (redirect response) only for SSO-enabled tenants.' Also in Constraints section (line 29): 'Coexistence with password login is non-negotiable: The existing email/password flow must remain fully functional for non-SSO tenants.'"
+    },
+    {
+      "text": "product-analysis.md describes the SSO login scenario step by step, not just restates the requirements",
+      "passed": true,
+      "evidence": "Lines 16-24 contain a numbered 9-step walkthrough under 'Main Scenario': from employee navigating to login page, entering email, system detecting SSO tenant, redirect to IdP, IdP authentication, SAML assertion sent to Keycloak, Keycloak validating and issuing tokens, platform receiving tokens and JIT provisioning, through to employee landing on dashboard with correct tenant context."
+    },
+    {
+      "text": "Each analysis contains a Self-Critique Notes section showing evidence of the analyze-critique-refine cycle",
+      "passed": true,
+      "evidence": "'## Self-Critique Notes' section found in all 3 files: product-analysis.md (line 102, 5 critique bullets), system-analysis.md (line 150, 4 critique bullets), constraints-risks-analysis.md (line 86, 5 critique bullets)."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection-needs-clarification",
+  "prompt": "Run Stage 2 deep analysis on an unprepared task (NEEDS_CLARIFICATION verdict). Should be rejected.",
+  "assertions": [
+    {"text": "Stage 2 refused to run deep analysis (did not produce analysis artifacts)", "type": "gate_enforcement"},
+    {"text": "The refusal explicitly mentions the NEEDS_CLARIFICATION verdict from the readiness review", "type": "gate_enforcement"},
+    {"text": "User is told to go back to Stage 1 or resolve the clarification questions first", "type": "actionable_guidance"},
+    {"text": "No product-analysis.md, system-analysis.md, or constraints-risks-analysis.md files were created", "type": "gate_enforcement"}
+  ]
+}

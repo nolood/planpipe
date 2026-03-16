@@ -1,0 +1,32 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Stage 4 detected missing agreed-task-model.md",
+      "passed": true,
+      "evidence": "States: 'agreed-task-model.md does not exist' and explicitly notes its absence as a key reason for rejection."
+    },
+    {
+      "text": "Stage 4 flagged that Stage 3 is incomplete or user agreement was not obtained",
+      "passed": true,
+      "evidence": "States: 'user agreement was not obtained', 'Stage 4's input requirements mandate a confirmed task model'. Flagged as incomplete."
+    },
+    {
+      "text": "User was told to go back to Stage 3 or complete the task synthesis",
+      "passed": true,
+      "evidence": "File explains the task cannot proceed and lists what's needed. Implies returning to Stage 3 though less formally than with_skill version."
+    },
+    {
+      "text": "No implementation-design.md or change-map.md were created from incomplete inputs",
+      "passed": true,
+      "evidence": "Only rejection-reasoning.md in outputs directory. No design artifacts created."
+    },
+    {
+      "text": "The response mentions that the task model is not confirmed/agreed by the user",
+      "passed": true,
+      "evidence": "States: 'No user agreement was obtained', 'user agreement was not obtained', 'Stage 4's input requirements mandate a confirmed task model'."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "skill_name": "solution-design",
+  "iteration": 1,
+  "configurations": [
+    {
+      "name": "with_skill",
+      "evals": [
+        {
+          "eval_name": "sso-design",
+          "pass_rate": 1.0,
+          "passed": 8,
+          "total": 8,
+          "tokens": 79256,
+          "duration_seconds": 495.7
+        },
+        {
+          "eval_name": "dashboard-design",
+          "pass_rate": 1.0,
+          "passed": 8,
+          "total": 8,
+          "tokens": 76043,
+          "duration_seconds": 535.7
+        },
+        {
+          "eval_name": "rejection",
+          "pass_rate": 1.0,
+          "passed": 5,
+          "total": 5,
+          "tokens": 19366,
+          "duration_seconds": 38.4
+        }
+      ],
+      "aggregate": {
+        "mean_pass_rate": 1.0,
+        "stddev_pass_rate": 0.0,
+        "mean_tokens": 58222,
+        "mean_duration_seconds": 356.6
+      }
+    },
+    {
+      "name": "without_skill",
+      "evals": [
+        {
+          "eval_name": "sso-design",
+          "pass_rate": 0.75,
+          "passed": 6,
+          "total": 8,
+          "tokens": 64451,
+          "duration_seconds": 458.4
+        },
+        {
+          "eval_name": "dashboard-design",
+          "pass_rate": 0.875,
+          "passed": 7,
+          "total": 8,
+          "tokens": 61479,
+          "duration_seconds": 481.3
+        },
+        {
+          "eval_name": "rejection",
+          "pass_rate": 1.0,
+          "passed": 5,
+          "total": 5,
+          "tokens": 19646,
+          "duration_seconds": 46.3
+        }
+      ],
+      "aggregate": {
+        "mean_pass_rate": 0.875,
+        "stddev_pass_rate": 0.108,
+        "mean_tokens": 48525,
+        "mean_duration_seconds": 328.7
+      }
+    }
+  ],
+  "delta": {
+    "pass_rate": "+0.125 (87.5% → 100%)",
+    "tokens": "+20% (48.5K → 58.2K)",
+    "duration": "+8.5% (329s → 357s)"
+  },
+  "analyst_observations": [
+    "Skill achieves 100% pass rate vs 87.5% baseline — the 12.5% gap comes from two structural assertions: subagent spawning (architect + critic) and formal approval points in design-review-package.md",
+    "Without the skill, the agent produces comparable content quality (even more verbose in some cases — 15 decisions vs 7) but lacks the structured review process (no critic, no formal approval points)",
+    "Rejection test (eval-3) is non-discriminating — both with and without skill correctly reject incomplete inputs at 100% pass rate",
+    "Skill costs ~20% more tokens (58K vs 49K) primarily due to subagent overhead (architect + critic spawning)",
+    "Duration difference is modest (+8.5%) — subagents run in parallel so the overhead is mostly from critic review, not doubled wall-clock time",
+    "The without_skill agent produced a stage-4-handoff.md for neither eval, while with_skill produced it for both — this indicates the skill template structure drives completeness of the full artifact set",
+    "Qualitative advantage of the skill: formal approval points with options/recommendations/questions (structured for user decision-making) vs informal 'open questions' in without_skill output"
+  ]
+}

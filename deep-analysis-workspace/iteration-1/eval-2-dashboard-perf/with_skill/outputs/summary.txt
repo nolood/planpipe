@@ -1,0 +1,100 @@
+Stage 2 Deep Analysis Summary — Dashboard Performance Optimization
+===================================================================
+
+Task: Reduce analytics dashboard chart load times from 8-10s to under 2s.
+
+Input Verification: Stage 1 readiness-review.md contains READY_FOR_DEEP_ANALYSIS verdict. Confirmed.
+
+---
+
+KEY FINDINGS PER STREAM
+========================
+
+Product / Business Analysis:
+The dashboard overview page is the landing page for 50k DAU. The 8-10 second load time
+is the sum of sequential backend work, not a single slow operation. Users see nothing
+until everything finishes. The minimum viable outcome is parallelizing backend queries --
+this alone could cut load time from ~10s (sum) to ~3-5s (max). Combined with caching and
+frontend progressive loading, the 2-second target is achievable.
+
+Codebase / System Analysis:
+11 specific performance bottlenecks identified across 4 layers:
+
+Backend (internal/analytics/service.go):
+  1. Sequential chart loading — for loop iterates 8 charts one by one (line 30)
+  2. No caching — internal/cache/ exists but is not wired in
+  3. Sequential summary queries — 4 independent queries run one after another
+
+ClickHouse (internal/clickhouse/):
+  4. Unbounded result sets — ExecuteQuery loads all rows into memory, no LIMIT
+  5. user_retention_cohort query has a parameter binding BUG — 5 ? placeholders,
+     only 3 params passed (queries.go lines 66-85)
+  6. top_events_by_count returns up to 10,000 rows (LIMIT 10000)
+  7. events_volume groups by hour * event_type, producing excessive rows
+  8. error_rate_over_time groups by minute, up to 1440 rows per day
+  9. No materialized views — all queries scan raw 500M-row events table
+
+Frontend (apps/dashboard/):
+  10. Single monolithic query fetches all 8 charts at once, page waits for all
+  11. No data downsampling — Recharts renders every SVG point (2-5s for 10k+ pts)
+  12. Apollo cache is ineffective — time range includes Date.now() milliseconds
+  13. All 8 charts render simultaneously, no lazy loading
+
+Constraints / Risks Analysis:
+The main risks are: (1) connection pool exhaustion when parallelizing 8 queries per
+request for 50k DAU, (2) the user_retention_cohort bug which is likely causing silent
+failures already, and (3) ClickHouse capacity under increased concurrent query load.
+The GraphQL API contract can remain unchanged — optimizations are internal. No test
+coverage exists anywhere in the codebase, which increases regression risk.
+
+---
+
+CROSS-ANALYSIS OBSERVATIONS
+============================
+
+1. ALIGNMENT: All three streams agree that sequential query execution is the dominant
+   bottleneck and parallelization is the highest-impact change.
+
+2. TENSION: Parallelization (system analysis finding) creates connection pool risk
+   (constraints analysis finding). Caching mitigates this — cache hits avoid ClickHouse
+   entirely, so the parallel query load is only for cache misses.
+
+3. BUG FOUND: The user_retention_cohort query parameter binding issue was found by the
+   system analysis. The constraints analysis notes this means the retention chart is
+   likely already silently failing (the service skips failed charts). This is both a
+   bug fix and a performance finding — a failing query still consumes time before erroring.
+
+4. GAP: The product analysis notes that cold-start vs warm-load distinction for the
+   2-second target is unresolved. The system analysis confirms that Apollo cache is
+   currently ineffective, so every load is effectively cold today.
+
+5. COVERAGE: No test files exist anywhere in the project. All three streams flagged
+   this as a concern for different reasons (regression risk, verification difficulty,
+   no performance baselines).
+
+---
+
+KNOWLEDGE BASE ASSESSMENT
+==========================
+
+The knowledge base is SUFFICIENT for plan synthesis. Specific file paths, line numbers,
+code patterns, and bottleneck mechanisms are documented. The three core analyses cover
+the product intent, system architecture, and constraint landscape with enough detail
+for concrete implementation planning.
+
+OPEN QUESTIONS FOR PLANNING:
+- Is the 2-second target for cold load or warm (cached) load?
+- What is the clickhouse-go default connection pool size?
+- Are there other GraphQL API consumers besides the dashboard?
+- What cache TTL is acceptable (staleness tolerance)?
+- Should below-the-fold charts be lazy-loaded (requires product input on chart priority)?
+
+READY FOR STAGE 3 (PLAN SYNTHESIS).
+
+---
+
+Output Artifacts:
+  - product-analysis.md
+  - system-analysis.md
+  - constraints-risks-analysis.md
+  - summary.txt (this file)

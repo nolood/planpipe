@@ -1,0 +1,46 @@
+{
+  "eval_id": 2,
+  "config": "without_skill",
+  "expectations": [
+    {
+      "text": "system-analysis.md identifies sequential chart loading in analytics/service.go",
+      "passed": true,
+      "evidence": "system-analysis.md line 14 states '8 sequential ClickHouse queries + 4 sequential summary queries'. Bottleneck 1 (lines 49-62) explicitly calls out service.go GetOverviewPage() lines 30-37 with the for loop iterating over DefaultOverviewCharts one at a time."
+    },
+    {
+      "text": "system-analysis.md identifies unused cache module in internal/cache/",
+      "passed": true,
+      "evidence": "system-analysis.md line 34 states 'internal/cache/cache.go | In-memory TTL cache | Exists but is completely unused — never imported by any other module'. Bottleneck 2 (lines 64-70) elaborates: 'internal/cache/cache.go exists but is never imported or used' and 'It was clearly built for this purpose but never integrated.'"
+    },
+    {
+      "text": "system-analysis.md identifies frontend rendering issue (no downsampling, all charts render simultaneously)",
+      "passed": true,
+      "evidence": "Line 43: 'No data downsampling; renders all SVG elements for all data points'. Line 44: 'All charts rendered simultaneously; no lazy loading or virtualization'. Bottleneck 3 (lines 72-78) details unbounded SVG rendering via Recharts. Bottleneck 4 (lines 80-89) covers all-or-nothing rendering. Should-change item 7 recommends LTTB or bucketing downsampling."
+    },
+    {
+      "text": "system-analysis.md references ClickHouse query patterns from internal/clickhouse/queries.go",
+      "passed": true,
+      "evidence": "Line 33 lists queries.go with '8 query templates; some are inherently expensive (retention cohort with self-join)'. Lines 99-108 (Bottleneck 6) cite queries.go lines 66-85 for user_retention_cohort, lines 16-25 for active_users_over_time, and lines 87-97 for users_by_region, with specific details on self-joins and parameter binding bugs."
+    },
+    {
+      "text": "constraints-risks-analysis.md identifies risk of breaking GraphQL API contract",
+      "passed": true,
+      "evidence": "Constraint C5 (lines 17-18) is titled 'GraphQL API Contract Preservation' and states 'changes to the GraphQL API contract that would affect other consumers are out of scope'. The Integration Dependencies section (lines 91-95) further specifies which changes are safe vs unsafe to the contract."
+    },
+    {
+      "text": "constraints-risks-analysis.md notes absence of materialized views",
+      "passed": true,
+      "evidence": "Line 15 (C4): 'materialized views and schema changes are acceptable if needed' implies they do not currently exist. Line 89 states 'If materialized views are added, they are additive — the raw events table is unchanged', confirming current absence. Line 136 suggests a materialized view as a needed future addition for the retention query."
+    },
+    {
+      "text": "All 3 analysis artifacts created",
+      "passed": true,
+      "evidence": "All three files were successfully read: product-analysis.md (72 lines), system-analysis.md (177 lines), and constraints-risks-analysis.md (140 lines). summary.txt also present but is not one of the 3 required artifacts."
+    },
+    {
+      "text": "Each analysis contains Self-Critique Notes section",
+      "passed": false,
+      "evidence": "Grep for 'Self-Critique' and 'Critique Notes' across all output files returned no matches. None of the three analysis files (product-analysis.md, system-analysis.md, constraints-risks-analysis.md) contain a Self-Critique Notes section."
+    }
+  ]
+}

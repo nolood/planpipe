@@ -1,0 +1,42 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-feature-clear-task",
+  "prompt": "We need to add SSO support via SAML. The product team wants this for Q3. We already use Keycloak for auth...",
+  "assertions": [
+    {
+      "id": "req-draft-exists",
+      "text": "requirements.draft.md file was created with all required sections",
+      "type": "file_exists"
+    },
+    {
+      "id": "readiness-review-exists",
+      "text": "readiness-review.md file was created with all 8 criteria scored",
+      "type": "file_exists"
+    },
+    {
+      "id": "clarifications-created",
+      "text": "clarifications.md was created (even though verdict may be READY, there are unknowns to close)",
+      "type": "file_exists"
+    },
+    {
+      "id": "clarifications-follow-template",
+      "text": "clarifications.md follows the fixed template: has Blocking Gaps/Open Unknowns/Assumptions to Verify/Questions sections",
+      "type": "template_check"
+    },
+    {
+      "id": "unknowns-converted-to-questions",
+      "text": "Open unknowns from requirements draft (e.g. auth middleware structure, tenant identification) appear as questions in clarifications.md",
+      "type": "content_check"
+    },
+    {
+      "id": "tech-context-captured",
+      "text": "Requirements draft mentions Keycloak, FastAPI, React, SAML, per-tenant",
+      "type": "content_check"
+    },
+    {
+      "id": "task-type-correct",
+      "text": "Task classified as feature or integration",
+      "type": "content_check"
+    }
+  ]
+}

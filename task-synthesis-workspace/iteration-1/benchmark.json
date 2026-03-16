@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "skill_name": "task-synthesis",
+    "skill_path": "/home/nolood/general/plan-pipeline/task-synthesis",
+    "executor_model": "claude-opus-4-6",
+    "analyzer_model": "claude-opus-4-6",
+    "timestamp": "2026-03-14T09:20:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "sso-synthesis",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 348.4,
+        "tokens": 48472,
+        "tool_calls": 13,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "analysis.md created with all required sections", "passed": true, "evidence": "All sections present: Task Goal, Problem Statement, Key Scenarios, System Scope, Constraints, Risks, Candidate Solution Directions"},
+        {"text": "agreement-package.md created with all 5 blocks", "passed": true, "evidence": "Exactly 5 blocks present: Goal & Problem Understanding, Scope, Key Scenarios, Constraints, Candidate Solution Directions"},
+        {"text": "Synthesis critic was spawned and returned a verdict", "passed": true, "evidence": "Critic subagent spawned, returned CONSISTENT verdict"},
+        {"text": "analysis.md resolves or flags contradictions", "passed": true, "evidence": "Resolved Contradictions section present with password fallback and account linking flagged"},
+        {"text": "agreement-package.md blocks end with confirmation questions", "passed": true, "evidence": "Each block ends with Confirm: question"},
+        {"text": "analysis.md preserves key findings", "passed": true, "evidence": "Zero test coverage, single Keycloak realm, direct grant to auth code shift, no per-tenant config all present"},
+        {"text": "Candidate solution directions include options", "passed": true, "evidence": "Three directions: Minimal MVO, Systematic, Test-first hybrid"},
+        {"text": "Open questions from Stage 2 are carried forward", "passed": true, "evidence": "8 open questions preserved including password fallback, account linking, per-tenant config design"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "sso-synthesis",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 4,
+        "failed": 4,
+        "total": 8,
+        "time_seconds": 302.9,
+        "tokens": 38143,
+        "tool_calls": 10,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "analysis.md created with all required sections", "passed": false, "evidence": "Uses different section names: 'Unified Task Definition' instead of 'Task Goal'/'Problem Statement', no 'Key Scenarios' or 'Candidate Solution Directions' sections"},
+        {"text": "agreement-package.md created with all 5 blocks", "passed": false, "evidence": "Has 7 sections (A-G) instead of the required 5 blocks"},
+        {"text": "Synthesis critic was spawned and returned a verdict", "passed": false, "evidence": "No synthesis critic was spawned"},
+        {"text": "analysis.md resolves or flags contradictions", "passed": true, "evidence": "Contradictions addressed in cross-analysis section"},
+        {"text": "agreement-package.md blocks end with confirmation questions", "passed": true, "evidence": "Sections end with 'Please confirm' prompts"},
+        {"text": "analysis.md preserves key findings", "passed": true, "evidence": "Key findings present in the analysis"},
+        {"text": "Candidate solution directions include options", "passed": false, "evidence": "No candidate solution directions section in analysis.md"},
+        {"text": "Open questions from Stage 2 are carried forward", "passed": true, "evidence": "Open questions preserved"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "dashboard-synthesis",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 343.5,
+        "tokens": 46146,
+        "tool_calls": 13,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "analysis.md created with all required template sections", "passed": true, "evidence": "All template sections present"},
+        {"text": "agreement-package.md created with all 5 blocks", "passed": true, "evidence": "All 5 blocks present with correct labels"},
+        {"text": "Synthesis preserves the retention cohort query bug finding", "passed": true, "evidence": "Bug documented with queries.go:67-85 reference"},
+        {"text": "Synthesis identifies the 3-layer bottleneck", "passed": true, "evidence": "Backend sequential queries, unused cache, frontend monolithic query all identified"},
+        {"text": "Constraints include: GraphQL API backward compatibility, 2-second target, zero test coverage", "passed": true, "evidence": "All three constraints present"},
+        {"text": "Candidate solution directions address backend-first vs full-stack", "passed": true, "evidence": "Three directions: Minimal, Safe, Systematic"},
+        {"text": "Risks include thundering herd and connection pool concerns", "passed": true, "evidence": "Both risks present with calibrated likelihood/impact"},
+        {"text": "The cache-busting time range bug is captured", "passed": true, "evidence": "Overview.tsx:26-27 cache-busting bug documented"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "dashboard-synthesis",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.875,
+        "passed": 7,
+        "failed": 1,
+        "total": 8,
+        "time_seconds": 219.6,
+        "tokens": 34487,
+        "tool_calls": 10,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "analysis.md created with all required template sections", "passed": true, "evidence": "Sections present though with different naming"},
+        {"text": "agreement-package.md created with all 5 blocks", "passed": true, "evidence": "Blocks present"},
+        {"text": "Synthesis preserves the retention cohort query bug finding", "passed": true, "evidence": "Bug documented"},
+        {"text": "Synthesis identifies the 3-layer bottleneck", "passed": true, "evidence": "All 3 layers identified"},
+        {"text": "Constraints include: GraphQL API backward compatibility, 2-second target, zero test coverage", "passed": true, "evidence": "All three present"},
+        {"text": "Candidate solution directions address backend-first vs full-stack", "passed": false, "evidence": "No explicit candidate directions section — jumps to recommended full-scope plan"},
+        {"text": "Risks include thundering herd and connection pool concerns", "passed": true, "evidence": "Both risks present"},
+        {"text": "The cache-busting time range bug is captured", "passed": true, "evidence": "Bug documented"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rejection-incomplete-input",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 53.4,
+        "tokens": 19474,
+        "tool_calls": 7,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Stage 3 detected missing stage-2-handoff.md", "passed": true, "evidence": "Explicitly flagged as first rejection reason"},
+        {"text": "Stage 3 flagged that analyses are insufficient or incomplete", "passed": true, "evidence": "Both analyses flagged as NEEDS_REFINEMENT"},
+        {"text": "User was told to go back to Stage 2", "passed": true, "evidence": "Rejection report directs back to Stage 2"},
+        {"text": "No analysis.md or agreement-package.md were created", "passed": true, "evidence": "Only stage-3-rejection.md created"},
+        {"text": "The response mentions that constraints-risks-analysis.md is also missing", "passed": true, "evidence": "Explicitly listed as missing artifact"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rejection-incomplete-input",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 109.4,
+        "tokens": 27188,
+        "tool_calls": 18,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Stage 3 detected missing stage-2-handoff.md", "passed": true, "evidence": "Detected and flagged"},
+        {"text": "Stage 3 flagged that analyses are insufficient or incomplete", "passed": true, "evidence": "Both analyses flagged as inadequate"},
+        {"text": "User was told to go back to Stage 2", "passed": true, "evidence": "Directed back to Stage 2"},
+        {"text": "No analysis.md or agreement-package.md were created", "passed": false, "evidence": "analysis.md was created with rejection content — file exists on disk"},
+        {"text": "The response mentions that constraints-risks-analysis.md is also missing", "passed": true, "evidence": "Missing file mentioned"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 248.4, "stddev": 138.2, "min": 53.4, "max": 348.4},
+      "tokens": {"mean": 38031, "stddev": 12809, "min": 19474, "max": 48472}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.725, "stddev": 0.159, "min": 0.5, "max": 0.875},
+      "time_seconds": {"mean": 210.6, "stddev": 79.3, "min": 109.4, "max": 302.9},
+      "tokens": {"mean": 33273, "stddev": 4541, "min": 27188, "max": 38143}
+    },
+    "delta": {
+      "pass_rate": "+0.275",
+      "time_seconds": "+37.8",
+      "tokens": "+4758"
+    }
+  },
+  "notes": [
+    "With-skill achieves 100% pass rate across all 3 evals vs 72.5% without skill (+27.5%)",
+    "The biggest discriminator is structural conformance: without-skill uses ad-hoc section names and block counts",
+    "Without-skill consistently lacks Candidate Solution Directions — the skill enforces presenting options to the user",
+    "Without-skill never spawns a synthesis critic — the skill adds independent quality validation",
+    "Rejection case: with-skill is cleaner (only rejection file, 53s) vs without-skill (creates analysis.md with rejection content, 109s)",
+    "With-skill costs ~14% more tokens on average but delivers 100% template compliance",
+    "Content quality is comparable — without-skill preserves findings well but lacks structured decision-making (no options, no critic)"
+  ]
+}

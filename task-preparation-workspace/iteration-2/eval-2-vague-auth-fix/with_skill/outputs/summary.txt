@@ -1,0 +1,34 @@
+Task Preparation — Stage 1 Summary
+====================================
+
+Input: "fix the auth"
+
+Result: NEEDS_CLARIFICATION — Stage 1 is NOT complete.
+
+The raw task input "fix the auth" is extremely vague. It identifies a domain area
+("auth") and a desired action ("fix") but provides no information about what is
+broken, how it manifests, which system is affected, or what correct behavior
+looks like.
+
+The readiness critic evaluated the requirements draft against 8 criteria and
+returned FAIL on 7 of them (Goal clarity, Problem clarity, Scope clarity,
+Change target clarity, Context sufficiency, Ambiguity level, Acceptance
+possibility) and WEAK on 1 (Assumption safety). The verdict is
+NEEDS_CLARIFICATION.
+
+Five blocking gaps were identified:
+  1. Problem definition — what exactly is broken
+  2. System identification — which codebase/service is involved
+  3. Reproduction path — no steps, errors, or logs provided
+  4. Expected behavior — no definition of what "fixed" means
+  5. Scope boundaries — cannot determine what the fix encompasses
+
+Nine clarification questions were formulated and saved to clarifications.md.
+The process is paused awaiting user answers before the prepare-critique-refine
+loop can continue.
+
+Artifacts produced:
+  - requirements.draft.md — structured task statement with all knowns/unknowns/assumptions
+  - readiness-review.md — critic evaluation with scores and blocking gaps
+  - clarifications.md — prioritized questions for the user using the required template
+  - summary.txt — this file

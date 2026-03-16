@@ -1,0 +1,65 @@
+Deep Analysis Summary: SAML SSO for Enterprise Tenants
+=======================================================
+
+TASK: Add SAML 2.0 SSO to a Go/Keycloak backend so enterprise tenants can
+authenticate through their corporate identity providers.
+
+CODEBASE: Go 1.22, chi router, Keycloak (gocloak v13), PostgreSQL (pgx v5).
+Four packages: auth, tenant, user, config. Currently supports only
+email/password login via Keycloak direct grant.
+
+KEY FINDINGS FROM CODEBASE EXPLORATION:
+
+1. Architecture fit: Keycloak already runs as the auth provider (single realm
+   "platform", single client "platform-app"). Keycloak natively supports SAML
+   IdP brokering, so the Go backend never touches SAML protocol -- it only
+   needs to implement OAuth2 authorization code flow with Keycloak, using
+   kc_idp_hint to target the correct tenant IdP.
+
+2. Primary gap: The codebase has ZERO authorization code flow support. All
+   Keycloak interaction is direct grant (password). SSO requires redirect-based
+   auth, callback endpoints, state/CSRF handling, and code-for-token exchange.
+   This is the largest net-new capability.
+
+3. Storage gap: The Tenant model (internal/tenant/models.go) has no per-tenant
+   configuration storage. A note in the code explicitly acknowledges this.
+   A new tenant_sso_configs table is needed. Recommend a separate table rather
+   than adding columns to the tenants table.
+
+4. JIT provisioning: The existing GetOrCreateByEmail (internal/user/service.go)
+   provides the foundation for JIT user provisioning on first SSO login, but it
+   does not populate KeycloakID. This must be extended.
+
+5. Pre-existing bug: RequireRole in middleware.go (line 99-103) has a variable
+   shadowing issue -- range variable "r" shadows the http.Request "r".
+
+6. SSO enforcement: auth.Service.Login must be modified to reject password
+   login for SSO-enabled tenants. Without this, SSO can be bypassed.
+
+7. Middleware compatibility: The Authenticate middleware will work unchanged
+   for SSO tokens since they are standard Keycloak JWTs. The tenant_id claim
+   fallback (email domain resolution) covers SSO tokens naturally.
+
+CHANGE POINTS (by file):
+- internal/auth/keycloak.go    -- Add authorization code flow methods
+- internal/auth/service.go     -- Add InitiateSSO, HandleSSOCallback; gate Login
+- internal/auth/handler.go     -- Add SSO check/login/callback HTTP endpoints
+- internal/tenant/models.go    -- Add SSOConfig model (or new file)
+- internal/tenant/repository.go -- Add SSO config CRUD queries
+- internal/tenant/service.go   -- Add SSO config retrieval methods
+- internal/user/service.go     -- Extend GetOrCreateByEmail for KeycloakID
+- internal/config/config.go    -- Add SSOCallbackURL, FrontendURL
+- cmd/server/main.go           -- Wire new services, register new routes
+- migrations/002_*.sql         -- New tenant_sso_configs table
+
+TOP RISKS:
+- Authorization code flow is entirely new to the codebase (high)
+- Tenant isolation during SSO redirect/callback (high)
+- SSO enforcement bypass via direct password login (high, but straightforward fix)
+- Account linking when existing users switch to SSO (medium)
+- Keycloak IdP configuration complexity (medium)
+
+Documents produced:
+- product-analysis.md         -- Business intent, user scenarios, edge cases
+- system-analysis.md          -- Module-by-module change analysis with code references
+- constraints-risks-analysis.md -- Constraints, risks, dependencies, compatibility

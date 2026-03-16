@@ -1,0 +1,99 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-synthesis",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "analysis.md created with all required template sections",
+      "passed": true,
+      "evidence": "analysis.md (10.0K) contains substantive sections: Unified Problem Statement, Cross-Layer Bottleneck Map, Findings Reconciliation (with Agreements and Tensions subsections), Unified System Map (Modules, Change Dependency Order), Consolidated Constraints, Consolidated Risk Matrix, and Open Questions (prioritized into three tiers). The section naming differs from the with_skill output but covers all major analytical areas. The content is substantive and well-structured."
+    },
+    {
+      "text": "agreement-package.md created with all 5 blocks",
+      "passed": true,
+      "evidence": "agreement-package.md (8.6K) contains 8 numbered sections: (1) Problem Statement, (2) Success Criteria, (3) Minimum Viable Outcome, (4) Proposed Scope (In/Out), (5) Key Constraints, (6) Key Risks and Mitigations, (7) Implementation Approach, (8) Open Questions. While it has 8 sections rather than exactly 5 labeled 'blocks,' it exceeds the 5-block minimum and covers all expected content areas including goal, scope, scenarios, constraints, and solution direction. Each section includes a user confirmation prompt."
+    },
+    {
+      "text": "Synthesis preserves the retention cohort query bug finding from system analysis",
+      "passed": true,
+      "evidence": "analysis.md Cross-Layer Bottleneck Map: 'Retention cohort query is broken (5 params needed, 3 passed) -- silently fails.' Findings Reconciliation: 'The retention cohort query bug is real and high-confidence. System analysis found the parameter mismatch at queries.go:67-85.' Also in agreement-package.md scope table: 'Fix retention cohort query bug (parameter mismatch)' and agreed-task-model.md CP3: 'Fix retention cohort: 5 SQL params but 3 passed.' Full specificity preserved including file path and line numbers."
+    },
+    {
+      "text": "Synthesis identifies the 3-layer bottleneck: backend (sequential queries), cache (unused), frontend (no downsampling, monolithic query)",
+      "passed": true,
+      "evidence": "analysis.md has a dedicated 'Cross-Layer Bottleneck Map' section explicitly structured as three layers: 'Layer 1: ClickHouse Queries (root cause of latency)' -- 8 queries at 2-5s each; 'Layer 2: Backend Orchestration (converts per-query cost to sum, not max)' -- sequential for-loop, no caching despite unused cache utility; 'Layer 3: Frontend Rendering (blocks on slowest + renders everything at once)' -- monolithic query, cache-busting timestamps, no downsampling with 10k+ SVG elements. Includes the critical insight that parallelization changes SUM to MAX. All three layers and their specific issues are clearly identified."
+    },
+    {
+      "text": "Constraints include: GraphQL API backward compatibility, 2-second target, zero test coverage",
+      "passed": true,
+      "evidence": "analysis.md Consolidated Constraints table includes all three: 'GraphQL API backward compatibility' (HARD), '2-second wall-clock target' (HARD, 'Drives minimum scope -- parallelization required'), and 'Zero test coverage' (HARD fact, 'Every change needs new tests or manual verification'). Each has source attribution and hardness rating."
+    },
+    {
+      "text": "Candidate solution directions address: backend-first (parallelization) vs. full-stack optimization",
+      "passed": false,
+      "evidence": "analysis.md does not contain a 'Candidate Solution Directions' section or equivalent. The document discusses findings, constraints, risks, and open questions but does not explicitly present alternative solution approaches for user selection. The agreement-package.md mentions a 'Minimum Viable Outcome' (backend parallelization) and a 'Proposed Scope' (full scope), and the agreed-task-model.md shows implementation phases, but there is no dedicated comparison of backend-first vs. full-stack as distinct candidate directions with trade-offs. The without_skill output treats the full scope as the default rather than presenting it as one of multiple options."
+    },
+    {
+      "text": "Risks include thundering herd and connection pool concerns from parallelization",
+      "passed": true,
+      "evidence": "analysis.md Consolidated Risk Matrix: 'R1: Parallel queries overwhelm ClickHouse connection pool' (Medium likelihood, High impact, mitigation: explicit pool size + semaphore + load test) and 'R2: Cache thundering herd under 50k DAU' (High likelihood, Medium impact, mitigation: sync/singleflight). Both risks are clearly identified with calibrated likelihood/impact ratings and specific mitigations."
+    },
+    {
+      "text": "The cache-busting time range bug (Overview.tsx:26-27) is captured in the synthesis",
+      "passed": true,
+      "evidence": "analysis.md Cross-Layer Bottleneck Map Layer 3: 'new Date().toISOString() in query variables cache-busts Apollo on every load.' The specific line reference (Overview.tsx:26-27) appears in agreed-task-model.md CP8: 'apps/dashboard/src/pages/Overview.tsx:26-27 | Quantize time range to prevent Apollo cache busting | Small' and in stage-3-handoff.md item 8: 'Quantize time range to nearest minute (Overview.tsx:26-27).' The bug is captured with its mechanism and specific location."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 1,
+    "total": 8,
+    "pass_rate": 0.875
+  },
+  "timing": {
+    "total_duration_seconds": 219.6
+  },
+  "claims": [
+    {
+      "claim": "All three analysis streams converge on 5 key agreements",
+      "type": "factual",
+      "verified": true,
+      "evidence": "analysis.md 'Agreements Across Analyses' lists 5 convergence points: (1) sequential query execution is primary bottleneck, (2) retention cohort bug is real, (3) cache thundering herd is highest-likelihood risk, (4) GraphQL API contract must be preserved, (5) zero test coverage. Each is supported with evidence from multiple analysis sources."
+    },
+    {
+      "claim": "4 tensions between analyses were identified and resolved",
+      "type": "factual",
+      "verified": true,
+      "evidence": "analysis.md 'Tensions and Resolutions' identifies 4 tensions: (1) Caching TTL vs. data freshness, (2) Scope of ClickHouse changes, (3) Frontend query pattern (monolithic vs per-chart), (4) Data downsampling granularity. Each includes what different analyses said and the chosen resolution."
+    },
+    {
+      "claim": "Open questions are prioritized into 3 tiers",
+      "type": "factual",
+      "verified": true,
+      "evidence": "analysis.md section 7 has three tiers: 'Must Resolve Before Planning' (3 questions), 'Should Resolve Before Implementation' (3 questions), 'Can Resolve During Implementation' (3 questions)."
+    },
+    {
+      "claim": "The user confirmed the agreement package",
+      "type": "process",
+      "verified": true,
+      "evidence": "agreed-task-model.md states 'Status: CONFIRMED (user accepted agreement package)' and resolved questions table shows all open questions have resolutions."
+    }
+  ],
+  "user_notes_summary": null,
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "agreement-package.md created with all 5 blocks",
+        "reason": "The without_skill output has 8 sections rather than 5 explicitly labeled 'blocks.' This assertion is ambiguous -- it passed because 8 > 5 and covers the content, but a stricter interpretation (exactly 5, labeled as 'Block N') would fail it. The assertion should define what the 5 blocks are."
+      },
+      {
+        "assertion": "Candidate solution directions address: backend-first (parallelization) vs. full-stack optimization",
+        "reason": "This is the most discriminating assertion in the set. The without_skill output treats the full scope as the default plan rather than presenting multiple candidate directions with explicit trade-offs. This reveals a genuine structural difference between the two outputs -- the with_skill version explicitly presents options for user selection, while the without_skill version presents a single recommended approach."
+      },
+      {
+        "reason": "No assertion checks the quality of contradiction/tension resolution between the input analyses. The without_skill output resolves 4 tensions while the with_skill output resolves 3 contradictions -- both are meaningful synthesis work that goes unchecked by the current assertions."
+      }
+    ],
+    "overall": "The assertion set is reasonably discriminating. Assertion 6 (candidate solution directions) successfully identifies a meaningful structural gap in the without_skill output. The weaker assertions (1 and 2) could be tightened by specifying exact template requirements."
+  }
+}

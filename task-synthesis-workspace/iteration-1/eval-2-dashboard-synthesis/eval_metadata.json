@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-synthesis",
+  "prompt": "Run Stage 3 task synthesis on dashboard performance optimization task. Stage 2 deep analysis is complete. Synthesize and prepare agreement package.",
+  "assertions": [
+    {"text": "analysis.md created with all required template sections"},
+    {"text": "agreement-package.md created with all 5 blocks"},
+    {"text": "Synthesis preserves the retention cohort query bug finding from system analysis"},
+    {"text": "Synthesis identifies the 3-layer bottleneck: backend (sequential queries), cache (unused), frontend (no downsampling, monolithic query)"},
+    {"text": "Constraints include: GraphQL API backward compatibility, 2-second target, zero test coverage"},
+    {"text": "Candidate solution directions address: backend-first (parallelization) vs. full-stack optimization"},
+    {"text": "Risks include thundering herd and connection pool concerns from parallelization"},
+    {"text": "The cache-busting time range bug (Overview.tsx:26-27) is captured in the synthesis"}
+  ]
+}

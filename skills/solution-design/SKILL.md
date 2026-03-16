@@ -65,9 +65,12 @@ Prepare a **design brief** (~300 words) for the subagents covering:
 
 Spawn a **Design Architect** subagent to build the initial implementation design.
 
-1. Read `agents/design-architect.md` from this skill's directory
-2. Use the **Agent tool** to spawn an **Explore** subagent (thoroughness: "very thorough") with that prompt
-3. Pass it: the design brief + full Stage 3 content + Stage 2 system analysis + constraints analysis
+1. Read `agents/design-architect.md` — this file contains the architect's complete role, codebase verification instructions, change specification format, and output structure
+2. Use the **Agent tool** with:
+   - `name`: `"design-architect"`
+   - `subagent_type`: `"Explore"`
+   - `prompt`: the FULL content of `agents/design-architect.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: the design brief + full Stage 3 content + Stage 2 system analysis + constraints analysis
 
 The architect must actually read the codebase to verify and extend the change map from Stage 2. Stage 2's system analysis provides a starting point, but the architect digs deeper — tracing data flows, checking interfaces, discovering implicit dependencies that surface only when you design the actual changes.
 
@@ -85,9 +88,12 @@ The architect returns:
 
 Once the architect returns, spawn a **Design Critic** subagent.
 
-1. Read `agents/design-critic.md` from this skill's directory
-2. Use the **Agent tool** to spawn an **Explore** subagent (thoroughness: "very thorough") with that prompt — the critic needs codebase access to spot-check the change map
-3. Pass it: the architect's design output + Stage 3 agreed task model + Stage 2 analyses
+1. Read `agents/design-critic.md` — this file contains the critic's complete role, spot-check procedure, evaluation criteria, and output format
+2. Use the **Agent tool** with (the critic needs codebase access to spot-check the change map):
+   - `name`: `"design-critic"`
+   - `subagent_type`: `"Explore"`
+   - `prompt`: the FULL content of `agents/design-critic.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: the architect's design output + Stage 3 agreed task model + Stage 2 analyses
 
 The critic independently reviews the design for:
 - Feasibility within task constraints
@@ -195,6 +201,22 @@ Present a brief summary:
 - Change scope (how many files/modules, rough size of changes)
 - Identified risks and their mitigations
 - Readiness for implementation
+
+Then offer the user two options for continuing to Stage 5:
+
+**Option 1 — Continue in this session:**
+> "Запустить Stage 5 (Implementation Decomposition) прямо сейчас в этой сессии?"
+
+If the user agrees, invoke the `/implementation-decomposition` skill.
+
+**Option 2 — Continue in a new session:**
+Provide a ready-to-paste block with actual paths filled in:
+```
+Запусти /implementation-decomposition
+
+Task ID: {task-id}
+Артефакты: .planpipe/{task-id}/ (stage-1/ через stage-4/)
+```
 
 ---
 
@@ -609,7 +631,7 @@ This stage produces up to five files. **Every artifact must follow its template 
 | 4 | `design-review-package.md` | Always | User-facing review document with approval points |
 | 5 | `stage-4-handoff.md` | On completion | **Primary input for the next stage** — clean, final, self-contained |
 
-Save all artifacts to the working directory (or a designated output path if the user specifies one).
+Save all artifacts to `.planpipe/{task-id}/stage-4/`.
 
 ---
 
@@ -656,3 +678,4 @@ Stage 4 is NOT complete if **any** of these hold:
 - **The review package is for the user, not for you.** Write it in terms they care about. Implementation details go in `implementation-design.md`. The review package surfaces understanding, approach, and key decisions.
 - **Templates are not optional.** Consistent structure enables the next stage to parse the output reliably.
 - **Memobank check.** If the project has a memobank or knowledge store, check it for: architectural conventions, preferred patterns, past design decisions on similar tasks. Opportunistic — skip if nothing exists.
+- **Subagent prompts = agent definition files.** When spawning a subagent, the content of its `agents/*.md` file IS the prompt. Read the file, combine it with input data, and pass as `prompt`. Never launch a subagent without its definition file — a generic subagent without the agent definition will not perform the specialized design/critique the pipeline requires.

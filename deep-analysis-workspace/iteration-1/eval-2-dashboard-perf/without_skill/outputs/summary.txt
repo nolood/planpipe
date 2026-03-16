@@ -1,0 +1,51 @@
+Deep Analysis Summary: Dashboard Chart Load Time Optimization
+=============================================================
+
+GOAL: Reduce analytics dashboard overview page load from 8-10s to under 2s.
+
+ARCHITECTURE: React+Recharts frontend -> Apollo Client -> Go/gqlgen GraphQL API -> ClickHouse (500M row events table)
+
+ROOT CAUSES IDENTIFIED (ordered by impact):
+
+1. SEQUENTIAL BACKEND QUERIES (Critical)
+   - service.go GetOverviewPage() runs 8 chart queries + 4 summary queries sequentially
+   - Total: 12 serial ClickHouse queries per page load
+   - Large tenants: 2-5s per query = 24-60s theoretical worst case
+
+2. NO CACHING (Critical)
+   - internal/cache/cache.go exists with working TTL cache but is NEVER USED
+   - Every page load by every user triggers 12 fresh ClickHouse queries
+   - 50,000 DAU means massive redundant query volume
+
+3. UNBOUNDED RESULT SETS (High)
+   - No LIMIT on most queries; error_rate_over_time produces ~43,200 rows for 30-day range
+   - All rows loaded into Go memory, serialized to JSON, and rendered as individual SVG elements
+   - Recharts chokes on 10,000+ data points (2-5s rendering time)
+
+4. ALL-OR-NOTHING FRONTEND RENDERING (Medium)
+   - Single GraphQL query fetches all 8 charts; nothing renders until everything returns
+   - Apollo cache defeated by millisecond-precision timestamps in query variables
+
+5. NO PRE-AGGREGATION (High)
+   - All queries hit raw events table; no materialized views
+   - user_retention_cohort does a self-join (scans events twice)
+
+BUG FOUND: user_retention_cohort query has 6 parameter placeholders but ExecuteQuery() only
+passes 3 arguments. This chart likely fails silently at runtime.
+
+KEY CHANGE POINTS:
+  - internal/analytics/service.go: Parallelize chart loading, add caching
+  - internal/clickhouse/client.go: Parallelize summary queries, fix param handling
+  - internal/clickhouse/queries.go: Add LIMIT clauses, fix retention query
+  - cmd/analytics-api/main.go: Wire in cache instance
+  - apps/dashboard/src/pages/Overview.tsx: Split into per-chart queries, progressive loading
+  - apps/dashboard/src/components/Chart.tsx: Add data downsampling
+
+TOP RISKS:
+  - Cache staleness (analytics users need fresh data)
+  - Parallel queries may burst-load ClickHouse
+  - In-memory cache won't scale across multiple API instances
+  - Frontend rendering may still exceed 2s without downsampling
+
+ESTIMATED FEASIBILITY: High. The 4-5x improvement needed (10s -> 2s) is achievable through
+parallelization alone (8x speedup potential). Adding caching and downsampling provides margin.

@@ -193,9 +193,12 @@ Build `execution-backlog.md` using the template from the **Artifact Templates** 
 
 Once the initial structure is built, spawn a **Decomposition Critic** subagent.
 
-1. Read `agents/decomposition-critic.md` from this skill's directory
-2. Use the **Agent tool** to spawn a **general-purpose** subagent with that prompt
-3. Pass it: the execution backlog + Stage 4 implementation design + change map
+1. Read `agents/decomposition-critic.md` — this file contains the critic's complete role, evaluation criteria (task clarity, boundaries, dependencies, parallelizability, conflicts, context, scope), and output format
+2. Use the **Agent tool** with:
+   - `name`: `"decomposition-critic"`
+   - `subagent_type`: `"general-purpose"`
+   - `prompt`: the FULL content of `agents/decomposition-critic.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: the execution backlog + Stage 4 implementation design + change map
 
 The critic independently reviews:
 - Task clarity — is each subtask understandable?
@@ -231,9 +234,12 @@ Save the critic's feedback.
 
 After the decomposition passes critique, spawn a **Coverage Reviewer** subagent.
 
-1. Read `agents/coverage-reviewer.md` from this skill's directory
-2. Use the **Agent tool** to spawn a **general-purpose** subagent with that prompt
-3. Pass it: the execution backlog + agreed task model + implementation design + change map + design decisions
+1. Read `agents/coverage-reviewer.md` — this file contains the reviewer's complete role, coverage checks (completeness, fidelity, traceability, alignment, sufficiency, done-state), and output format
+2. Use the **Agent tool** with:
+   - `name`: `"coverage-reviewer"`
+   - `subagent_type`: `"general-purpose"`
+   - `prompt`: the FULL content of `agents/coverage-reviewer.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: the execution backlog + agreed task model + implementation design + change map + design decisions
 
 The Coverage Reviewer checks:
 - **Coverage completeness** — all required parts of the task are covered by at least one subtask
@@ -331,6 +337,22 @@ Present a brief summary:
 - Coverage confidence level
 - Identified risks for execution
 - Readiness for implementation
+
+Then offer the user two options for continuing to Stage 6:
+
+**Option 1 — Continue in this session:**
+> "Запустить Stage 6 (Execution Flow) прямо сейчас в этой сессии?"
+
+If the user agrees, invoke the `/execution-flow` skill.
+
+**Option 2 — Continue in a new session:**
+Provide a ready-to-paste block with actual paths filled in:
+```
+Запусти /execution-flow
+
+Task ID: {task-id}
+Артефакты: .planpipe/{task-id}/ (stage-1/ через stage-5/)
+```
 
 ---
 
@@ -735,7 +757,7 @@ This section contains **actual excerpts** (not references) from the design and a
 | 3 | `decomposition-review-package.md` | Always | User-facing review document with execution structure |
 | 4 | `stage-5-handoff.md` | On completion | **Primary input for execution** — clean, final, self-contained |
 
-Save all artifacts to the working directory (or a designated output path if the user specifies one).
+Save all artifacts to `.planpipe/{task-id}/stage-5/`.
 
 ---
 
@@ -783,3 +805,4 @@ Stage 5 is NOT complete if **any** of these hold:
 - **The review package is for the user, not for you.** Write it in terms they care about. Full subtask details go in `execution-backlog.md`. The review package surfaces structure, dependencies, and decisions.
 - **Templates are not optional.** Consistent structure enables the execution stage to parse the output reliably.
 - **Memobank check.** If the project has a memobank or knowledge store, check it for: execution patterns, decomposition precedents on similar tasks, known integration bottlenecks. Opportunistic — skip if nothing exists.
+- **Subagent prompts = agent definition files.** When spawning a subagent, the content of its `agents/*.md` file IS the prompt. Read the file, combine it with input data, and pass as `prompt`. Never launch a subagent without its definition file — the file defines the agent's specialized role and behavior.

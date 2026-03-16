@@ -1,0 +1,99 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-synthesis",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "analysis.md created with all required template sections",
+      "passed": true,
+      "evidence": "analysis.md (17.3K) contains all expected sections: Task Goal, Problem Statement, Key Scenarios (Primary, Mandatory Edge Cases, Deferred), System Scope (Affected Modules, Key Change Points, Dependencies), Constraints, Risks, Candidate Solution Directions, Resolved Contradictions, Remaining Open Questions, and a Critique Review section. The content is substantive throughout, not just headings."
+    },
+    {
+      "text": "agreement-package.md created with all 5 blocks",
+      "passed": true,
+      "evidence": "agreement-package.md (6.2K) explicitly labels all 5 blocks: Block 1 — Goal & Problem Understanding, Block 2 — Scope (Included/Excluded), Block 3 — Key Scenarios (Primary, Mandatory, Deferred), Block 4 — Constraints, Block 5 — Candidate Solution Directions. Each block includes a 'Confirm' prompt for user review."
+    },
+    {
+      "text": "Synthesis preserves the retention cohort query bug finding from system analysis",
+      "passed": true,
+      "evidence": "analysis.md identifies the bug in multiple places: Key Scenarios/Mandatory Edge Cases ('user_retention_cohort query in queries.go:67-85 has 5 SQL placeholders but ExecuteQuery only passes 3 parameters'), Key Change Points table ('Fix bug: 5 params but only 3 passed'), and Resolved Contradictions ('Retention cohort bug -- in scope or separate?'). The finding is preserved with full specificity including file path and line numbers."
+    },
+    {
+      "text": "Synthesis identifies the 3-layer bottleneck: backend (sequential queries), cache (unused), frontend (no downsampling, monolithic query)",
+      "passed": true,
+      "evidence": "analysis.md Problem Statement: 'loads 8 charts sequentially from a 500M-row ClickHouse table with no caching, no parallelization, no data downsampling, and a cache-busting frontend bug.' Key Scenarios/Primary Scenario explicitly describes: backend sequential queries (2-5 seconds per query), cache unused ('internal/cache/ Unused TTL cache'), and frontend issues (monolithic GraphQL query, no downsampling with 10k+ SVG elements per chart). All three layers are identified as compounding bottlenecks."
+    },
+    {
+      "text": "Constraints include: GraphQL API backward compatibility, 2-second target, zero test coverage",
+      "passed": true,
+      "evidence": "Constraints section lists all three: 'GraphQL API contract must be backward-compatible' (unknown consumers, additive only), '2-second target is wall-clock from user perspective' (includes network, backend, rendering), and 'No existing test coverage: Zero test files across all modules (backend and frontend).' Each includes source attribution."
+    },
+    {
+      "text": "Candidate solution directions address: backend-first (parallelization) vs. full-stack optimization",
+      "passed": true,
+      "evidence": "analysis.md has a dedicated 'Candidate Solution Directions' section with three options: 'Minimal (backend parallelization only)' -- parallelize 8 queries with errgroup as mathematical minimum; 'Safe (backend + caching + frontend cache fix)' -- moderate scope addressing three most impactful bottlenecks; 'Systematic (full stack optimization)' -- all layers including frontend progressive loading, downsampling, and lazy loading. Each direction includes trade-offs and appropriate-when guidance."
+    },
+    {
+      "text": "Risks include thundering herd and connection pool concerns from parallelization",
+      "passed": true,
+      "evidence": "Risks table includes both: 'Parallel ClickHouse queries overwhelm connection pool or cluster' (medium likelihood, high impact, mitigation: explicit pool size + semaphore + load test) and 'Cache thundering herd (concurrent requests bypass cache simultaneously)' (high likelihood, medium impact, mitigation: sync/singleflight). Both are well-calibrated with specific mitigations."
+    },
+    {
+      "text": "The cache-busting time range bug (Overview.tsx:26-27) is captured in the synthesis",
+      "passed": true,
+      "evidence": "analysis.md Key Change Points table: 'apps/dashboard/src/pages/Overview.tsx:26-27 | Quantize time range to prevent Apollo cache busting | Millisecond-precision timestamps create unique cache keys every load.' Also in Key Scenarios/Mandatory Edge Cases: 'The frontend passes new Date().toISOString() as the to parameter, which changes every millisecond. This prevents Apollo Client's cache from ever producing a hit.' The specific file and line numbers (Overview.tsx:26-27) are preserved."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_duration_seconds": 343.5
+  },
+  "claims": [
+    {
+      "claim": "The synthesis was reviewed by an independent critic with a CONSISTENT verdict",
+      "type": "process",
+      "verified": true,
+      "evidence": "analysis.md contains a 'Critique Review' section documenting the critic's assessment with PASS scores on goal fidelity, scenario coverage, system scope accuracy, constraint completeness, risk calibration, contradiction resolution, and information preservation, with one WEAK score on assumption honesty."
+    },
+    {
+      "claim": "Three contradictions were identified and resolved between analyses",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Resolved Contradictions section identifies and resolves: (1) thundering herd severity -- edge case vs. high likelihood, (2) minimum viable outcome scope -- backend-only vs. backend+caching, (3) retention cohort bug -- in scope or separate. Each resolution cites what each source said and why one view was chosen."
+    },
+    {
+      "claim": "The user confirmed all five agreement blocks without corrections",
+      "type": "process",
+      "verified": true,
+      "evidence": "agreed-task-model.md User Corrections Log: 'No corrections were made. The user confirmed all five blocks without changes.' Each block is listed as 'Confirmed as proposed.' The systematic (full stack) solution direction was selected."
+    },
+    {
+      "claim": "7 open questions remain after synthesis",
+      "type": "factual",
+      "verified": true,
+      "evidence": "analysis.md 'Remaining Open Questions' lists exactly 7 questions covering data staleness, API consumers, ClickHouse topology, percentile target, connection pooling, transfer size, and query timeouts."
+    }
+  ],
+  "user_notes_summary": null,
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "analysis.md created with all required template sections",
+        "reason": "This assertion does not define what the 'required template sections' are. Both outputs could pass with different section structures. A more discriminating assertion would list the exact section names expected."
+      },
+      {
+        "assertion": "agreement-package.md created with all 5 blocks",
+        "reason": "The assertion should specify what the 5 blocks are (e.g., Goal, Scope, Scenarios, Constraints, Solution Directions) since different interpretations could lead to different block structures that technically still have '5 blocks.'"
+      },
+      {
+        "reason": "No assertion checks whether the synthesis resolves contradictions between the input analyses. The with_skill output has a dedicated 'Resolved Contradictions' section with three explicit resolutions -- this is a strong signal of synthesis quality that goes unchecked."
+      }
+    ],
+    "overall": "Assertions are generally good at checking content preservation (specific bugs, specific file references, specific layers), but weaker at checking structural template compliance since the expected template is not defined in the assertions themselves."
+  }
+}

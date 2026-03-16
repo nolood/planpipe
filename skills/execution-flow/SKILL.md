@@ -123,7 +123,9 @@ Assign each subtask an execution status:
 
 Initialize from the dependency graph: subtasks with no blockers start as `ready`, others as `pending`.
 
-Create `execution-status.md` (template in `references/artifact-templates.md`). Update it after every state change -- this is your live tracking document.
+Create `execution-status.md` in `.planpipe/{task-id}/stage-6/` (template in `references/artifact-templates.md`). Update it after every state change -- this is your live tracking document.
+
+The task ID comes from Stage 5's handoff or from the `.planpipe/` directory structure.
 
 ---
 
@@ -145,11 +147,20 @@ Present the execution plan to the user: what runs now, what waits, why.
 
 For each subtask being executed, spawn an implementer subagent.
 
-Build a self-contained prompt from the subtask definition. The implementer has no access to your conversation history, so pack everything it needs.
+1. Read `agents/implementer.md` — this file contains the implementer's complete role, rules, output format, and anti-patterns
+2. Choose the `subagent_type` matching the project's language: `go-engineer`, `ts-engineer`, `python-engineer`, `rust-engineer`, or `general-purpose`
+3. Use the **Agent tool** with:
+   - `name`: `"implementer-{ST-ID}"` (e.g. `"implementer-ST-1"`, `"implementer-ST-3"`)
+   - `subagent_type`: the chosen type from step 2
+   - `prompt`: the FULL content of `agents/implementer.md` combined with the subtask data below — the agent definition file IS the prompt, do not summarize or skip it
+
+**Do NOT launch a generic subagent without the agent definition.** The file defines the implementer's rules, output format, and anti-patterns — without it, the subagent won't know how to report results or respect boundaries.
+
+**Subtask data to append to the prompt:**
 
 If the subtask comes from Stage 5's `execution-backlog.md`, it already contains a `Design & System Context` section with relevant excerpts from design and analysis artifacts. **Use it verbatim** — no need to parse `implementation-design.md` or `system-analysis.md` yourself.
 
-Include in the prompt:
+Include:
 - Subtask purpose, goal, change area
 - Boundaries (in scope / out of scope)
 - Related design decisions with reasoning
@@ -161,14 +172,6 @@ Include in the prompt:
 
 If the subtask does NOT have a `Design & System Context` section (e.g., Format B/C input), fall back to reading `implementation-design.md` and `system-analysis.md` directly and extracting the relevant sections for this subtask's change area.
 
-**Implementer rules** (include in the prompt):
-- Implement the subtask exactly as specified
-- Write or update tests as needed by completion criteria
-- Do not modify files outside the declared change area
-- Report what was changed and how each completion criterion was met
-
-Choose the subagent type matching the project's language: `go-engineer`, `ts-engineer`, `python-engineer`, `rust-engineer`, or `general-purpose`.
-
 When done, move the subtask to `in_review`.
 
 ---
@@ -177,9 +180,12 @@ When done, move the subtask to `in_review`.
 
 Spawn a **Task Reviewer** subagent.
 
-1. Read `agents/task-reviewer.md` from this skill's directory
-2. Spawn a **general-purpose** subagent with that prompt
-3. Pass: implementer's result + original subtask definition + relevant sections from `implementation-design.md` and `system-analysis.md` for this subtask's change area
+1. Read `agents/task-reviewer.md` — this file contains the reviewer's complete role, evaluation criteria (completion criteria check, scope compliance, boundary integrity), and output format
+2. Use the **Agent tool** with:
+   - `name`: `"task-reviewer"`
+   - `subagent_type`: `"general-purpose"`
+   - `prompt`: the FULL content of `agents/task-reviewer.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: implementer's result + original subtask definition + relevant sections from `implementation-design.md` and `system-analysis.md` for this subtask's change area
 
 The reviewer returns either **TASK_REVIEW_PASSED** or **TASK_REVIEW_CHANGES_REQUESTED** with specific issues.
 
@@ -189,9 +195,12 @@ The reviewer returns either **TASK_REVIEW_PASSED** or **TASK_REVIEW_CHANGES_REQU
 
 If Task Review passed, spawn a **Code Reviewer** subagent.
 
-1. Read `agents/code-reviewer.md` from this skill's directory
-2. Spawn a subagent of type **code-reviewer** with that prompt
-3. Pass: changed files (diff) + subtask definition + surrounding codebase context
+1. Read `agents/code-reviewer.md` — this file contains the reviewer's complete role, code quality criteria (correctness, quality, patterns, regression risk, tests, security), and output format
+2. Use the **Agent tool** with:
+   - `name`: `"code-reviewer"`
+   - `subagent_type`: `"code-reviewer"`
+   - `prompt`: the FULL content of `agents/code-reviewer.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: changed files (diff) + subtask definition + surrounding codebase context
 
 The reviewer returns either **CODE_REVIEW_PASSED** or **CODE_REVIEW_CHANGES_REQUESTED** with findings by severity.
 
@@ -355,3 +364,4 @@ Execution flow is NOT complete if **any** of these hold:
 - **Escalate early.** A subtask that can't be completed as designed is valuable signal. Surface it before wasting effort.
 - **Rework is normal; infinite rework is not.** 1-2 cycles happen. 3 cycles means the problem is upstream.
 - **Flexible input.** This skill works with Stage 5 output, but also with any set of subtasks that have clear goals and completion criteria.
+- **Subagent prompts = agent definition files.** When spawning a subagent, the content of its `agents/*.md` file IS the prompt. Read the file, combine it with input data, and pass as `prompt`. Never launch a subagent without its definition file — a generic subagent without the agent definition will not perform the specialized review/implementation the pipeline requires.

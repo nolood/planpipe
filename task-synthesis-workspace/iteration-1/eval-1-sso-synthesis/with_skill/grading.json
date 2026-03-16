@@ -1,0 +1,89 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-synthesis",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "analysis.md created with all required sections (Task Goal, Problem Statement, Key Scenarios, System Scope, Constraints, Risks, Candidate Solution Directions)",
+      "passed": true,
+      "evidence": "analysis.md contains all required sections: '## Task Goal' (line 3), '## Problem Statement' (line 7), '## Key Scenarios' (line 11), '## System Scope' (line 38), '## Constraints' (line 67), '## Risks' (line 81), '## Candidate Solution Directions' (line 93). Each section contains substantive content."
+    },
+    {
+      "text": "agreement-package.md created with all 5 blocks (Goal & Problem Understanding, Scope, Key Scenarios, Constraints, Candidate Solution Directions)",
+      "passed": true,
+      "evidence": "agreement-package.md contains exactly 5 blocks: '## Block 1 — Goal & Problem Understanding' (line 9), '## Block 2 — Scope' (line 23), '## Block 3 — Key Scenarios' (line 49), '## Block 4 — Constraints' (line 71), '## Block 5 — Candidate Solution Directions' (line 88)."
+    },
+    {
+      "text": "Synthesis critic was spawned and returned a verdict",
+      "passed": true,
+      "evidence": "analysis.md contains a '## Critique Review' section (line 122) documenting that 'The synthesis was reviewed by an independent critic against eight criteria' with 'Verdict: CONSISTENT' (line 126). All eight criteria (goal fidelity, scenario coverage, system scope accuracy, constraint completeness, risk calibration, contradiction resolution, assumption honesty, information preservation) are listed as PASS."
+    },
+    {
+      "text": "analysis.md resolves or flags contradictions from Stage 2 analyses (e.g., password fallback policy, account linking strategy)",
+      "passed": true,
+      "evidence": "analysis.md has a '## Resolved Contradictions' section (line 101) that honestly documents 'No significant contradictions were found between them' and details specific areas of alignment. It notes a 'Minor emphasis difference' on account linking (product vs constraints framing) and flags it as 'an open question requiring a decision before implementation.' Password fallback policy and account linking are both carried forward in '## Remaining Open Questions' (items 1 and 2, lines 113-115)."
+    },
+    {
+      "text": "agreement-package.md blocks end with confirmation questions for the user",
+      "passed": true,
+      "evidence": "Every block ends with a 'Confirm:' question: Block 1 asks 'Is this the right goal? Are we solving the right problem?' (line 19), Block 2 asks 'Is the scope correct? Anything missing?' (line 45), Block 3 asks 'Is the primary scenario correct? Are the mandatory edge cases right?' (line 67), Block 4 asks 'Are these constraints accurate? Are there constraints we missed?' (line 84), Block 5 asks 'Which direction do you prefer? Minimal and fast, or safe and tested?' (line 100)."
+    },
+    {
+      "text": "analysis.md preserves key findings: zero test coverage, single Keycloak realm, direct grant to auth code shift, no per-tenant config storage",
+      "passed": true,
+      "evidence": "All four key findings are explicitly present: (1) 'Zero test coverage makes auth flow changes dangerous' in Risks table (line 84) and Constraints section (line 76); (2) 'Single Keycloak realm' in Constraints (line 69); (3) 'shift from direct grant to authorization code flow' in Resolved Contradictions (line 105) and Key Change Points table for keycloak.go (line 53); (4) 'No per-tenant config storage exists yet' in Constraints (line 72) and Key Change Points (line 54)."
+    },
+    {
+      "text": "Candidate solution directions include options (e.g., minimal MVO vs. systematic approach)",
+      "passed": true,
+      "evidence": "The '## Candidate Solution Directions' section (lines 95-99) presents three distinct options: 'Minimal / MVO-first' (implement happy path, manual Keycloak config), 'Systematic / automation-included' (same core flow plus Keycloak Admin API automation), and 'Safe / test-first' (establish integration tests before any SSO code). A recommended hybrid is also proposed: 'safe + minimal first, then systematic.'"
+    },
+    {
+      "text": "Open questions from Stage 2 are carried forward (password fallback, account linking, per-tenant config design)",
+      "passed": true,
+      "evidence": "The '## Remaining Open Questions' section (lines 112-121) explicitly carries forward all three: (1) 'Password fallback policy for SSO tenants' (question 1, line 113), (2) 'Account linking strategy' (question 2, line 114), (3) 'Per-tenant config storage design: New table (tenant_sso_config) vs. JSONB column on tenants table' (question 3, line 115). Additionally, questions 4-8 cover other Stage 2 open items (gocloak coverage, Keycloak client config, SSO/password coexistence, required SAML attributes, SSO config management at scale)."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_duration_seconds": 348.4
+  },
+  "claims": [
+    {
+      "claim": "All three Stage 2 analyses were closely aligned with no significant contradictions",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The analysis documents cross-analysis alignment on all key themes (direct grant shift, zero test coverage, single realm, per-tenant config gap, backward compatibility, account linking). Only a minor emphasis difference on account linking framing was noted."
+    },
+    {
+      "claim": "The synthesis was reviewed by an independent critic against eight criteria",
+      "type": "process",
+      "verified": true,
+      "evidence": "analysis.md contains a Critique Review section listing all eight criteria with individual PASS results and a CONSISTENT verdict."
+    },
+    {
+      "claim": "User confirmed all five agreement blocks without corrections",
+      "type": "process",
+      "verified": true,
+      "evidence": "agreed-task-model.md states 'No corrections were made -- the user confirmed all five blocks as presented without changes' and stage-3-handoff.md confirms 'No corrections were made -- the user confirmed all five agreement blocks as presented without changes.'"
+    }
+  ],
+  "user_notes_summary": null,
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Synthesis critic was spawned and returned a verdict",
+        "reason": "This assertion checks that a critic verdict exists in the output, but it cannot verify that the critic was actually a separate subagent invocation vs. the same agent writing a self-review. The verdict section could be fabricated by the executor. Consider checking the transcript for evidence of a separate tool call or subagent spawn if transcripts are available."
+      },
+      {
+        "reason": "No assertion checks the quality of the stage-3-handoff.md file, which is the actual output consumed by the next pipeline stage. The with_skill version includes a well-structured handoff with confirmed decisions, phased plan suggestions, and acceptance criteria. This is arguably the most important output artifact."
+      }
+    ],
+    "overall": "Assertions are well-designed and cover the key structural and content requirements. The with_skill output passes all assertions with substantive evidence, not just surface compliance."
+  }
+}

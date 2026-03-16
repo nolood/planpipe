@@ -1,0 +1,42 @@
+{
+  "eval_id": 2,
+  "eval_name": "vague-auth-fix",
+  "prompt": "fix the auth",
+  "assertions": [
+    {
+      "id": "req-draft-exists",
+      "text": "requirements.draft.md file was created",
+      "type": "file_exists"
+    },
+    {
+      "id": "readiness-review-exists",
+      "text": "readiness-review.md with NEEDS_CLARIFICATION verdict",
+      "type": "file_exists"
+    },
+    {
+      "id": "clarifications-exist",
+      "text": "clarifications.md was created",
+      "type": "file_exists"
+    },
+    {
+      "id": "clarifications-follow-template",
+      "text": "clarifications.md follows the fixed template with all 4 sections",
+      "type": "template_check"
+    },
+    {
+      "id": "questions-actionable",
+      "text": "Questions are specific and actionable, not generic",
+      "type": "quality_check"
+    },
+    {
+      "id": "more-unknowns-than-knowns",
+      "text": "Requirements draft has more unknowns than knowns",
+      "type": "content_check"
+    },
+    {
+      "id": "no-hallucination",
+      "text": "Agent did not invent technical details",
+      "type": "quality_check"
+    }
+  ]
+}

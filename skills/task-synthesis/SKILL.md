@@ -81,9 +81,12 @@ When resolving contradictions:
 
 Spawn a **Synthesis Critic** subagent to independently review the unified model.
 
-1. Read `agents/synthesis-critic.md` from this skill's directory
-2. Use the **Agent tool** to spawn a **general-purpose** subagent with that prompt
-3. Pass it: the synthesized `analysis.md` content + all Stage 2 analyses + Stage 1 content
+1. Read `agents/synthesis-critic.md` — this file contains the critic's complete role, item-by-item comparison checklist, evaluation criteria, and output format
+2. Use the **Agent tool** with:
+   - `name`: `"synthesis-critic"`
+   - `subagent_type`: `"general-purpose"`
+   - `prompt`: the FULL content of `agents/synthesis-critic.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: the synthesized `analysis.md` content + all Stage 2 analyses + Stage 1 content
 
 The critic checks:
 - Internal consistency of the synthesized model
@@ -167,6 +170,22 @@ Present a brief summary:
 - Key findings and resolved contradictions
 - What the draft model contains
 - Note: user review will happen jointly with design review in Stage 4
+
+Then offer the user two options for continuing to Stage 4:
+
+**Option 1 — Continue in this session:**
+> "Запустить Stage 4 (Solution Design) прямо сейчас в этой сессии? Там же будет combined review."
+
+If the user agrees, invoke the `/solution-design` skill.
+
+**Option 2 — Continue in a new session:**
+Provide a ready-to-paste block with actual paths filled in:
+```
+Запусти /solution-design
+
+Task ID: {task-id}
+Артефакты: .planpipe/{task-id}/ (stage-1/, stage-2/, stage-3/)
+```
 
 ---
 
@@ -518,7 +537,7 @@ Based on the analysis, we see these possible directions:
 | 3 | `agreed-task-model.md` | Always (as draft) | Draft task model — finalized by Stage 4 after user confirms |
 | 4 | `stage-3-handoff.md` | On completion | **Primary input for Stage 4** — draft, pending user confirmation |
 
-Save all artifacts to the working directory (or a designated output path if the user specifies one).
+Save all artifacts to `.planpipe/{task-id}/stage-3/`.
 
 ---
 
@@ -558,3 +577,4 @@ Stage 3 is NOT complete if **any** of these hold:
 - **The draft model is the product.** Everything else is working material. Draft `agreed-task-model.md` is what Stage 4 builds the design on and then presents to the user for combined confirmation.
 - **Memobank check.** If the project has a memobank or knowledge store, check it for relevant context — past decisions on similar tasks, known patterns, prior agreements. Opportunistic — skip if nothing exists.
 - **Templates are not optional.** Stage 4 depends on consistent structure. An artifact that doesn't follow the template is incomplete.
+- **Subagent prompts = agent definition files.** When spawning a subagent, the content of its `agents/*.md` file IS the prompt. Read the file, combine it with input data, and pass as `prompt`. Never launch a subagent without its definition file — the file defines the agent's specialized role and behavior.

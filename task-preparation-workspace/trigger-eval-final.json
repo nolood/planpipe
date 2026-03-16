@@ -1,0 +1,82 @@
+[
+  {
+    "query": "ok so we just got a ticket from the mobile team — they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+    "should_trigger": true
+  },
+  {
+    "query": "we have a bug in production — users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+    "should_trigger": true
+  },
+  {
+    "query": "hey I just got this from my tech lead: 'we need to migrate the payment processing from Stripe v2 to v3 API'. That's literally all the context I got. Can you help me turn this into something actionable?",
+    "should_trigger": true
+  },
+  {
+    "query": "I need to prepare this task for our planning session tomorrow — the task is about adding rate limiting to our public API. We use Express.js, the API gateway is in services/gateway/. I know we want 100 req/min for free tier and 1000 for paid, but I'm not sure about the exact scope yet",
+    "should_trigger": true
+  },
+  {
+    "query": "Вот тикет из трекера: CP-341 — 'Реализовать экспорт отчётов в PDF'. Надо разобраться что именно нужно сделать и подготовить задачу к планированию",
+    "should_trigger": true
+  },
+  {
+    "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything — what are the unknowns, what assumptions am I making, what could go wrong?",
+    "should_trigger": true
+  },
+  {
+    "query": "the QA team found 3 issues with the new checkout flow but the tickets are really vague. before I start fixing anything I want to normalize these into proper task statements with clear scope. here are the ticket IDs: CHECKOUT-88, CHECKOUT-89, CHECKOUT-91",
+    "should_trigger": true
+  },
+  {
+    "query": "we're starting a new project — building an internal tool for the ops team to manage customer subscriptions. I have a rough idea of what's needed but nothing is written down yet. help me structure this into a proper task with requirements",
+    "should_trigger": true
+  },
+  {
+    "query": "fix the auth — users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+    "should_trigger": true
+  },
+  {
+    "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+    "should_trigger": false
+  },
+  {
+    "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+    "should_trigger": false
+  },
+  {
+    "query": "refactor this function to use async/await instead of .then() chains:\n\nfunction fetchUser(id) {\n  return api.get(`/users/${id}`).then(res => res.data).then(user => enrichUser(user))\n}",
+    "should_trigger": false
+  },
+  {
+    "query": "I already have a detailed plan for the migration — here are the 12 steps. Can you start executing step 1: create the new database schema?",
+    "should_trigger": false
+  },
+  {
+    "query": "run the test suite and tell me which tests are failing",
+    "should_trigger": false
+  },
+  {
+    "query": "add a .gitignore entry for .env.local files",
+    "should_trigger": false
+  },
+  {
+    "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+    "should_trigger": false
+  },
+  {
+    "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+    "should_trigger": false
+  },
+  {
+    "query": "what's the difference between useMemo and useCallback in React?",
+    "should_trigger": false
+  },
+  {
+    "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+    "should_trigger": false
+  }
+]

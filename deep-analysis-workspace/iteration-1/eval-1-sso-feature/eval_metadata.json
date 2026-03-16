@@ -1,0 +1,15 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-feature-deep-analysis",
+  "prompt": "Run Stage 2 deep analysis on the SSO SAML task. Stage 1 artifacts and Go codebase provided.",
+  "assertions": [
+    {"text": "product-analysis.md was created with all required sections (Business Intent, Actor & Scenario, Expected Outcome, Edge Cases, Success Signals)", "type": "file_structure"},
+    {"text": "system-analysis.md was created with all required sections (Relevant Modules, Change Points, Dependencies, Existing Patterns)", "type": "file_structure"},
+    {"text": "constraints-risks-analysis.md was created with all required sections (Constraints, Risks, Integration Dependencies, Backward Compatibility)", "type": "file_structure"},
+    {"text": "system-analysis.md references actual file paths from the mock project (internal/auth/, internal/tenant/, internal/user/)", "type": "code_specificity"},
+    {"text": "system-analysis.md identifies that the tenant model has no per-tenant configuration storage (key finding from reading tenant/models.go)", "type": "key_finding"},
+    {"text": "constraints-risks-analysis.md mentions backward compatibility for the existing email/password login flow", "type": "constraint_coverage"},
+    {"text": "product-analysis.md describes the SSO login scenario step by step, not just restates the requirements", "type": "analysis_depth"},
+    {"text": "Each analysis contains a Self-Critique Notes section showing evidence of the analyze-critique-refine cycle", "type": "process_compliance"}
+  ]
+}

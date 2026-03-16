@@ -1,0 +1,32 @@
+{
+  "eval_id": 3,
+  "eval_name": "rejection-incomplete-design",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Missing stage-4-handoff.md is detected and flagged",
+      "passed": false,
+      "evidence": "The output never mentions stage-4-handoff.md. It references incomplete-design.md and partial-change-map.md as the input artifacts but does not detect or flag the absence of stage-4-handoff.md."
+    },
+    {
+      "text": "Incomplete implementation design is recognized (vague approach, no concrete changes, no decisions)",
+      "passed": true,
+      "evidence": "The 'Evidence of Insufficiency' table for incomplete-design.md explicitly identifies: vague approach ('Improve the notification system to make it more reliable.'), no concrete changes ('Changes to be determined after further analysis.'), and no decisions ('No decisions made yet.'). The document is marked 'REJECTED -- Input insufficient for decomposition'."
+    },
+    {
+      "text": "User is told to return to Stage 4 to complete the design",
+      "passed": true,
+      "evidence": "The Recommendation section states: 'Return this work to the design phase. The design document should be completed through all sections listed above, reviewed by a design critic, and approved by stakeholders before decomposition is attempted again.' While it does not name 'Stage 4' explicitly, it clearly directs the user back to the design phase."
+    },
+    {
+      "text": "No decomposition artifacts (execution-backlog.md, coverage-matrix.md) are created from incomplete inputs",
+      "passed": false,
+      "evidence": "An execution-backlog.md file was created in the outputs directory. Although it contains a rejection notice rather than actual subtasks, the file itself exists as an artifact. No coverage-matrix.md was created. The assertion requires that no decomposition artifacts are created at all, but execution-backlog.md was produced."
+    },
+    {
+      "text": "Response mentions that agreed-task-model.md is missing, limiting coverage validation",
+      "passed": false,
+      "evidence": "The output does not mention agreed-task-model.md anywhere. There is no reference to this file or to coverage validation being limited by its absence."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md file was created with all required sections",
+      "passed": true,
+      "evidence": "Found 4/4 section variants"
+    },
+    {
+      "text": "readiness-review.md with all 8 criteria scored",
+      "passed": false,
+      "evidence": "Missing \u2014 baseline did not create readiness review"
+    },
+    {
+      "text": "Task correctly classified as bug or performance issue",
+      "passed": true,
+      "evidence": "Performance terms found"
+    },
+    {
+      "text": "Goal states the performance target: under 2 seconds",
+      "passed": true,
+      "evidence": "Target found"
+    },
+    {
+      "text": "Knowns mention ClickHouse, GraphQL, file paths, 50k DAU",
+      "passed": true,
+      "evidence": "Found 5/5: ['clickhouse', 'graphql', 'apps/dashboard', 'services/analytics-api', '50']"
+    },
+    {
+      "text": "Unknowns include root cause uncertainty",
+      "passed": true,
+      "evidence": "Root cause terms found"
+    },
+    {
+      "text": "Verdict is reasonable for the detail level provided",
+      "passed": false,
+      "evidence": "No readiness review \u2014 no verdict"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 2,
+    "total": 7,
+    "pass_rate": 0.71
+  }
+}

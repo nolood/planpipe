@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md file was created (even if sparse)",
+      "passed": true,
+      "evidence": "File exists"
+    },
+    {
+      "text": "readiness-review.md file was created with a verdict",
+      "passed": true,
+      "evidence": "File exists"
+    },
+    {
+      "text": "Readiness critic returned NEEDS_CLARIFICATION",
+      "passed": true,
+      "evidence": "Verdict line: ## Verdict: NEEDS_CLARIFICATION"
+    },
+    {
+      "text": "clarifications.md was created with specific questions",
+      "passed": true,
+      "evidence": "File exists"
+    },
+    {
+      "text": "Clarification questions are specific and actionable",
+      "passed": true,
+      "evidence": "15 questions found, specific terms present: True"
+    },
+    {
+      "text": "Requirements draft has more unknowns than knowns",
+      "passed": true,
+      "evidence": "Knowns: 2, Unknowns: 10"
+    },
+    {
+      "text": "Agent did NOT invent specific technical details without evidence",
+      "passed": true,
+      "evidence": "No invented details in Knowns section"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

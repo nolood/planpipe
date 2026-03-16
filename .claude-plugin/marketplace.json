@@ -8,7 +8,7 @@
     {
       "name": "plan-pipeline",
       "description": "6-stage planning pipeline for complex tasks",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "./",
       "author": {
         "name": "nolood"

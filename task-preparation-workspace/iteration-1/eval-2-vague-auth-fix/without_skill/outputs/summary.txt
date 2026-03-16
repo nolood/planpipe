@@ -1,0 +1,32 @@
+Summary of Task Preparation for "fix the auth"
+
+What was done:
+- Received the raw task input: "fix the auth"
+- Attempted to normalize the task into a structured statement
+- Identified knowns, unknowns, and assumptions
+- Drafted a requirements document (requirements.draft.md)
+- Evaluated readiness against 8 criteria (readiness-review.md)
+- Produced a prioritized list of clarification questions (clarifications.md)
+
+Outcome: NEEDS_CLARIFICATION
+
+The task "fix the auth" is too vague to proceed to analysis or implementation. It
+fails on 7 of 8 readiness criteria. The input provides no information about:
+- What specific behavior is broken
+- What the expected behavior should be
+- Which part of the auth system is affected
+- What tech stack or architecture is involved
+- What environment the issue occurs in
+- How to reproduce the problem
+- How severe or urgent the issue is
+
+Three artifacts were produced:
+1. requirements.draft.md - A requirements document with the goal stated as best as
+   possible given zero context, with extensive unknowns documented honestly.
+2. readiness-review.md - A readiness evaluation scoring the task against 8 criteria,
+   all of which fail except assumption safety (weak). Verdict: NEEDS_CLARIFICATION.
+3. clarifications.md - Eight specific, actionable questions prioritized by criticality,
+   designed to gather enough information to proceed with meaningful analysis.
+
+Next step: The person who submitted this task needs to answer the clarification
+questions (at minimum questions 1-3) before any useful work can begin.

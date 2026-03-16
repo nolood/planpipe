@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md file was created with all required sections",
+      "passed": true,
+      "evidence": "Sections found: 7/7"
+    },
+    {
+      "text": "readiness-review.md with all 8 criteria scored",
+      "passed": true,
+      "evidence": "Criteria found: 8/8: ['Goal clarity', 'Problem clarity', 'Scope clarity', 'Change target', 'Context sufficiency', 'Ambiguity', 'Assumption safety', 'Acceptance']"
+    },
+    {
+      "text": "Task correctly classified as bug or performance issue",
+      "passed": true,
+      "evidence": "Found 'bug' or 'performance' in requirements"
+    },
+    {
+      "text": "Goal states the performance target: under 2 seconds",
+      "passed": true,
+      "evidence": "Performance target of 2 seconds found in requirements"
+    },
+    {
+      "text": "Knowns mention ClickHouse, GraphQL, file paths, 50k DAU",
+      "passed": true,
+      "evidence": "Found 5/5: ['clickhouse', 'graphql', 'apps/dashboard', 'services/analytics-api', '50']"
+    },
+    {
+      "text": "Unknowns include root cause uncertainty",
+      "passed": true,
+      "evidence": "Root cause uncertainty mentioned in requirements"
+    },
+    {
+      "text": "Verdict is reasonable for the detail level provided",
+      "passed": true,
+      "evidence": "Verdict present: True, reasoning length: 5080 chars"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

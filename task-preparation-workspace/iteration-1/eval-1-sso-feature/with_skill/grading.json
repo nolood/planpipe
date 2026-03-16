@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md file was created",
+      "passed": true,
+      "evidence": "File exists at /home/nolood/general/plan-pipeline/task-preparation-workspace/iteration-1/eval-1-sso-feature/with_skill/outputs/requirements.draft.md"
+    },
+    {
+      "text": "Requirements draft contains all required sections",
+      "passed": true,
+      "evidence": "All 8 sections present"
+    },
+    {
+      "text": "readiness-review.md file was created with a verdict",
+      "passed": true,
+      "evidence": "File exists"
+    },
+    {
+      "text": "Readiness critic returned READY_FOR_DEEP_ANALYSIS",
+      "passed": true,
+      "evidence": "Verdict line: ## Verdict: READY_FOR_DEEP_ANALYSIS"
+    },
+    {
+      "text": "Task correctly classified as feature or integration",
+      "passed": true,
+      "evidence": "Found 'feature' or 'integration' in outputs"
+    },
+    {
+      "text": "Knowns section mentions key technical context",
+      "passed": true,
+      "evidence": "Found 5/5 terms: ['keycloak', 'fastapi', 'react', 'per-tenant', 'saml']"
+    },
+    {
+      "text": "No clarifications.md was created",
+      "passed": true,
+      "evidence": "clarifications.md absent (correct)"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

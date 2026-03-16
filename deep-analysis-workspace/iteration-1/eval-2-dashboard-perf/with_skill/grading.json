@@ -1,0 +1,46 @@
+{
+  "eval_id": 2,
+  "config": "with_skill",
+  "expectations": [
+    {
+      "text": "system-analysis.md identifies sequential chart loading in analytics/service.go",
+      "passed": true,
+      "evidence": "Line 15 explicitly states service.go's GetOverviewPage() 'Iterates DefaultOverviewCharts sequentially in a for loop (line 30), calling loadChart() for each. No parallelism, no caching.' The Change Points table also documents this as the 'single highest-impact change' at internal/analytics/service.go:GetOverviewPage."
+    },
+    {
+      "text": "system-analysis.md identifies unused cache module in internal/cache/",
+      "passed": true,
+      "evidence": "Line 9 states 'the internal/cache package is not imported here at all. The service is constructed as analytics.NewService(chClient) with no cache parameter.' Lines 37-41 describe cache.go as 'an existing, unused cache that was explicitly built for this purpose (TODO comment: Consider using this for caching ClickHouse query results).' The Change Points table lists wiring it in as a planned change."
+    },
+    {
+      "text": "system-analysis.md identifies frontend rendering issue (no downsampling, all charts render simultaneously)",
+      "passed": true,
+      "evidence": "Line 62 quotes the Chart.tsx WARNING comment: 'No data downsampling or virtualization. For charts with 10k+ data points, recharts renders every single SVG element, causing significant rendering time (2-5 seconds for large datasets).' Line 63 quotes ChartGrid.tsx NOTE: 'All charts are rendered simultaneously -- no lazy loading or virtualization.' The Change Points table lists downsampling in Chart.tsx as a required change."
+    },
+    {
+      "text": "system-analysis.md references ClickHouse query patterns from internal/clickhouse/queries.go",
+      "passed": true,
+      "evidence": "Lines 26-35 detail all 8 named SQL queries from queries.go with per-query performance observations, including notes on active_users_over_time, events_volume (hours * event_types producing many rows), top_events_by_count (LIMIT 10000), user_retention_cohort (self-join subquery, parameter binding bug), and error_rate_over_time (groups by minute, up to 1440 rows per day). The file is explicitly referenced as internal/clickhouse/queries.go."
+    },
+    {
+      "text": "constraints-risks-analysis.md identifies risk of breaking GraphQL API contract",
+      "passed": true,
+      "evidence": "Line 33 in the Compatibility section states 'Changes to the GraphQL schema response types (e.g., adding pagination fields, changing dataPoints structure) could break unknown consumers.' The risk table (line 48) lists 'Breaking unknown GraphQL API consumers when changing response behavior' as a risk with low likelihood but high impact, citing CORS allowing all origins as evidence."
+    },
+    {
+      "text": "constraints-risks-analysis.md notes absence of materialized views",
+      "passed": true,
+      "evidence": "Line 15 states 'Creating materialized views is technically possible (ClickHouse supports them natively) and does not require schema migration of the base table, but it is at the boundary of the stated scope.' This is in the context of discussing the fixed ClickHouse table structure. The system-analysis.md database schema section (line 53) also explicitly states 'No materialized views for pre-aggregated data', and the summary.txt lists finding 9 as 'No materialized views -- all queries scan raw 500M-row events table.'"
+    },
+    {
+      "text": "All 3 analysis artifacts created",
+      "passed": true,
+      "evidence": "All three files were successfully read: product-analysis.md (86 lines), system-analysis.md (157 lines), and constraints-risks-analysis.md (96 lines). All contain substantive analysis content. summary.txt also exists and references all three as output artifacts."
+    },
+    {
+      "text": "Each analysis contains Self-Critique Notes section",
+      "passed": true,
+      "evidence": "system-analysis.md has '## Self-Critique Notes' at line 146 (4 items covering runtime verification limits, parameter binding confidence, missing generated code, and unknown consumers). constraints-risks-analysis.md has '## Self-Critique Notes' at line 85 (4 items covering parameter binding confidence, connection pool uncertainty, API consumer risk escalation, and ClickHouse capacity assumptions). product-analysis.md has '## Self-Critique Notes' at line 77 (4 items covering cold vs warm load ambiguity, bottleneck measurement, session frequency assumption, and chart attention distribution)."
+    }
+  ]
+}

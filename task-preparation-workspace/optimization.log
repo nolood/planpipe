@@ -1,0 +1,1545 @@
+Split: 12 train, 8 test (holdout=0.4)
+
+============================================================
+Iteration 1/5
+Description: Stage 1 of the planning pipeline — normalizes raw task input into a validated, structured task statement ready for deep analysis. Use this skill whenever you receive a new task, ticket, issue, feature request, bug report, or any work item that needs to be understood and structured before planning or implementation begins. Also use when requirements seem unclear, when you need to validate whether a task is ready for deeper work, or when preparing input for any planning, analysis, or design process. Triggers on: new task, prepare task, normalize requirements, task intake, stage 1, prepare for planning, validate task, structure requirements, raw ticket, unclear scope, what needs to be done, break down this task, understand the task.
+============================================================
+Train: 18/36 correct, precision=100% recall=0% accuracy=50% (106.7s)
+  [FAIL] rate=0/3 expected=True: I'm picking up INFRA-205 which says 'upgrade postgres from 1
+  [FAIL] rate=0/3 expected=True: our CEO mentioned in the all-hands that we need 'better anal
+  [FAIL] rate=0/3 expected=True: fix the auth — users can't log in since the last deploy. Err
+  [FAIL] rate=0/3 expected=True: Вот тикет из трекера: CP-341 — 'Реализовать экспорт отчётов 
+  [FAIL] rate=0/3 expected=True: ok so we just got a ticket from the mobile team — they need 
+  [PASS] rate=0/3 expected=False: write a unit test for the calculateDiscount function in serv
+  [FAIL] rate=0/3 expected=True: we have a bug in production — users are reporting that the s
+  [PASS] rate=0/3 expected=False: what's the difference between useMemo and useCallback in Rea
+  [PASS] rate=0/3 expected=False: can you read the file at src/components/Header.tsx and expla
+  [PASS] rate=0/3 expected=False: create a new React component called UserAvatar that takes a 
+  [PASS] rate=0/3 expected=False: I need to debug why the API returns 500 on POST /api/orders.
+  [PASS] rate=0/3 expected=False: deploy the current branch to staging using our CI pipeline. 
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: the QA team found 3 issues with the new checkout flow but th
+  [FAIL] rate=0/3 expected=True: I need to prepare this task for our planning session tomorro
+  [FAIL] rate=1/3 expected=True: hey I just got this from my tech lead: 'we need to migrate t
+  [FAIL] rate=0/3 expected=True: we're starting a new project — building an internal tool for
+  [PASS] rate=0/3 expected=False: I already have a detailed plan for the migration — here are 
+  [PASS] rate=0/3 expected=False: add a .gitignore entry for .env.local files
+  [PASS] rate=0/3 expected=False: refactor this function to use async/await instead of .then()
+  [PASS] rate=0/3 expected=False: run the test suite and tell me which tests are failing
+
+Improving description...
+Proposed (128.8s): Use FIRST when someone presents a work item — ticket, bug, feature, upgrade, or vague ask — and the priority is understanding what's needed before jumping to code. Surfaces unknowns, validates assumptions, defines scope, and identifies risks. Essential signals: 'before we start coding', 'what exactly needs to happen', 'figure out the requirements', 'what am I missing', 'what could go wrong', 'understand the scope/problem', 'prepare for planning', or presenting a complex task or incident that needs structured framing. Also applies to detailed bug reports involving multiple systems where problem framing precedes fixing. Skip for direct requests to write code, explain code, actively debug with a stack trace, or run deployments.
+
+============================================================
+Iteration 2/5
+Description: Use FIRST when someone presents a work item — ticket, bug, feature, upgrade, or vague ask — and the priority is understanding what's needed before jumping to code. Surfaces unknowns, validates assumptions, defines scope, and identifies risks. Essential signals: 'before we start coding', 'what exactly needs to happen', 'figure out the requirements', 'what am I missing', 'what could go wrong', 'understand the scope/problem', 'prepare for planning', or presenting a complex task or incident that needs structured framing. Also applies to detailed bug reports involving multiple systems where problem framing precedes fixing. Skip for direct requests to write code, explain code, actively debug with a stack trace, or run deployments.
+============================================================
+Train: 19/36 correct, precision=100% recall=6% accuracy=53% (121.0s)
+  [FAIL] rate=0/3 expected=True: fix the auth — users can't log in since the last deploy. Err
+  [FAIL] rate=1/3 expected=True: our CEO mentioned in the all-hands that we need 'better anal
+  [FAIL] rate=0/3 expected=True: I'm picking up INFRA-205 which says 'upgrade postgres from 1
+  [FAIL] rate=0/3 expected=True: Вот тикет из трекера: CP-341 — 'Реализовать экспорт отчётов 
+  [FAIL] rate=0/3 expected=True: ok so we just got a ticket from the mobile team — they need 
+  [FAIL] rate=0/3 expected=True: we have a bug in production — users are reporting that the s
+  [PASS] rate=0/3 expected=False: write a unit test for the calculateDiscount function in serv
+  [PASS] rate=0/3 expected=False: what's the difference between useMemo and useCallback in Rea
+  [PASS] rate=0/3 expected=False: create a new React component called UserAvatar that takes a 
+  [PASS] rate=0/3 expected=False: can you read the file at src/components/Header.tsx and expla
+  [PASS] rate=0/3 expected=False: I need to debug why the API returns 500 on POST /api/orders.
+  [PASS] rate=0/3 expected=False: deploy the current branch to staging using our CI pipeline. 
+Test : 12/24 correct, precision=100% recall=0% accuracy=50% (0.0s)
+  [FAIL] rate=0/3 expected=True: I need to prepare this task for our planning session tomorro
+  [FAIL] rate=0/3 expected=True: the QA team found 3 issues with the new checkout flow but th
+  [FAIL] rate=0/3 expected=True: we're starting a new project — building an internal tool for
+  [FAIL] rate=0/3 expected=True: hey I just got this from my tech lead: 'we need to migrate t
+  [PASS] rate=0/3 expected=False: add a .gitignore entry for .env.local files
+  [PASS] rate=0/3 expected=False: I already have a detailed plan for the migration — here are 
+  [PASS] rate=0/3 expected=False: refactor this function to use async/await instead of .then()
+  [PASS] rate=0/3 expected=False: run the test suite and tell me which tests are failing
+
+Improving description...
+Proposed (109.5s): Not every 'fix this' or 'build that' is ready to act on. Use this skill FIRST when a user introduces a new work item — ticket, bug, incident, feature request, upgrade, or vague ask — to structure the problem before any other skill runs. Validates scope, surfaces unknowns, checks assumptions, identifies risks. Triggers: presenting a ticket/issue ID, describing a production problem with context, relaying a team or stakeholder request, picking up a new task, asking 'what exactly needs to happen' or 'what am I missing', or introducing any multi-faceted problem. Skip for: active debugging with stack traces, direct 'write this code' requests, code or concept explanations, and deployment commands.
+
+============================================================
+Iteration 3/5
+Description: Not every 'fix this' or 'build that' is ready to act on. Use this skill FIRST when a user introduces a new work item — ticket, bug, incident, feature request, upgrade, or vague ask — to structure the problem before any other skill runs. Validates scope, surfaces unknowns, checks assumptions, identifies risks. Triggers: presenting a ticket/issue ID, describing a production problem with context, relaying a team or stakeholder request, picking up a new task, asking 'what exactly needs to happen' or 'what am I missing', or introducing any multi-faceted problem. Skip for: active debugging with stack traces, direct 'write this code' requests, code or concept explanations, and deployment commands.
+============================================================
+Train: 18/36 correct, precision=100% recall=0% accuracy=50% (121.0s)
+  [FAIL] rate=0/3 expected=True: our CEO mentioned in the all-hands that we need 'better anal
+  [FAIL] rate=0/3 expected=True: fix the auth — users can't log in since the last deploy. Err
+  [FAIL] rate=0/3 expected=True: Вот тикет из трекера: CP-341 — 'Реализовать экспорт отчётов 
+  [FAIL] rate=0/3 expected=True: I'm picking up INFRA-205 which says 'upgrade postgres from 1
+  [FAIL] rate=0/3 expected=True: ok so we just got a ticket from the mobile team — they need 
+  [FAIL] rate=0/3 expected=True: we have a bug in production — users are reporting that the s
+  [PASS] rate=0/3 expected=False: write a unit test for the calculateDiscount function in serv
+  [PASS] rate=0/3 expected=False: what's the difference between useMemo and useCallback in Rea
+  [PASS] rate=0/3 expected=False: create a new React component called UserAvatar that takes a 
+  [PASS] rate=0/3 expected=False: can you read the file at src/components/Header.tsx and expla
+  [PASS] rate=0/3 expected=False: I need to debug why the API returns 500 on POST /api/orders.
+  [PASS] rate=0/3 expected=False: deploy the current branch to staging using our CI pipeline. 
+Test : 12/24 correct, precision=100% recall=0% accuracy=50% (0.0s)
+  [FAIL] rate=0/3 expected=True: the QA team found 3 issues with the new checkout flow but th
+  [FAIL] rate=0/3 expected=True: I need to prepare this task for our planning session tomorro
+  [FAIL] rate=0/3 expected=True: hey I just got this from my tech lead: 'we need to migrate t
+  [FAIL] rate=0/3 expected=True: we're starting a new project — building an internal tool for
+  [PASS] rate=0/3 expected=False: add a .gitignore entry for .env.local files
+  [PASS] rate=0/3 expected=False: refactor this function to use async/await instead of .then()
+  [PASS] rate=0/3 expected=False: run the test suite and tell me which tests are failing
+  [PASS] rate=0/3 expected=False: I already have a detailed plan for the migration — here are 
+
+Improving description...
+Proposed (95.1s): Required first step before brainstorming, fix-issue, build-feature, or any planning skill. Invoke when a user brings a new task, ticket, bug, feature, upgrade, incident, or undefined ask that needs structured understanding before action. Trigger signals: referencing a ticket/issue ID, describing a production problem with context, relaying a team or stakeholder request, saying 'picking up [task]', asking 'what needs to happen' / 'what am I missing' / 'figure out requirements' / 'understand the scope', or presenting any multi-system problem needing structured framing — in any language. Produces validated requirements with resolved unknowns and hands off to downstream skills. Skip only for direct 'write this code' requests, concept explanations, stack-trace debugging sessions, and deployment commands.
+
+============================================================
+Iteration 4/5
+Description: Required first step before brainstorming, fix-issue, build-feature, or any planning skill. Invoke when a user brings a new task, ticket, bug, feature, upgrade, incident, or undefined ask that needs structured understanding before action. Trigger signals: referencing a ticket/issue ID, describing a production problem with context, relaying a team or stakeholder request, saying 'picking up [task]', asking 'what needs to happen' / 'what am I missing' / 'figure out requirements' / 'understand the scope', or presenting any multi-system problem needing structured framing — in any language. Produces validated requirements with resolved unknowns and hands off to downstream skills. Skip only for direct 'write this code' requests, concept explanations, stack-trace debugging sessions, and deployment commands.
+============================================================
+Train: 19/36 correct, precision=100% recall=6% accuracy=53% (133.3s)
+  [FAIL] rate=0/3 expected=True: Вот тикет из трекера: CP-341 — 'Реализовать экспорт отчётов 
+  [FAIL] rate=0/3 expected=True: fix the auth — users can't log in since the last deploy. Err
+  [FAIL] rate=1/3 expected=True: our CEO mentioned in the all-hands that we need 'better anal
+  [FAIL] rate=0/3 expected=True: I'm picking up INFRA-205 which says 'upgrade postgres from 1
+  [FAIL] rate=0/3 expected=True: ok so we just got a ticket from the mobile team — they need 
+  [FAIL] rate=0/3 expected=True: we have a bug in production — users are reporting that the s
+  [PASS] rate=0/3 expected=False: write a unit test for the calculateDiscount function in serv
+  [PASS] rate=0/3 expected=False: what's the difference between useMemo and useCallback in Rea
+  [PASS] rate=0/3 expected=False: create a new React component called UserAvatar that takes a 
+  [PASS] rate=0/3 expected=False: can you read the file at src/components/Header.tsx and expla
+  [PASS] rate=0/3 expected=False: I need to debug why the API returns 500 on POST /api/orders.
+  [PASS] rate=0/3 expected=False: deploy the current branch to staging using our CI pipeline. 
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: the QA team found 3 issues with the new checkout flow but th
+  [FAIL] rate=0/3 expected=True: I need to prepare this task for our planning session tomorro
+  [FAIL] rate=1/3 expected=True: hey I just got this from my tech lead: 'we need to migrate t
+  [FAIL] rate=0/3 expected=True: we're starting a new project — building an internal tool for
+  [PASS] rate=0/3 expected=False: I already have a detailed plan for the migration — here are 
+  [PASS] rate=0/3 expected=False: add a .gitignore entry for .env.local files
+  [PASS] rate=0/3 expected=False: refactor this function to use async/await instead of .then()
+  [PASS] rate=0/3 expected=False: run the test suite and tell me which tests are failing
+
+Improving description...
+Proposed (127.7s): Requirements gathering and task scoping skill. Invoke BEFORE brainstorming, fi, or bf when a user presents new work and the priority is understanding what's needed — not building or fixing yet. Use when someone: shares a tracker ticket or issue ID (any language), picks up a task and wants to check assumptions, describes a production problem that needs scoping before fixing, asks about requirements, unknowns, scope, or risks, says 'before we start coding' or 'figure out what needs to happen' or 'what am I missing', or brings any vague/unstructured request that needs structured framing. Even 'fix X' or 'build Y' triggers this when the user provides rich context suggesting they want to understand the problem first. Skip for direct code writing, concept explanations, active stack-trace debugging, and deployment commands.
+
+============================================================
+Iteration 5/5
+Description: Requirements gathering and task scoping skill. Invoke BEFORE brainstorming, fi, or bf when a user presents new work and the priority is understanding what's needed — not building or fixing yet. Use when someone: shares a tracker ticket or issue ID (any language), picks up a task and wants to check assumptions, describes a production problem that needs scoping before fixing, asks about requirements, unknowns, scope, or risks, says 'before we start coding' or 'figure out what needs to happen' or 'what am I missing', or brings any vague/unstructured request that needs structured framing. Even 'fix X' or 'build Y' triggers this when the user provides rich context suggesting they want to understand the problem first. Skip for direct code writing, concept explanations, active stack-trace debugging, and deployment commands.
+============================================================
+Train: 19/36 correct, precision=100% recall=6% accuracy=53% (110.6s)
+  [FAIL] rate=0/3 expected=True: fix the auth — users can't log in since the last deploy. Err
+  [FAIL] rate=0/3 expected=True: I'm picking up INFRA-205 which says 'upgrade postgres from 1
+  [FAIL] rate=0/3 expected=True: our CEO mentioned in the all-hands that we need 'better anal
+  [FAIL] rate=1/3 expected=True: Вот тикет из трекера: CP-341 — 'Реализовать экспорт отчётов 
+  [FAIL] rate=0/3 expected=True: ok so we just got a ticket from the mobile team — they need 
+  [PASS] rate=0/3 expected=False: write a unit test for the calculateDiscount function in serv
+  [FAIL] rate=0/3 expected=True: we have a bug in production — users are reporting that the s
+  [PASS] rate=0/3 expected=False: what's the difference between useMemo and useCallback in Rea
+  [PASS] rate=0/3 expected=False: create a new React component called UserAvatar that takes a 
+  [PASS] rate=0/3 expected=False: can you read the file at src/components/Header.tsx and expla
+  [PASS] rate=0/3 expected=False: deploy the current branch to staging using our CI pipeline. 
+  [PASS] rate=0/3 expected=False: I need to debug why the API returns 500 on POST /api/orders.
+Test : 12/24 correct, precision=100% recall=0% accuracy=50% (0.0s)
+  [FAIL] rate=0/3 expected=True: I need to prepare this task for our planning session tomorro
+  [FAIL] rate=0/3 expected=True: the QA team found 3 issues with the new checkout flow but th
+  [FAIL] rate=0/3 expected=True: hey I just got this from my tech lead: 'we need to migrate t
+  [PASS] rate=0/3 expected=False: I already have a detailed plan for the migration — here are 
+  [FAIL] rate=0/3 expected=True: we're starting a new project — building an internal tool for
+  [PASS] rate=0/3 expected=False: add a .gitignore entry for .env.local files
+  [PASS] rate=0/3 expected=False: refactor this function to use async/await instead of .then()
+  [PASS] rate=0/3 expected=False: run the test suite and tell me which tests are failing
+
+Max iterations reached (5).
+
+Exit reason: max_iterations (5)
+Best score: 4/8 (iteration 1)
+{
+  "exit_reason": "max_iterations (5)",
+  "original_description": "Stage 1 of the planning pipeline \u2014 normalizes raw task input into a validated, structured task statement ready for deep analysis. Use this skill whenever you receive a new task, ticket, issue, feature request, bug report, or any work item that needs to be understood and structured before planning or implementation begins. Also use when requirements seem unclear, when you need to validate whether a task is ready for deeper work, or when preparing input for any planning, analysis, or design process. Triggers on: new task, prepare task, normalize requirements, task intake, stage 1, prepare for planning, validate task, structure requirements, raw ticket, unclear scope, what needs to be done, break down this task, understand the task.",
+  "best_description": "Stage 1 of the planning pipeline \u2014 normalizes raw task input into a validated, structured task statement ready for deep analysis. Use this skill whenever you receive a new task, ticket, issue, feature request, bug report, or any work item that needs to be understood and structured before planning or implementation begins. Also use when requirements seem unclear, when you need to validate whether a task is ready for deeper work, or when preparing input for any planning, analysis, or design process. Triggers on: new task, prepare task, normalize requirements, task intake, stage 1, prepare for planning, validate task, structure requirements, raw ticket, unclear scope, what needs to be done, break down this task, understand the task.",
+  "best_score": "4/8",
+  "best_train_score": "6/12",
+  "best_test_score": "4/8",
+  "final_description": "Requirements gathering and task scoping skill. Invoke BEFORE brainstorming, fi, or bf when a user presents new work and the priority is understanding what's needed \u2014 not building or fixing yet. Use when someone: shares a tracker ticket or issue ID (any language), picks up a task and wants to check assumptions, describes a production problem that needs scoping before fixing, asks about requirements, unknowns, scope, or risks, says 'before we start coding' or 'figure out what needs to happen' or 'what am I missing', or brings any vague/unstructured request that needs structured framing. Even 'fix X' or 'build Y' triggers this when the user provides rich context suggesting they want to understand the problem first. Skip for direct code writing, concept explanations, active stack-trace debugging, and deployment commands.",
+  "iterations_run": 5,
+  "holdout": 0.4,
+  "train_size": 12,
+  "test_size": 8,
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Stage 1 of the planning pipeline \u2014 normalizes raw task input into a validated, structured task statement ready for deep analysis. Use this skill whenever you receive a new task, ticket, issue, feature request, bug report, or any work item that needs to be understood and structured before planning or implementation begins. Also use when requirements seem unclear, when you need to validate whether a task is ready for deeper work, or when preparing input for any planning, analysis, or design process. Triggers on: new task, prepare task, normalize requirements, task intake, stage 1, prepare for planning, validate task, structure requirements, raw ticket, unclear scope, what needs to be done, break down this task, understand the task.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "the QA team found 3 issues with the new checkout flow but the tickets are really vague. before I start fixing anything I want to normalize these into proper task statements with clear scope. here are the ticket IDs: CHECKOUT-88, CHECKOUT-89, CHECKOUT-91",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I need to prepare this task for our planning session tomorrow \u2014 the task is about adding rate limiting to our public API. We use Express.js, the API gateway is in services/gateway/. I know we want 100 req/min for free tier and 1000 for paid, but I'm not sure about the exact scope yet",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "hey I just got this from my tech lead: 'we need to migrate the payment processing from Stripe v2 to v3 API'. That's literally all the context I got. Can you help me turn this into something actionable?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we're starting a new project \u2014 building an internal tool for the ops team to manage customer subscriptions. I have a rough idea of what's needed but nothing is written down yet. help me structure this into a proper task with requirements",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I already have a detailed plan for the migration \u2014 here are the 12 steps. Can you start executing step 1: create the new database schema?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "add a .gitignore entry for .env.local files",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "refactor this function to use async/await instead of .then() chains:\n\nfunction fetchUser(id) {\n  return api.get(`/users/${id}`).then(res => res.data).then(user => enrichUser(user))\n}",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the test suite and tell me which tests are failing",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "description": "Use FIRST when someone presents a work item \u2014 ticket, bug, feature, upgrade, or vague ask \u2014 and the priority is understanding what's needed before jumping to code. Surfaces unknowns, validates assumptions, defines scope, and identifies risks. Essential signals: 'before we start coding', 'what exactly needs to happen', 'figure out the requirements', 'what am I missing', 'what could go wrong', 'understand the scope/problem', 'prepare for planning', or presenting a complex task or incident that needs structured framing. Also applies to detailed bug reports involving multiple systems where problem framing precedes fixing. Skip for direct requests to write code, explain code, actively debug with a stack trace, or run deployments.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "I need to prepare this task for our planning session tomorrow \u2014 the task is about adding rate limiting to our public API. We use Express.js, the API gateway is in services/gateway/. I know we want 100 req/min for free tier and 1000 for paid, but I'm not sure about the exact scope yet",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "the QA team found 3 issues with the new checkout flow but the tickets are really vague. before I start fixing anything I want to normalize these into proper task statements with clear scope. here are the ticket IDs: CHECKOUT-88, CHECKOUT-89, CHECKOUT-91",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we're starting a new project \u2014 building an internal tool for the ops team to manage customer subscriptions. I have a rough idea of what's needed but nothing is written down yet. help me structure this into a proper task with requirements",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "hey I just got this from my tech lead: 'we need to migrate the payment processing from Stripe v2 to v3 API'. That's literally all the context I got. Can you help me turn this into something actionable?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "add a .gitignore entry for .env.local files",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I already have a detailed plan for the migration \u2014 here are the 12 steps. Can you start executing step 1: create the new database schema?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "refactor this function to use async/await instead of .then() chains:\n\nfunction fetchUser(id) {\n  return api.get(`/users/${id}`).then(res => res.data).then(user => enrichUser(user))\n}",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the test suite and tell me which tests are failing",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "description": "Not every 'fix this' or 'build that' is ready to act on. Use this skill FIRST when a user introduces a new work item \u2014 ticket, bug, incident, feature request, upgrade, or vague ask \u2014 to structure the problem before any other skill runs. Validates scope, surfaces unknowns, checks assumptions, identifies risks. Triggers: presenting a ticket/issue ID, describing a production problem with context, relaying a team or stakeholder request, picking up a new task, asking 'what exactly needs to happen' or 'what am I missing', or introducing any multi-faceted problem. Skip for: active debugging with stack traces, direct 'write this code' requests, code or concept explanations, and deployment commands.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "the QA team found 3 issues with the new checkout flow but the tickets are really vague. before I start fixing anything I want to normalize these into proper task statements with clear scope. here are the ticket IDs: CHECKOUT-88, CHECKOUT-89, CHECKOUT-91",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I need to prepare this task for our planning session tomorrow \u2014 the task is about adding rate limiting to our public API. We use Express.js, the API gateway is in services/gateway/. I know we want 100 req/min for free tier and 1000 for paid, but I'm not sure about the exact scope yet",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "hey I just got this from my tech lead: 'we need to migrate the payment processing from Stripe v2 to v3 API'. That's literally all the context I got. Can you help me turn this into something actionable?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we're starting a new project \u2014 building an internal tool for the ops team to manage customer subscriptions. I have a rough idea of what's needed but nothing is written down yet. help me structure this into a proper task with requirements",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "add a .gitignore entry for .env.local files",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "refactor this function to use async/await instead of .then() chains:\n\nfunction fetchUser(id) {\n  return api.get(`/users/${id}`).then(res => res.data).then(user => enrichUser(user))\n}",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the test suite and tell me which tests are failing",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I already have a detailed plan for the migration \u2014 here are the 12 steps. Can you start executing step 1: create the new database schema?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "description": "Required first step before brainstorming, fix-issue, build-feature, or any planning skill. Invoke when a user brings a new task, ticket, bug, feature, upgrade, incident, or undefined ask that needs structured understanding before action. Trigger signals: referencing a ticket/issue ID, describing a production problem with context, relaying a team or stakeholder request, saying 'picking up [task]', asking 'what needs to happen' / 'what am I missing' / 'figure out requirements' / 'understand the scope', or presenting any multi-system problem needing structured framing \u2014 in any language. Produces validated requirements with resolved unknowns and hands off to downstream skills. Skip only for direct 'write this code' requests, concept explanations, stack-trace debugging sessions, and deployment commands.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "the QA team found 3 issues with the new checkout flow but the tickets are really vague. before I start fixing anything I want to normalize these into proper task statements with clear scope. here are the ticket IDs: CHECKOUT-88, CHECKOUT-89, CHECKOUT-91",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I need to prepare this task for our planning session tomorrow \u2014 the task is about adding rate limiting to our public API. We use Express.js, the API gateway is in services/gateway/. I know we want 100 req/min for free tier and 1000 for paid, but I'm not sure about the exact scope yet",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "hey I just got this from my tech lead: 'we need to migrate the payment processing from Stripe v2 to v3 API'. That's literally all the context I got. Can you help me turn this into something actionable?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we're starting a new project \u2014 building an internal tool for the ops team to manage customer subscriptions. I have a rough idea of what's needed but nothing is written down yet. help me structure this into a proper task with requirements",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I already have a detailed plan for the migration \u2014 here are the 12 steps. Can you start executing step 1: create the new database schema?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "add a .gitignore entry for .env.local files",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "refactor this function to use async/await instead of .then() chains:\n\nfunction fetchUser(id) {\n  return api.get(`/users/${id}`).then(res => res.data).then(user => enrichUser(user))\n}",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the test suite and tell me which tests are failing",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "description": "Requirements gathering and task scoping skill. Invoke BEFORE brainstorming, fi, or bf when a user presents new work and the priority is understanding what's needed \u2014 not building or fixing yet. Use when someone: shares a tracker ticket or issue ID (any language), picks up a task and wants to check assumptions, describes a production problem that needs scoping before fixing, asks about requirements, unknowns, scope, or risks, says 'before we start coding' or 'figure out what needs to happen' or 'what am I missing', or brings any vague/unstructured request that needs structured framing. Even 'fix X' or 'build Y' triggers this when the user provides rich context suggesting they want to understand the problem first. Skip for direct code writing, concept explanations, active stack-trace debugging, and deployment commands.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "I need to prepare this task for our planning session tomorrow \u2014 the task is about adding rate limiting to our public API. We use Express.js, the API gateway is in services/gateway/. I know we want 100 req/min for free tier and 1000 for paid, but I'm not sure about the exact scope yet",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "the QA team found 3 issues with the new checkout flow but the tickets are really vague. before I start fixing anything I want to normalize these into proper task statements with clear scope. here are the ticket IDs: CHECKOUT-88, CHECKOUT-89, CHECKOUT-91",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "hey I just got this from my tech lead: 'we need to migrate the payment processing from Stripe v2 to v3 API'. That's literally all the context I got. Can you help me turn this into something actionable?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I already have a detailed plan for the migration \u2014 here are the 12 steps. Can you start executing step 1: create the new database schema?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we're starting a new project \u2014 building an internal tool for the ops team to manage customer subscriptions. I have a rough idea of what's needed but nothing is written down yet. help me structure this into a proper task with requirements",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "add a .gitignore entry for .env.local files",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "refactor this function to use async/await instead of .then() chains:\n\nfunction fetchUser(id) {\n  return api.get(`/users/${id}`).then(res => res.data).then(user => enrichUser(user))\n}",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the test suite and tell me which tests are failing",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "fix the auth \u2014 users can't log in since the last deploy. Error is 'invalid_grant' on the OAuth callback. It's affecting all users on production. We use Keycloak 22 with OIDC. The deploy was 2 hours ago, commit abc123",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm picking up INFRA-205 which says 'upgrade postgres from 14 to 16'. seems straightforward but I want to make sure I'm not missing anything \u2014 what are the unknowns, what assumptions am I making, what could go wrong?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CEO mentioned in the all-hands that we need 'better analytics'. nobody wrote a proper ticket yet. before anyone starts building dashboards, can we at least figure out what the actual requirements are?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u0412\u043e\u0442 \u0442\u0438\u043a\u0435\u0442 \u0438\u0437 \u0442\u0440\u0435\u043a\u0435\u0440\u0430: CP-341 \u2014 '\u0420\u0435\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0442\u0447\u0451\u0442\u043e\u0432 \u0432 PDF'. \u041d\u0430\u0434\u043e \u0440\u0430\u0437\u043e\u0431\u0440\u0430\u0442\u044c\u0441\u044f \u0447\u0442\u043e \u0438\u043c\u0435\u043d\u043d\u043e \u043d\u0443\u0436\u043d\u043e \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0438 \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u0442\u044c \u0437\u0430\u0434\u0430\u0447\u0443 \u043a \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so we just got a ticket from the mobile team \u2014 they need us to add push notification support for order status updates. the backend is in Go, notifications service is in services/notifications/, and we use Firebase for push. The PM wants it by end of sprint. Can you help me figure out what exactly needs to happen before we start coding?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write a unit test for the calculateDiscount function in services/pricing/calculator.ts",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we have a bug in production \u2014 users are reporting that the search results page shows stale data after they update their profile. I filed it as SEARCH-482. Before we dive into fixing it, let's make sure we understand the problem properly and figure out the scope",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "what's the difference between useMemo and useCallback in React?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a new React component called UserAvatar that takes a user object and renders a circular avatar with their initials if no image is available",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "can you read the file at src/components/Header.tsx and explain what the useAuth hook does?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "deploy the current branch to staging using our CI pipeline. the workflow file is at .github/workflows/deploy-staging.yml",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to debug why the API returns 500 on POST /api/orders. Here's the stack trace: TypeError: Cannot read properties of undefined (reading 'map') at OrderService.createOrder (services/orders/service.ts:45)",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}
+Report: /tmp/skill_description_report_task-preparation_20260314_092348.html
+

@@ -1,0 +1,46 @@
+{
+  "eval_id": 1,
+  "config": "with_skill",
+  "expectations": [
+    {
+      "text": "product-analysis.md follows exact template (Business Intent, Actor & Scenario, Expected Outcome, Edge Cases, Success Signals, Minimum Viable Outcome, Critique Review, Open Questions)",
+      "passed": true,
+      "evidence": "All 8 required section headers are present: '## Business Intent' (line 3), '## Actor & Scenario' (line 11), '## Expected Outcome' (line 34), '## Edge Cases' (line 51), '## Success Signals' (line 60), '## Minimum Viable Outcome' (line 68), '## Critique Review' (line 88), '## Open Questions' (line 94)."
+    },
+    {
+      "text": "system-analysis.md follows exact template (Relevant Modules, Change Points, Dependencies, Existing Patterns, Technical Observations, Test Coverage, Critique Review, Open Questions)",
+      "passed": true,
+      "evidence": "All 8 required section headers are present: '## Relevant Modules' (line 3), '## Change Points' (line 64), '## Dependencies' (line 82), '## Existing Patterns' (line 107), '## Technical Observations' (line 117), '## Test Coverage' (line 128), '## Critique Review' (line 138), '## Open Questions' (line 144)."
+    },
+    {
+      "text": "constraints-risks-analysis.md follows exact template (Constraints by category, Risks table, Integration Dependencies, Backward Compatibility, Sensitive Areas, Critique Review, Open Questions)",
+      "passed": true,
+      "evidence": "All required headers are present including subsections under Constraints: '## Constraints' (line 3) with subsections '### Architectural' (line 5), '### Technical' (line 10), '### Business' (line 17), '### Compatibility' (line 22), plus '### Regulatory/Compliance' (line 27). Also present: '## Risks' (line 31), '## Integration Dependencies' (line 44), '## Backward Compatibility' (line 50), '## Sensitive Areas' (line 60), '## Critique Review' (line 68), '## Open Questions' (line 74)."
+    },
+    {
+      "text": "system-analysis.md references actual file paths from the mock project (internal/auth/, internal/tenant/)",
+      "passed": true,
+      "evidence": "system-analysis.md references 'internal/auth/' multiple times (lines 6, 14) and 'internal/tenant/' multiple times (lines 17, 24). Specific file paths cited include 'internal/auth/handler.go', 'internal/auth/service.go', 'internal/auth/keycloak.go', 'internal/auth/middleware.go', 'internal/tenant/models.go', 'internal/tenant/repository.go', 'internal/tenant/service.go', 'internal/tenant/handler.go'."
+    },
+    {
+      "text": "system-analysis.md identifies that tenant model has no per-tenant configuration storage",
+      "passed": true,
+      "evidence": "system-analysis.md line 20 explicitly quotes the NOTE comment: '\"There is currently no per-tenant configuration storage\"' from internal/tenant/models.go:18-23. Line 124 also states: 'Tenant model has no extensible config: The explicit NOTE in internal/tenant/models.go:18-23 and migrations/001_initial.sql:34-37 acknowledge the lack of per-tenant configuration storage.' This finding is also repeated in constraints-risks-analysis.md and stage-2-handoff.md."
+    },
+    {
+      "text": "Critique Review section in each artifact contains actual critic findings (not placeholder text)",
+      "passed": true,
+      "evidence": "All three Critique Review sections contain specific findings: product-analysis.md (line 90) states 'critic found this analysis SUFFICIENT across all criteria' with specific assessments of business intent, scenario detail, edge cases, success signals, and MVO, plus a named minor observation about the admin configuration scenario. system-analysis.md (line 140) lists specific PASS verdicts per criterion (module specificity, change points, dependencies, patterns, test coverage) and identifies a tangential finding about the RequireRole bug. constraints-risks-analysis.md (line 70) provides criterion-level verdicts (constraint specificity, risk calibration, backward compatibility, integration dependencies, sensitive areas) with specific strengths noted. None contain placeholder text."
+    },
+    {
+      "text": "stage-2-handoff.md was created with all required sections (Task Summary, System Map, Constraints, Risks, Product Requirements, Critique Results, Open Questions)",
+      "passed": true,
+      "evidence": "All required sections are present: '## Task Summary' (line 3), '## System Map' (line 23), '## Constraints the Plan Must Respect' (line 52), '## Risks the Plan Must Mitigate' (line 63), '## Product Requirements for Planning' (line 73), '## Critique Results' (line 80), '## Open Questions for Planning' (line 96). The file also includes '## Classification' (line 7) and '## Analysis Summary' (line 13) as additional sections."
+    },
+    {
+      "text": "stage-2-handoff.md is self-contained — readable without consulting the detailed analyses",
+      "passed": true,
+      "evidence": "The handoff contains: goal/context in Task Summary (lines 3-9), business rationale and main scenario in Analysis Summary (lines 14-15), a full System Map table listing all modules with paths and change scopes (lines 25-45), Key Change Points table with specific file locations (lines 35-45), Critical Dependencies section (lines 47-50), a Constraints table with code references (lines 52-59), a Risks table with likelihood/impact/mitigation (lines 63-72), Product Requirements covering main scenario, success signals, and MVO (lines 74-78), Critique Results with named findings (lines 80-94), and 8 numbered Open Questions (lines 96-105). A reader gains sufficient understanding of the task, affected modules, constraints, and risks without needing to open the detailed files."
+    }
+  ]
+}

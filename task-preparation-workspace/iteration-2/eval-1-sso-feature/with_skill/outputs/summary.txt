@@ -1,0 +1,29 @@
+Task Preparation — Stage 1 Summary
+====================================
+
+Task: Add SAML-based SSO support for enterprise tenants
+
+Process Executed:
+1. Intake: Collected all context from the user's request. No external links to fetch, no memobank found.
+2. Normalization: Identified core ask (SAML SSO via Keycloak, per-tenant), task type (feature), actor (enterprise client users), expected outcome (corporate IdP login), and affected area (Keycloak, services/auth/, React login flow, tenant config).
+3. Knowns/Unknowns/Assumptions: Separated 8 knowns, 12 unknowns, and 7 assumptions. Key unknowns include Keycloak deployment state, tenant config storage, session handling, and user provisioning strategy.
+4. Requirements Draft: Created structured requirements.draft.md with all sections.
+5. Readiness Critique: Evaluated against 8 criteria per the Readiness Critic protocol.
+
+Readiness Verdict: READY_FOR_DEEP_ANALYSIS (with 3 WEAK scores)
+- PASS: Goal clarity, Problem clarity, Change target clarity, Ambiguity level, Acceptance possibility
+- WEAK: Scope clarity, Context sufficiency, Assumption safety
+
+Stage Status: NOT COMPLETE
+The verdict is READY_FOR_DEEP_ANALYSIS but 3 WEAK scores and 12 open unknowns remain. Per the skill protocol, the task cannot proceed to deep analysis until the user answers the clarification questions and the WEAK areas are resolved. Clarifications have been saved to clarifications.md with 12 prioritized questions covering the open unknowns and 3 assumptions to verify.
+
+Key risks if proceeding without clarification:
+- The Keycloak-as-broker assumption is architecturally fundamental — if wrong, the entire approach changes
+- Tenant config storage mechanism affects scope significantly
+- JIT provisioning vs pre-creation changes the user lifecycle design
+
+Artifacts Produced:
+- requirements.draft.md — Structured task statement with goal, scope, constraints, knowns, unknowns, assumptions
+- readiness-review.md — Critic evaluation with scores, verdict, and reasoning
+- clarifications.md — 12 questions for the user, 3 assumptions to verify
+- summary.txt — This file

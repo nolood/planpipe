@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "requirements.draft.md file was created with all required sections",
+      "passed": true,
+      "evidence": "All 8 sections present"
+    },
+    {
+      "text": "readiness-review.md file was created with all 8 criteria scored",
+      "passed": true,
+      "evidence": "Found 8/8 criteria"
+    },
+    {
+      "text": "clarifications.md was created (even though verdict is READY, unknowns must be closed)",
+      "passed": true,
+      "evidence": "File exists, 5014 chars"
+    },
+    {
+      "text": "clarifications.md follows the fixed template with all required sections",
+      "passed": true,
+      "evidence": "Template sections found: ['# Clarifications Needed', '## Blocking Gaps', '## Open Unknowns', '## Assumptions to Verify', '## Questions for the User'], has header: True"
+    },
+    {
+      "text": "Open unknowns from requirements draft appear as questions in clarifications",
+      "passed": true,
+      "evidence": "Found 4/7 unknown topics in questions: ['tenant config', 'jit', 'slo', 'single logout']"
+    },
+    {
+      "text": "Requirements draft mentions Keycloak, FastAPI, React, SAML, per-tenant",
+      "passed": true,
+      "evidence": "Found 5/5: ['keycloak', 'fastapi', 'react', 'saml', 'per-tenant']"
+    },
+    {
+      "text": "Task classified as feature or integration",
+      "passed": true,
+      "evidence": "Found"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

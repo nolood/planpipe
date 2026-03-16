@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-design",
+  "prompt": "Run Stage 4 solution design on the dashboard performance optimization task. Stage 3 is complete. Design the implementation for full-stack optimization.",
+  "assertions": [
+    {"text": "implementation-design.md created with all required template sections"},
+    {"text": "change-map.md created with files from both backend (internal/analytics/, internal/clickhouse/, internal/cache/) and frontend (apps/dashboard/)"},
+    {"text": "Implementation approach addresses the 3-layer optimization: backend parallelization, caching with singleflight, and frontend progressive loading"},
+    {"text": "change-map.md includes the retention cohort bug fix at queries.go:67-85"},
+    {"text": "Design decisions include: errgroup vs goroutine management, cache TTL strategy per chart type, singleflight integration point, downsampling algorithm choice"},
+    {"text": "Implementation sequence starts with backend changes before frontend to allow incremental validation"},
+    {"text": "Risk zones include connection pool sizing and thundering herd scenarios with specific mitigations"},
+    {"text": "design-review-package.md presents approval points about cache TTL values and downsampling thresholds"}
+  ]
+}

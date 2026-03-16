@@ -1,0 +1,15 @@
+{
+  "eval_id": 2,
+  "eval_name": "dashboard-perf-deep-analysis",
+  "prompt": "Run Stage 2 deep analysis on the dashboard performance task. Stage 1 artifacts and Go+React codebase provided.",
+  "assertions": [
+    {"text": "system-analysis.md identifies the sequential chart loading pattern in analytics/service.go (GetOverviewPage loads charts one by one)", "type": "key_finding"},
+    {"text": "system-analysis.md identifies the unused cache module in internal/cache/ (exists but not wired into analytics service)", "type": "key_finding"},
+    {"text": "system-analysis.md identifies the frontend rendering issue (no data downsampling, all charts render simultaneously via Recharts)", "type": "key_finding"},
+    {"text": "system-analysis.md references specific ClickHouse query patterns from internal/clickhouse/queries.go", "type": "code_specificity"},
+    {"text": "constraints-risks-analysis.md identifies the risk of breaking the GraphQL API contract for potential other consumers", "type": "constraint_coverage"},
+    {"text": "constraints-risks-analysis.md notes that no materialized views exist (visible in migrations/001_analytics_tables.sql)", "type": "key_finding"},
+    {"text": "All 3 analysis artifacts were created (product-analysis.md, system-analysis.md, constraints-risks-analysis.md)", "type": "file_structure"},
+    {"text": "Each analysis contains a Self-Critique Notes section", "type": "process_compliance"}
+  ]
+}

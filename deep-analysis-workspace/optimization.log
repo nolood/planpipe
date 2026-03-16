@@ -1,0 +1,1545 @@
+Split: 12 train, 8 test (holdout=0.4)
+
+============================================================
+Iteration 1/5
+Description: Stage 2 of the planning pipeline — runs multi-faceted analysis of a prepared task to build a structured knowledge base for planning. Use this skill after Stage 1 (task-preparation) completes with READY_FOR_DEEP_ANALYSIS verdict. Launches three parallel analysis streams — product/business intent, codebase/system mapping, and constraints/risks assessment — then runs an independent critic to validate and refine each analysis. Triggers on: deep analysis, stage 2, analyze task, investigate before planning, build knowledge base, research task, map system for task, analyze constraints, assess risks, understand codebase for task, prepare for plan synthesis, multi-faceted analysis.
+============================================================
+Train: 20/36 correct, precision=100% recall=11% accuracy=56% (105.7s)
+  [FAIL] rate=1/3 expected=True: analyze this task for planning: we need to add real-time not
+  [FAIL] rate=0/3 expected=True: the task preparation is complete, critic said READY_FOR_DEEP
+  [FAIL] rate=0/3 expected=True: нужно провести глубокий анализ задачи перед планированием. Э
+  [FAIL] rate=0/3 expected=True: run stage 2 on this task. here's the handoff from stage 1: w
+  [PASS] rate=0/3 expected=False: write me a Go function that validates SAML assertions using 
+  [FAIL] rate=1/3 expected=True: I have a requirements.draft.md and readiness-review.md from 
+  [FAIL] rate=0/3 expected=True: ok so stage 1 is done, the task passed readiness review with
+  [PASS] rate=0/3 expected=False: run the tests for the auth module and tell me what's failing
+  [PASS] rate=0/3 expected=False: review this pull request: github.com/acme/platform/pull/234.
+  [PASS] rate=0/3 expected=False: hey can you fix the login page? When I click submit nothing 
+  [PASS] rate=0/3 expected=False: I need to plan the implementation of the SSO feature. We alr
+  [PASS] rate=0/3 expected=False: we got a new ticket from the product team but it's super vag
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: before we plan the implementation, I want to deeply understa
+  [FAIL] rate=1/3 expected=True: I need to investigate what parts of the system are affected 
+  [FAIL] rate=0/3 expected=True: we just finished preparing the task (stage 1 complete) and n
+  [FAIL] rate=0/3 expected=True: build a knowledge base for this task before planning — I wan
+  [PASS] rate=0/3 expected=False: explain how the auth middleware works in our codebase. I'm n
+  [PASS] rate=0/3 expected=False: our CI pipeline is failing on the linting step. The error is
+  [PASS] rate=0/3 expected=False: create a PR for the changes I just made. I've committed ever
+  [PASS] rate=0/3 expected=False: I have a vague idea for a feature — something about improvin
+
+Improving description...
+Proposed (36.3s): Use this skill when the user says Stage 1 or task-preparation is complete and they need analysis before planning. Key signals: user references stage-1-handoff.md, requirements.draft.md, readiness-review.md, or the READY_FOR_DEEP_ANALYSIS verdict. Also triggers when user asks to analyze a validated/prepared task across product intent, codebase mapping, and risk dimensions before synthesizing a plan. This is Stage 2 of the planning pipeline — it researches and maps the territory, it does not build plans or write code. Triggers: "stage 1 is done", "run stage 2", "analyze task for planning", "deep analysis", "READY_FOR_DEEP_ANALYSIS", "analyze before planning", "product/system/constraints analysis", any mention of handoff or readiness files from a prior preparation stage, or requests to understand codebase and risks for a task that has already been scoped.
+
+============================================================
+Iteration 2/5
+Description: Use this skill when the user says Stage 1 or task-preparation is complete and they need analysis before planning. Key signals: user references stage-1-handoff.md, requirements.draft.md, readiness-review.md, or the READY_FOR_DEEP_ANALYSIS verdict. Also triggers when user asks to analyze a validated/prepared task across product intent, codebase mapping, and risk dimensions before synthesizing a plan. This is Stage 2 of the planning pipeline — it researches and maps the territory, it does not build plans or write code. Triggers: "stage 1 is done", "run stage 2", "analyze task for planning", "deep analysis", "READY_FOR_DEEP_ANALYSIS", "analyze before planning", "product/system/constraints analysis", any mention of handoff or readiness files from a prior preparation stage, or requests to understand codebase and risks for a task that has already been scoped.
+============================================================
+Train: 20/36 correct, precision=100% recall=11% accuracy=56% (101.8s)
+  [FAIL] rate=0/3 expected=True: the task preparation is complete, critic said READY_FOR_DEEP
+  [FAIL] rate=0/3 expected=True: нужно провести глубокий анализ задачи перед планированием. Э
+  [FAIL] rate=1/3 expected=True: analyze this task for planning: we need to add real-time not
+  [FAIL] rate=0/3 expected=True: run stage 2 on this task. here's the handoff from stage 1: w
+  [FAIL] rate=1/3 expected=True: ok so stage 1 is done, the task passed readiness review with
+  [FAIL] rate=0/3 expected=True: I have a requirements.draft.md and readiness-review.md from 
+  [PASS] rate=0/3 expected=False: write me a Go function that validates SAML assertions using 
+  [PASS] rate=0/3 expected=False: run the tests for the auth module and tell me what's failing
+  [PASS] rate=0/3 expected=False: hey can you fix the login page? When I click submit nothing 
+  [PASS] rate=0/3 expected=False: review this pull request: github.com/acme/platform/pull/234.
+  [PASS] rate=0/3 expected=False: I need to plan the implementation of the SSO feature. We alr
+  [PASS] rate=0/3 expected=False: we got a new ticket from the product team but it's super vag
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: I need to investigate what parts of the system are affected 
+  [FAIL] rate=0/3 expected=True: before we plan the implementation, I want to deeply understa
+  [FAIL] rate=0/3 expected=True: we just finished preparing the task (stage 1 complete) and n
+  [FAIL] rate=1/3 expected=True: build a knowledge base for this task before planning — I wan
+  [PASS] rate=0/3 expected=False: explain how the auth middleware works in our codebase. I'm n
+  [PASS] rate=0/3 expected=False: our CI pipeline is failing on the linting step. The error is
+  [PASS] rate=0/3 expected=False: I have a vague idea for a feature — something about improvin
+  [PASS] rate=0/3 expected=False: create a PR for the changes I just made. I've committed ever
+
+Improving description...
+Proposed (72.4s): Use this skill at the transition between task preparation and planning — when a user has completed Stage 1 (task-preparation) and needs to deeply investigate the problem space before building a plan. Triggers on: completed Stage 1 or task-preparation, READY_FOR_DEEP_ANALYSIS verdict, references to stage-1-handoff.md / requirements.draft.md / readiness-review.md, "run stage 2", "deep analysis", "analyze for planning", or requests to map codebase, assess risks, and analyze product intent for an already-scoped task. Runs parallel product, system, and constraints analysis with critic validation. Research only — no planning, no code.
+
+============================================================
+Iteration 3/5
+Description: Use this skill at the transition between task preparation and planning — when a user has completed Stage 1 (task-preparation) and needs to deeply investigate the problem space before building a plan. Triggers on: completed Stage 1 or task-preparation, READY_FOR_DEEP_ANALYSIS verdict, references to stage-1-handoff.md / requirements.draft.md / readiness-review.md, "run stage 2", "deep analysis", "analyze for planning", or requests to map codebase, assess risks, and analyze product intent for an already-scoped task. Runs parallel product, system, and constraints analysis with critic validation. Research only — no planning, no code.
+============================================================
+Train: 21/36 correct, precision=100% recall=17% accuracy=58% (121.9s)
+  [FAIL] rate=0/3 expected=True: the task preparation is complete, critic said READY_FOR_DEEP
+  [FAIL] rate=1/3 expected=True: нужно провести глубокий анализ задачи перед планированием. Э
+  [FAIL] rate=0/3 expected=True: analyze this task for planning: we need to add real-time not
+  [FAIL] rate=1/3 expected=True: run stage 2 on this task. here's the handoff from stage 1: w
+  [FAIL] rate=1/3 expected=True: ok so stage 1 is done, the task passed readiness review with
+  [FAIL] rate=0/3 expected=True: I have a requirements.draft.md and readiness-review.md from 
+  [PASS] rate=0/3 expected=False: run the tests for the auth module and tell me what's failing
+  [PASS] rate=0/3 expected=False: hey can you fix the login page? When I click submit nothing 
+  [PASS] rate=0/3 expected=False: review this pull request: github.com/acme/platform/pull/234.
+  [PASS] rate=0/3 expected=False: I need to plan the implementation of the SSO feature. We alr
+  [PASS] rate=0/3 expected=False: write me a Go function that validates SAML assertions using 
+  [PASS] rate=0/3 expected=False: we got a new ticket from the product team but it's super vag
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: before we plan the implementation, I want to deeply understa
+  [FAIL] rate=0/3 expected=True: I need to investigate what parts of the system are affected 
+  [FAIL] rate=0/3 expected=True: we just finished preparing the task (stage 1 complete) and n
+  [FAIL] rate=1/3 expected=True: build a knowledge base for this task before planning — I wan
+  [PASS] rate=0/3 expected=False: explain how the auth middleware works in our codebase. I'm n
+  [PASS] rate=0/3 expected=False: our CI pipeline is failing on the linting step. The error is
+  [PASS] rate=0/3 expected=False: I have a vague idea for a feature — something about improvin
+  [PASS] rate=0/3 expected=False: create a PR for the changes I just made. I've committed ever
+
+Improving description...
+Proposed (58.7s): Use this skill when a user has finished preparing or scoping a task and now wants to deeply investigate it before making a plan. The user has requirements in hand and wants to understand the codebase, product intent, risks, and constraints — research and analysis, not yet planning or coding. Strong signals: mentions of completed preparation, "stage 1 done", "deep analysis", READY_FOR_DEEP_ANALYSIS, references to handoff/requirements/readiness files, or asking for parallel product + system + constraints analysis of a prepared task. Do NOT use for: writing plans, fixing bugs, writing code, reviewing PRs, or clarifying vague requirements.
+
+============================================================
+Iteration 4/5
+Description: Use this skill when a user has finished preparing or scoping a task and now wants to deeply investigate it before making a plan. The user has requirements in hand and wants to understand the codebase, product intent, risks, and constraints — research and analysis, not yet planning or coding. Strong signals: mentions of completed preparation, "stage 1 done", "deep analysis", READY_FOR_DEEP_ANALYSIS, references to handoff/requirements/readiness files, or asking for parallel product + system + constraints analysis of a prepared task. Do NOT use for: writing plans, fixing bugs, writing code, reviewing PRs, or clarifying vague requirements.
+============================================================
+Train: 19/36 correct, precision=100% recall=6% accuracy=53% (132.9s)
+  [FAIL] rate=0/3 expected=True: the task preparation is complete, critic said READY_FOR_DEEP
+  [FAIL] rate=0/3 expected=True: analyze this task for planning: we need to add real-time not
+  [FAIL] rate=0/3 expected=True: нужно провести глубокий анализ задачи перед планированием. Э
+  [FAIL] rate=0/3 expected=True: run stage 2 on this task. here's the handoff from stage 1: w
+  [PASS] rate=0/3 expected=False: write me a Go function that validates SAML assertions using 
+  [FAIL] rate=0/3 expected=True: I have a requirements.draft.md and readiness-review.md from 
+  [FAIL] rate=1/3 expected=True: ok so stage 1 is done, the task passed readiness review with
+  [PASS] rate=0/3 expected=False: run the tests for the auth module and tell me what's failing
+  [PASS] rate=0/3 expected=False: review this pull request: github.com/acme/platform/pull/234.
+  [PASS] rate=0/3 expected=False: hey can you fix the login page? When I click submit nothing 
+  [PASS] rate=0/3 expected=False: I need to plan the implementation of the SSO feature. We alr
+  [PASS] rate=0/3 expected=False: we got a new ticket from the product team but it's super vag
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: I need to investigate what parts of the system are affected 
+  [FAIL] rate=1/3 expected=True: before we plan the implementation, I want to deeply understa
+  [FAIL] rate=0/3 expected=True: we just finished preparing the task (stage 1 complete) and n
+  [FAIL] rate=0/3 expected=True: build a knowledge base for this task before planning — I wan
+  [PASS] rate=0/3 expected=False: explain how the auth middleware works in our codebase. I'm n
+  [PASS] rate=0/3 expected=False: I have a vague idea for a feature — something about improvin
+  [PASS] rate=0/3 expected=False: create a PR for the changes I just made. I've committed ever
+  [PASS] rate=0/3 expected=False: our CI pipeline is failing on the linting step. The error is
+
+Improving description...
+Proposed (74.6s): Use for deep-analysis — structured, multi-stream investigation of a task that has already been prepared or scoped, done BEFORE plan creation. Invoke when: the user completed task preparation and wants to analyze the codebase, product intent, risks, and constraints; they mention deep analysis, stage 2, READY_FOR_DEEP_ANALYSIS, or analyzing a task before planning; they reference handoff, readiness, or requirements files from preparation. This is NOT brainstorming (exploring ideas), NOT plan-writing, NOT coding, NOT bug-fixing, NOT PR review. Distinct from research skill — this runs a specific 3-stream pipeline (product + system + constraints) with critic validation on prepared tasks.
+
+============================================================
+Iteration 5/5
+Description: Use for deep-analysis — structured, multi-stream investigation of a task that has already been prepared or scoped, done BEFORE plan creation. Invoke when: the user completed task preparation and wants to analyze the codebase, product intent, risks, and constraints; they mention deep analysis, stage 2, READY_FOR_DEEP_ANALYSIS, or analyzing a task before planning; they reference handoff, readiness, or requirements files from preparation. This is NOT brainstorming (exploring ideas), NOT plan-writing, NOT coding, NOT bug-fixing, NOT PR review. Distinct from research skill — this runs a specific 3-stream pipeline (product + system + constraints) with critic validation on prepared tasks.
+============================================================
+Train: 20/36 correct, precision=100% recall=11% accuracy=56% (126.5s)
+  [FAIL] rate=0/3 expected=True: нужно провести глубокий анализ задачи перед планированием. Э
+  [FAIL] rate=0/3 expected=True: run stage 2 on this task. here's the handoff from stage 1: w
+  [FAIL] rate=0/3 expected=True: the task preparation is complete, critic said READY_FOR_DEEP
+  [FAIL] rate=1/3 expected=True: analyze this task for planning: we need to add real-time not
+  [FAIL] rate=0/3 expected=True: ok so stage 1 is done, the task passed readiness review with
+  [FAIL] rate=1/3 expected=True: I have a requirements.draft.md and readiness-review.md from 
+  [PASS] rate=0/3 expected=False: write me a Go function that validates SAML assertions using 
+  [PASS] rate=0/3 expected=False: run the tests for the auth module and tell me what's failing
+  [PASS] rate=0/3 expected=False: I need to plan the implementation of the SSO feature. We alr
+  [PASS] rate=0/3 expected=False: hey can you fix the login page? When I click submit nothing 
+  [PASS] rate=0/3 expected=False: review this pull request: github.com/acme/platform/pull/234.
+  [PASS] rate=0/3 expected=False: we got a new ticket from the product team but it's super vag
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=1/3 expected=True: I need to investigate what parts of the system are affected 
+  [FAIL] rate=0/3 expected=True: before we plan the implementation, I want to deeply understa
+  [FAIL] rate=0/3 expected=True: we just finished preparing the task (stage 1 complete) and n
+  [FAIL] rate=0/3 expected=True: build a knowledge base for this task before planning — I wan
+  [PASS] rate=0/3 expected=False: our CI pipeline is failing on the linting step. The error is
+  [PASS] rate=0/3 expected=False: explain how the auth middleware works in our codebase. I'm n
+  [PASS] rate=0/3 expected=False: I have a vague idea for a feature — something about improvin
+  [PASS] rate=0/3 expected=False: create a PR for the changes I just made. I've committed ever
+
+Max iterations reached (5).
+
+Exit reason: max_iterations (5)
+Best score: 4/8 (iteration 1)
+{
+  "exit_reason": "max_iterations (5)",
+  "original_description": "Stage 2 of the planning pipeline \u2014 runs multi-faceted analysis of a prepared task to build a structured knowledge base for planning. Use this skill after Stage 1 (task-preparation) completes with READY_FOR_DEEP_ANALYSIS verdict. Launches three parallel analysis streams \u2014 product/business intent, codebase/system mapping, and constraints/risks assessment \u2014 then runs an independent critic to validate and refine each analysis. Triggers on: deep analysis, stage 2, analyze task, investigate before planning, build knowledge base, research task, map system for task, analyze constraints, assess risks, understand codebase for task, prepare for plan synthesis, multi-faceted analysis.",
+  "best_description": "Stage 2 of the planning pipeline \u2014 runs multi-faceted analysis of a prepared task to build a structured knowledge base for planning. Use this skill after Stage 1 (task-preparation) completes with READY_FOR_DEEP_ANALYSIS verdict. Launches three parallel analysis streams \u2014 product/business intent, codebase/system mapping, and constraints/risks assessment \u2014 then runs an independent critic to validate and refine each analysis. Triggers on: deep analysis, stage 2, analyze task, investigate before planning, build knowledge base, research task, map system for task, analyze constraints, assess risks, understand codebase for task, prepare for plan synthesis, multi-faceted analysis.",
+  "best_score": "4/8",
+  "best_train_score": "6/12",
+  "best_test_score": "4/8",
+  "final_description": "Use for deep-analysis \u2014 structured, multi-stream investigation of a task that has already been prepared or scoped, done BEFORE plan creation. Invoke when: the user completed task preparation and wants to analyze the codebase, product intent, risks, and constraints; they mention deep analysis, stage 2, READY_FOR_DEEP_ANALYSIS, or analyzing a task before planning; they reference handoff, readiness, or requirements files from preparation. This is NOT brainstorming (exploring ideas), NOT plan-writing, NOT coding, NOT bug-fixing, NOT PR review. Distinct from research skill \u2014 this runs a specific 3-stream pipeline (product + system + constraints) with critic validation on prepared tasks.",
+  "iterations_run": 5,
+  "holdout": 0.4,
+  "train_size": 12,
+  "test_size": 8,
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Stage 2 of the planning pipeline \u2014 runs multi-faceted analysis of a prepared task to build a structured knowledge base for planning. Use this skill after Stage 1 (task-preparation) completes with READY_FOR_DEEP_ANALYSIS verdict. Launches three parallel analysis streams \u2014 product/business intent, codebase/system mapping, and constraints/risks assessment \u2014 then runs an independent critic to validate and refine each analysis. Triggers on: deep analysis, stage 2, analyze task, investigate before planning, build knowledge base, research task, map system for task, analyze constraints, assess risks, understand codebase for task, prepare for plan synthesis, multi-faceted analysis.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "before we plan the implementation, I want to deeply understand this task from all angles \u2014 what's the business intent, where in the codebase does this live, what are the risks. We have the requirements ready, they passed the readiness gate",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I need to investigate what parts of the system are affected by this change and what risks we should account for. We've already structured the requirements in stage 1. The task involves replacing our message queue from RabbitMQ to Kafka",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we just finished preparing the task (stage 1 complete) and now need the multi-faceted analysis \u2014 product/business, system mapping, constraints. The dashboard refactoring involves clickhouse queries, graphql resolvers, and react components",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "build a knowledge base for this task before planning \u2014 I want to understand business intent, map the codebase, and identify constraints. Stage 1 handoff is ready. Task: implement rate limiting on our public API",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "explain how the auth middleware works in our codebase. I'm new to the team and trying to understand the request flow from the HTTP handler through authentication to the service layer",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "our CI pipeline is failing on the linting step. The error is about unused imports in internal/auth/handler.go. Can you fix it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a PR for the changes I just made. I've committed everything on the feature/sso branch. The PR should go to main with a description of what changed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a vague idea for a feature \u2014 something about improving our search. Not sure what exactly. Can you help me understand what needs to happen?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "description": "Use this skill when the user says Stage 1 or task-preparation is complete and they need analysis before planning. Key signals: user references stage-1-handoff.md, requirements.draft.md, readiness-review.md, or the READY_FOR_DEEP_ANALYSIS verdict. Also triggers when user asks to analyze a validated/prepared task across product intent, codebase mapping, and risk dimensions before synthesizing a plan. This is Stage 2 of the planning pipeline \u2014 it researches and maps the territory, it does not build plans or write code. Triggers: \"stage 1 is done\", \"run stage 2\", \"analyze task for planning\", \"deep analysis\", \"READY_FOR_DEEP_ANALYSIS\", \"analyze before planning\", \"product/system/constraints analysis\", any mention of handoff or readiness files from a prior preparation stage, or requests to understand codebase and risks for a task that has already been scoped.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "I need to investigate what parts of the system are affected by this change and what risks we should account for. We've already structured the requirements in stage 1. The task involves replacing our message queue from RabbitMQ to Kafka",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "before we plan the implementation, I want to deeply understand this task from all angles \u2014 what's the business intent, where in the codebase does this live, what are the risks. We have the requirements ready, they passed the readiness gate",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we just finished preparing the task (stage 1 complete) and now need the multi-faceted analysis \u2014 product/business, system mapping, constraints. The dashboard refactoring involves clickhouse queries, graphql resolvers, and react components",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "build a knowledge base for this task before planning \u2014 I want to understand business intent, map the codebase, and identify constraints. Stage 1 handoff is ready. Task: implement rate limiting on our public API",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "explain how the auth middleware works in our codebase. I'm new to the team and trying to understand the request flow from the HTTP handler through authentication to the service layer",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "our CI pipeline is failing on the linting step. The error is about unused imports in internal/auth/handler.go. Can you fix it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a vague idea for a feature \u2014 something about improving our search. Not sure what exactly. Can you help me understand what needs to happen?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a PR for the changes I just made. I've committed everything on the feature/sso branch. The PR should go to main with a description of what changed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "description": "Use this skill at the transition between task preparation and planning \u2014 when a user has completed Stage 1 (task-preparation) and needs to deeply investigate the problem space before building a plan. Triggers on: completed Stage 1 or task-preparation, READY_FOR_DEEP_ANALYSIS verdict, references to stage-1-handoff.md / requirements.draft.md / readiness-review.md, \"run stage 2\", \"deep analysis\", \"analyze for planning\", or requests to map codebase, assess risks, and analyze product intent for an already-scoped task. Runs parallel product, system, and constraints analysis with critic validation. Research only \u2014 no planning, no code.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "before we plan the implementation, I want to deeply understand this task from all angles \u2014 what's the business intent, where in the codebase does this live, what are the risks. We have the requirements ready, they passed the readiness gate",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I need to investigate what parts of the system are affected by this change and what risks we should account for. We've already structured the requirements in stage 1. The task involves replacing our message queue from RabbitMQ to Kafka",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we just finished preparing the task (stage 1 complete) and now need the multi-faceted analysis \u2014 product/business, system mapping, constraints. The dashboard refactoring involves clickhouse queries, graphql resolvers, and react components",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "build a knowledge base for this task before planning \u2014 I want to understand business intent, map the codebase, and identify constraints. Stage 1 handoff is ready. Task: implement rate limiting on our public API",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "explain how the auth middleware works in our codebase. I'm new to the team and trying to understand the request flow from the HTTP handler through authentication to the service layer",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "our CI pipeline is failing on the linting step. The error is about unused imports in internal/auth/handler.go. Can you fix it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a vague idea for a feature \u2014 something about improving our search. Not sure what exactly. Can you help me understand what needs to happen?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a PR for the changes I just made. I've committed everything on the feature/sso branch. The PR should go to main with a description of what changed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "description": "Use this skill when a user has finished preparing or scoping a task and now wants to deeply investigate it before making a plan. The user has requirements in hand and wants to understand the codebase, product intent, risks, and constraints \u2014 research and analysis, not yet planning or coding. Strong signals: mentions of completed preparation, \"stage 1 done\", \"deep analysis\", READY_FOR_DEEP_ANALYSIS, references to handoff/requirements/readiness files, or asking for parallel product + system + constraints analysis of a prepared task. Do NOT use for: writing plans, fixing bugs, writing code, reviewing PRs, or clarifying vague requirements.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "I need to investigate what parts of the system are affected by this change and what risks we should account for. We've already structured the requirements in stage 1. The task involves replacing our message queue from RabbitMQ to Kafka",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "before we plan the implementation, I want to deeply understand this task from all angles \u2014 what's the business intent, where in the codebase does this live, what are the risks. We have the requirements ready, they passed the readiness gate",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we just finished preparing the task (stage 1 complete) and now need the multi-faceted analysis \u2014 product/business, system mapping, constraints. The dashboard refactoring involves clickhouse queries, graphql resolvers, and react components",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "build a knowledge base for this task before planning \u2014 I want to understand business intent, map the codebase, and identify constraints. Stage 1 handoff is ready. Task: implement rate limiting on our public API",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "explain how the auth middleware works in our codebase. I'm new to the team and trying to understand the request flow from the HTTP handler through authentication to the service layer",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a vague idea for a feature \u2014 something about improving our search. Not sure what exactly. Can you help me understand what needs to happen?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a PR for the changes I just made. I've committed everything on the feature/sso branch. The PR should go to main with a description of what changed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "our CI pipeline is failing on the linting step. The error is about unused imports in internal/auth/handler.go. Can you fix it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "description": "Use for deep-analysis \u2014 structured, multi-stream investigation of a task that has already been prepared or scoped, done BEFORE plan creation. Invoke when: the user completed task preparation and wants to analyze the codebase, product intent, risks, and constraints; they mention deep analysis, stage 2, READY_FOR_DEEP_ANALYSIS, or analyzing a task before planning; they reference handoff, readiness, or requirements files from preparation. This is NOT brainstorming (exploring ideas), NOT plan-writing, NOT coding, NOT bug-fixing, NOT PR review. Distinct from research skill \u2014 this runs a specific 3-stream pipeline (product + system + constraints) with critic validation on prepared tasks.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "I need to investigate what parts of the system are affected by this change and what risks we should account for. We've already structured the requirements in stage 1. The task involves replacing our message queue from RabbitMQ to Kafka",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "before we plan the implementation, I want to deeply understand this task from all angles \u2014 what's the business intent, where in the codebase does this live, what are the risks. We have the requirements ready, they passed the readiness gate",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "we just finished preparing the task (stage 1 complete) and now need the multi-faceted analysis \u2014 product/business, system mapping, constraints. The dashboard refactoring involves clickhouse queries, graphql resolvers, and react components",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "build a knowledge base for this task before planning \u2014 I want to understand business intent, map the codebase, and identify constraints. Stage 1 handoff is ready. Task: implement rate limiting on our public API",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "our CI pipeline is failing on the linting step. The error is about unused imports in internal/auth/handler.go. Can you fix it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "explain how the auth middleware works in our codebase. I'm new to the team and trying to understand the request flow from the HTTP handler through authentication to the service layer",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I have a vague idea for a feature \u2014 something about improving our search. Not sure what exactly. Can you help me understand what needs to happen?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "create a PR for the changes I just made. I've committed everything on the feature/sso branch. The PR should go to main with a description of what changed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "\u043d\u0443\u0436\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0441\u0442\u0438 \u0433\u043b\u0443\u0431\u043e\u043a\u0438\u0439 \u0430\u043d\u0430\u043b\u0438\u0437 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u0435\u0440\u0435\u0434 \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c. \u042d\u0442\u0430\u043f 1 \u043f\u0440\u043e\u0439\u0434\u0435\u043d, \u0435\u0441\u0442\u044c requirements.draft.md. \u0417\u0430\u0434\u0430\u0447\u0430 \u2014 \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443 \u043c\u0443\u043b\u044c\u0442\u0438\u044f\u0437\u044b\u0447\u043d\u043e\u0441\u0442\u0438 \u0432 \u043d\u0430\u0448\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "run stage 2 on this task. here's the handoff from stage 1: we need to add webhook support for our event system. The stage-1-handoff.md is in the working directory",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "the task preparation is complete, critic said READY_FOR_DEEP_ANALYSIS. Now I need the product analysis, system analysis, and constraints analysis before we can start building a plan. The feature is about adding RBAC to our API gateway",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "analyze this task for planning: we need to add real-time notifications via websockets. The requirements have been validated and we have a stage-1-handoff.md ready. I need product analysis, system analysis, and risk assessment",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "ok so stage 1 is done, the task passed readiness review with READY_FOR_DEEP_ANALYSIS \u2014 now I need to understand what we're actually dealing with before we start planning. The SSO feature touches auth, tenants, and keycloak. Can you do a deep dive?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I have a requirements.draft.md and readiness-review.md from the previous stage. Need to analyze the codebase, understand risks, and figure out what constraints we're working with before building a plan. The task is about migrating our payment processing from Stripe to Adyen.",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "write me a Go function that validates SAML assertions using the crewjam/saml library. It should extract the NameID and return a struct with user info",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "run the tests for the auth module and tell me what's failing. I think something broke after the last merge. Use go test ./internal/auth/...",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I need to plan the implementation of the SSO feature. We already know the codebase, we know the constraints, we have all the analysis done. Now I need a step-by-step implementation plan with dependencies and ordering",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "hey can you fix the login page? When I click submit nothing happens. I checked the console and there's a CORS error. The frontend is in apps/web/src/pages/Login.tsx",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "review this pull request: github.com/acme/platform/pull/234. Check if the code follows our patterns, has tests, and handles errors properly",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "we got a new ticket from the product team but it's super vague \u2014 just says 'make the dashboard faster'. I need to figure out what this even means, what the actual problem is, and whether we have enough info to proceed",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}
+Report: /tmp/skill_description_report_deep-analysis_20260314_103244.html
+

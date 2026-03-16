@@ -1,0 +1,32 @@
+Stage 2 Deep Analysis — REJECTED
+
+Reason: Input validation failed. The readiness-review.md verdict is NEEDS_CLARIFICATION, not READY_FOR_DEEP_ANALYSIS. Stage 2 cannot proceed with unprepared input.
+
+The skill instructions are explicit: "If readiness-review.md does NOT show READY_FOR_DEEP_ANALYSIS, stop immediately and tell the user. This stage cannot produce reliable analysis from unprepared input — send it back to Stage 1."
+
+Why this task is not ready for deep analysis:
+
+The task "fix the authentication system" failed Stage 1's readiness review with five FAIL scores across core criteria:
+
+- Goal clarity: FAIL — "Fix the authentication" does not define what "done" means. No specific bug, behavior, or outcome is described.
+- Problem clarity: FAIL — No concrete problem statement exists. "Something is wrong" provides no specifics.
+- Scope clarity: FAIL — "Auth-related changes" sets no boundary. The scope could range from a typo fix to a complete rewrite.
+- Context sufficiency: FAIL — Almost no context was provided. Analysis would be pure guesswork.
+- Acceptance possibility: FAIL — There is no way to determine if a fix is correct without knowing what is broken.
+- Ambiguity level: FAIL — Every aspect of this task is unclear.
+
+The requirements draft itself lists more unknowns than knowns:
+- Unknown: What is broken
+- Unknown: Where the auth code lives
+- Unknown: What "fix" means
+- Unknown: Who is affected
+- Unknown: How to verify the fix
+
+Action required: Send this task back to Stage 1 for clarification. The following questions must be answered before Stage 2 can proceed:
+
+1. What specific behavior is broken? (error message, incorrect behavior, security issue, performance problem?)
+2. Who reported this and what did they observe?
+3. Which part of the auth system is affected? (login, token validation, permissions, session management?)
+4. How should we verify the fix works?
+
+No analysis artifacts were produced. No subagents were spawned. Proceeding with analysis on this input would violate the pipeline's quality guarantees and produce unreliable results that could mislead the planning stage.

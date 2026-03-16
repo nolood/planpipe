@@ -50,17 +50,23 @@ The analysts do NOT self-critique. Their job is to produce the most thorough ana
 
 #### Stream 1: Product / Business Analysis
 
-1. Read `agents/product-analyst.md` from this skill's directory
-2. Spawn a **general-purpose** subagent with that prompt
-3. Pass it: task briefing + full Stage 1 content + any clarifications
+1. Read `agents/product-analyst.md` — this file contains the analyst's complete role, analysis structure, and output format
+2. Use the **Agent tool** with:
+   - `name`: `"product-analyst"`
+   - `subagent_type`: `"general-purpose"`
+   - `prompt`: the FULL content of `agents/product-analyst.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: task briefing + full Stage 1 content + any clarifications
 
 This stream answers: **why does this task exist and what outcome actually matters?**
 
 #### Stream 2: Codebase / System Analysis
 
-1. Read `agents/system-analyst.md` from this skill's directory
-2. Spawn an **Explore** subagent (thoroughness: "very thorough") with that prompt
-3. Pass it: task briefing + full Stage 1 content + specific file paths and module names
+1. Read `agents/system-analyst.md` — this file contains the analyst's complete role, codebase exploration instructions, and output format
+2. Use the **Agent tool** with:
+   - `name`: `"system-analyst"`
+   - `subagent_type`: `"Explore"`
+   - `prompt`: the FULL content of `agents/system-analyst.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: task briefing + full Stage 1 content + specific file paths and module names
 
 This stream answers: **where in the system does this task live and what gets touched?**
 
@@ -68,9 +74,12 @@ This is the only stream that actively explores the codebase.
 
 #### Stream 3: Constraints / Risks Analysis
 
-1. Read `agents/constraints-analyst.md` from this skill's directory
-2. Spawn a **researcher** subagent with that prompt
-3. Pass it: task briefing + full Stage 1 content + any clarifications
+1. Read `agents/constraints-analyst.md` — this file contains the analyst's complete role, constraint categories, risk framework, and output format
+2. Use the **Agent tool** with:
+   - `name`: `"constraints-analyst"`
+   - `subagent_type`: `"researcher"`
+   - `prompt`: the FULL content of `agents/constraints-analyst.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: task briefing + full Stage 1 content + any clarifications
 
 This stream answers: **what limits, risks, and sensitive areas must the plan account for?**
 
@@ -80,9 +89,12 @@ This stream answers: **what limits, risks, and sensitive areas must the plan acc
 
 When all three analysts return, spawn an **Analysis Critic** subagent.
 
-1. Read `agents/analysis-critic.md` from this skill's directory
-2. Spawn an **Explore** subagent (thoroughness: "very thorough") with that prompt — the critic needs codebase access to spot-check system analysis claims
-3. Pass it: all three draft analyses + the original task briefing + Stage 1 content
+1. Read `agents/analysis-critic.md` — this file contains the critic's complete role, spot-check procedure, evaluation criteria, and output format
+2. Use the **Agent tool** with (the critic needs codebase access to spot-check system analysis claims):
+   - `name`: `"analysis-critic"`
+   - `subagent_type`: `"Explore"`
+   - `prompt`: the FULL content of `agents/analysis-critic.md` combined with the input data below — the agent definition file IS the prompt, do not summarize or skip it
+3. Input data to append to the prompt: all three draft analyses + the original task briefing + Stage 1 content
 
 The critic independently reviews each analysis for:
 - Completeness — are required sections present and populated?
@@ -113,7 +125,9 @@ The critic returns a structured review with a verdict per analysis: **SUFFICIENT
 
 ### Step 5: Assemble Artifacts
 
-Write the three analysis artifacts to the output directory using the **exact templates** from the Artifact Templates section below. Every artifact must follow its template — these are not optional.
+Write the three analysis artifacts to `.planpipe/{task-id}/stage-2/` using the **exact templates** from the Artifact Templates section below. Every artifact must follow its template — these are not optional.
+
+The task ID comes from Stage 1's handoff or from the `.planpipe/` directory structure. If invoked independently, determine the task ID from context (ticket ID, or project-name + sequential number).
 
 1. `product-analysis.md`
 2. `system-analysis.md`
@@ -145,7 +159,23 @@ Present a brief synthesis covering:
 - **Knowledge base assessment** — sufficient for plan synthesis, or are there critical gaps?
 - **Open questions for planning** — things the planning stage should account for
 
-If the knowledge base is sufficient, indicate the task is ready for Stage 3 (plan synthesis).
+If the knowledge base is sufficient, indicate the task is ready for Stage 3.
+
+Then offer the user two options for continuing to Stage 3:
+
+**Option 1 — Continue in this session:**
+> "Запустить Stage 3 (Task Synthesis) прямо сейчас в этой сессии?"
+
+If the user agrees, invoke the `/task-synthesis` skill.
+
+**Option 2 — Continue in a new session:**
+Provide a ready-to-paste block with actual paths filled in:
+```
+Запусти /task-synthesis
+
+Task ID: {task-id}
+Артефакты: .planpipe/{task-id}/stage-2/
+```
 
 ---
 
@@ -450,3 +480,4 @@ Stage 2 is NOT complete if **any** of these hold:
 - **The critic is independent.** It sees the analysts' output with fresh eyes. This is where quality comes from — not self-review.
 - **Templates are not optional.** Stage 3 depends on consistent structure. An analysis that doesn't follow the template is incomplete.
 - **Memobank check.** If the project has a memobank or knowledge store, each subagent should search it for relevant context. Opportunistic — skip if nothing exists.
+- **Subagent prompts = agent definition files.** When spawning a subagent, the content of its `agents/*.md` file IS the prompt. Read the file, combine it with input data, and pass as `prompt`. Never launch a subagent without its definition file — a generic subagent without the agent definition will not perform the specialized analysis/critique the pipeline requires.

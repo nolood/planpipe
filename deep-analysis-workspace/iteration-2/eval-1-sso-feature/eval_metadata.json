@@ -1,0 +1,15 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-feature-deep-analysis-v2",
+  "prompt": "Run Stage 2 deep analysis on SSO SAML task. Updated skill with external critic, strict templates, and handoff document.",
+  "assertions": [
+    {"text": "product-analysis.md follows exact template (Business Intent, Actor & Scenario, Expected Outcome, Edge Cases, Success Signals, Minimum Viable Outcome, Critique Review, Open Questions)"},
+    {"text": "system-analysis.md follows exact template (Relevant Modules, Change Points, Dependencies, Existing Patterns, Technical Observations, Test Coverage, Critique Review, Open Questions)"},
+    {"text": "constraints-risks-analysis.md follows exact template (Constraints by category, Risks table, Integration Dependencies, Backward Compatibility, Sensitive Areas, Critique Review, Open Questions)"},
+    {"text": "system-analysis.md references actual file paths from the mock project (internal/auth/, internal/tenant/)"},
+    {"text": "system-analysis.md identifies that tenant model has no per-tenant configuration storage"},
+    {"text": "Critique Review section in each artifact contains actual critic findings (not placeholder text)"},
+    {"text": "stage-2-handoff.md was created with all required sections (Task Summary, System Map, Constraints, Risks, Product Requirements, Critique Results, Open Questions)"},
+    {"text": "stage-2-handoff.md is self-contained — readable without consulting the detailed analyses"}
+  ]
+}

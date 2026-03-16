@@ -1,0 +1,89 @@
+{
+  "eval_id": 1,
+  "eval_name": "sso-synthesis",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "analysis.md created with all required sections (Task Goal, Problem Statement, Key Scenarios, System Scope, Constraints, Risks, Candidate Solution Directions)",
+      "passed": false,
+      "evidence": "analysis.md exists and contains substantive synthesis content, but uses different section names than specified. The actual sections are: '1. Unified Task Definition' (covers goal and problem), '2. Cross-Analysis Alignment', '3. Consolidated System Map', '4. Consolidated Dependencies', '5. Consolidated Constraints', '6. Consolidated Risk Matrix', '7. Consolidated Open Questions', '8. Pre-Existing Issues Discovered', '9. Minimum Viable Outcome (MVO) Definition', '10. Synthesis Confidence Assessment'. Missing as named sections: 'Task Goal' (embedded in Unified Task Definition), 'Problem Statement' (not a standalone section), 'Key Scenarios' (absent -- no dedicated scenarios section), 'System Scope' (closest is 'Consolidated System Map'), 'Candidate Solution Directions' (completely absent -- no section discusses alternative solution approaches). The content partially covers some required topics but lacks the required section structure, and notably omits candidate solution directions entirely."
+    },
+    {
+      "text": "agreement-package.md created with all 5 blocks (Goal & Problem Understanding, Scope, Key Scenarios, Constraints, Candidate Solution Directions)",
+      "passed": false,
+      "evidence": "agreement-package.md exists with 7 sections plus a summary: A. Task Understanding, B. Primary Scenario, C. Architecture Decisions Requiring Confirmation, D. Decisions We Need From You, E. Risks We Plan to Mitigate, F. MVO Boundary, G. Pre-Existing Issues. The required 5-block structure is not followed. Missing blocks: 'Goal & Problem Understanding' (closest is 'A. Task Understanding' but lacks explicit problem framing), 'Scope' (partially covered across sections but no dedicated Scope block), 'Key Scenarios' (closest is 'B. Primary Scenario' but does not cover all mandatory edge cases in the block), 'Constraints' (no dedicated Constraints block -- constraints are scattered), 'Candidate Solution Directions' (absent -- section D covers decisions/options for specific questions but not high-level solution directions like minimal vs systematic vs test-first)."
+    },
+    {
+      "text": "Synthesis critic was spawned and returned a verdict",
+      "passed": false,
+      "evidence": "No mention of a critic, critic review, or verdict anywhere in analysis.md or any other output file. Searched all output files for 'critic', 'Critic', 'verdict', 'Verdict' -- only matches were 'Critical Change Points' (unrelated). The without_skill output did not include a synthesis critic step."
+    },
+    {
+      "text": "analysis.md resolves or flags contradictions from Stage 2 analyses (e.g., password fallback policy, account linking strategy)",
+      "passed": true,
+      "evidence": "Section '2. Cross-Analysis Alignment' (line 15) states 'All three analysis streams converge on the same core challenges. No contradictions were found during synthesis.' The alignment table documents how product, system, and constraints views align on 6 key themes. Section '7. Consolidated Open Questions' flags password fallback policy (Q1), account linking strategy (Q2), and per-tenant config storage design (Q3) as blocking questions with 'Must Resolve Before Planning' status. While it does not deeply analyze contradictions (because it claims none exist), it does flag the key unresolved items."
+    },
+    {
+      "text": "agreement-package.md blocks end with confirmation questions for the user",
+      "passed": true,
+      "evidence": "Most sections end with confirmation prompts: Section A ends with '> **Please confirm:** Is this understanding of scope and exclusions correct?' (line 23); Section B ends with '> **Please confirm:** Is this flow description accurate?' (line 42); Section C subsections end with '> **Please confirm:** Are the module change scopes accurate?' (line 60) and '> **Please confirm:** Are these backward compatibility requirements complete?' (line 72); Section D decisions end with '> Your decision: A, B, or C?'; Section E ends with '> **Please confirm:** Are these mitigations acceptable?' (line 167); Section F ends with '> **Please confirm:** Is this MVO scope correct?' (line 193); Section G ends with '> **Please confirm:** Should we fix the RequireRole bug as part of SSO work, or track it separately?' (line 205)."
+    },
+    {
+      "text": "analysis.md preserves key findings: zero test coverage, single Keycloak realm, direct grant to auth code shift, no per-tenant config storage",
+      "passed": true,
+      "evidence": "All four key findings are present: (1) Zero test coverage: 'Zero test coverage makes auth flow changes dangerous' in risk matrix R1 (line 100) and Cross-Analysis Alignment table 'No test files exist in any module' (line 24); (2) Single Keycloak realm: in Alignment table 'keycloak.go:18 stores single realm string' (line 22) and Constraints C4 (line 84); (3) Direct grant to auth code shift: Alignment table 'keycloak.go:42 uses client.Login() (direct grant); SSO needs authorization code flow' (line 23) and labeled 'Fundamental shift from API-to-API to browser-redirect pattern'; (4) No per-tenant config storage: Alignment table 'tenant/models.go has explicit NOTE about missing config storage' (line 21) and Open Questions Q3 (line 119)."
+    },
+    {
+      "text": "Candidate solution directions include options (e.g., minimal MVO vs. systematic approach)",
+      "passed": false,
+      "evidence": "analysis.md does not contain a 'Candidate Solution Directions' section or any equivalent. There is no discussion of alternative solution approaches (minimal vs systematic vs test-first). The closest content is Section 9 'Minimum Viable Outcome (MVO) Definition' which defines what is in/out of MVO, but does not present alternative implementation approaches or trade-offs between them. The agreement-package.md Section D presents options for specific decisions (password fallback, account linking, config storage) but these are architectural decisions, not high-level solution directions."
+    },
+    {
+      "text": "Open questions from Stage 2 are carried forward (password fallback, account linking, per-tenant config design)",
+      "passed": true,
+      "evidence": "Section '7. Consolidated Open Questions' carries forward all three: Q1 'Password fallback policy for SSO tenants' (line 117), Q2 'Account linking strategy' (line 118), Q3 'Per-tenant config storage design' (line 119). These are categorized as 'Must Resolve Before Planning' and marked as blocking. Additional open questions Q4-Q7 are also carried forward with 'Should Resolve Before Implementation' status, and Q8-Q11 are listed as deferrable."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 4,
+    "total": 8,
+    "pass_rate": 0.5
+  },
+  "timing": {
+    "total_duration_seconds": 302.9
+  },
+  "claims": [
+    {
+      "claim": "All three analysis streams converge on the same core challenges with no contradictions",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The Cross-Analysis Alignment table shows genuine convergence across product, system, and constraints views on 6 key themes, with specific file references backing the system view."
+    },
+    {
+      "claim": "User accepted all sections of the agreement package",
+      "type": "process",
+      "verified": true,
+      "evidence": "agreed-task-model.md states 'Status: Confirmed (user accepted all sections of the agreement package)' and documents confirmed decisions D1 (block password), D2 (automatic email-based linking), D3 (new table)."
+    },
+    {
+      "claim": "The without_skill output has 10 numbered sections providing comprehensive synthesis",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Verified 10 sections exist with substantive content. However, the section structure does not match the required format specified in the assertions."
+    }
+  ],
+  "user_notes_summary": null,
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "analysis.md created with all required sections (Task Goal, Problem Statement, Key Scenarios, System Scope, Constraints, Risks, Candidate Solution Directions)",
+        "reason": "This assertion checks both file existence AND specific section naming. The without_skill output contains much of the same substantive content but organized under different section headings. A more discriminating assertion might separately check (a) that the file exists, (b) that it covers specific content themes regardless of section naming, and (c) that it follows the prescribed format. Currently, good content under wrong headings fails the same as missing content."
+      },
+      {
+        "reason": "No assertion checks the quality of the agreed-task-model.md, which is a key output in both configurations. The without_skill version includes a detailed data model schema, flow diagrams (SSO login and modified password login), new endpoint specifications, and explicit agreed decisions -- high-quality planning-ready content that goes unchecked."
+      }
+    ],
+    "overall": "The assertions effectively discriminate between skill-guided and unguided output: the skill enforces a specific structure (5 blocks, named sections, critic step, candidate solution directions) that the unguided agent does not follow. The without_skill output is substantively strong but structurally non-conformant. Assertions 1, 2, and 7 are format-sensitive by design, which is appropriate if the downstream pipeline depends on that specific structure."
+  }
+}

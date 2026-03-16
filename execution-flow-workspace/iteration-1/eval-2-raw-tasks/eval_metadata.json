@@ -1,0 +1,6 @@
+{
+  "eval_id": 2,
+  "eval_name": "raw-tasks-flexible-input",
+  "prompt": "Implement tasks from a raw markdown list using the execution flow skill with proper review gates.",
+  "assertions": []
+}

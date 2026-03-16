@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "skill_name": "implementation-decomposition",
+    "skill_path": "/home/nolood/general/plan-pipeline/implementation-decomposition",
+    "executor_model": "claude-opus-4-6",
+    "timestamp": "2026-03-14T10:00:00Z",
+    "evals_run": ["sso-decomposition", "dashboard-decomposition", "rejection-incomplete-design"],
+    "runs_per_configuration": 1
+  },
+  "configurations": [
+    {
+      "name": "with_skill",
+      "pass_rate": {
+        "mean": 0.952,
+        "stddev": 0.076,
+        "per_eval": {
+          "sso-decomposition": 1.0,
+          "dashboard-decomposition": 1.0,
+          "rejection-incomplete-design": 0.8
+        }
+      },
+      "time_seconds": {
+        "mean": 311.2,
+        "stddev": 188.2,
+        "per_eval": {
+          "sso-decomposition": 453.1,
+          "dashboard-decomposition": 426.5,
+          "rejection-incomplete-design": 53.9
+        }
+      },
+      "tokens": {
+        "mean": 53181,
+        "stddev": 22235,
+        "per_eval": {
+          "sso-decomposition": 76152,
+          "dashboard-decomposition": 60971,
+          "rejection-incomplete-design": 22421
+        }
+      }
+    },
+    {
+      "name": "without_skill",
+      "pass_rate": {
+        "mean": 0.476,
+        "stddev": 0.126,
+        "per_eval": {
+          "sso-decomposition": 0.375,
+          "dashboard-decomposition": 0.625,
+          "rejection-incomplete-design": 0.4
+        }
+      },
+      "time_seconds": {
+        "mean": 92.6,
+        "stddev": 35.5,
+        "per_eval": {
+          "sso-decomposition": 119.2,
+          "dashboard-decomposition": 117.5,
+          "rejection-incomplete-design": 41.1
+        }
+      },
+      "tokens": {
+        "mean": 22599,
+        "stddev": 7903,
+        "per_eval": {
+          "sso-decomposition": 29051,
+          "dashboard-decomposition": 27404,
+          "rejection-incomplete-design": 11342
+        }
+      }
+    }
+  ],
+  "run_summary": {
+    "delta": {
+      "pass_rate": "+0.476",
+      "time_seconds": "+218.6",
+      "tokens": "+30582"
+    }
+  },
+  "notes": [
+    "with_skill achieves 95.2% pass rate vs 47.6% baseline — nearly 2x improvement",
+    "Main baseline failures: missing artifacts (coverage-matrix, review-package, handoff), no subagent quality gates, no explicit boundaries",
+    "with_skill uses ~2.4x more tokens and ~3.4x more time due to subagent spawning (critic + coverage reviewer)",
+    "Rejection case: with_skill correctly rejects but misses mentioning coverage validation limitation (4/5)",
+    "Dashboard baseline performs better (5/8) than SSO baseline (3/8) because parallelism assertions are skill-agnostic"
+  ]
+}
